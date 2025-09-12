@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Virtual Tour - VR Tour Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#39FF14'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #39FF14;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.dragover {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: #39FF14;
+            transform: scale(1.02);
+        }
+        .file-item {
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hotspot-marker {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #39FF14;
+            border-radius: 50%;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .preview-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div style="display: flex; align-items: center;">
+                <button onclick="window.location.href='index.html'" class="btn" style="background: transparent; padding: 0.5rem; margin-right: 1rem;">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <a href="upload.html" class="nav-brand">
+                    <i class="fas fa-vr-cardboard text-3xl text-primary"></i>
+                    <span style="font-size: 1.25rem;">Create Virtual Tour</span>
+                </a>
+            </div>
+            
+            <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="convert.html" class="nav-link">Photo to 360°</a></li>
+                    <li><a href="upload.html" class="nav-link">Create Tour</a></li>
+                    <li><a href="viewer.html" class="nav-link">View Tours</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button id="darkModeToggle" class="btn" style="background: transparent; padding: 0.5rem;">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 2rem 1rem; max-width: 1024px;">
+        <!-- Step Indicator -->
+        <div class="mb-8">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center">
+                    <div id="step1" class="step-circle bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div>
+                    <div class="w-20 h-1 bg-gray-300 dark:bg-gray-600"></div>
+                    <div id="step2" class="step-circle bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div>
+                    <div class="w-20 h-1 bg-gray-300 dark:bg-gray-600"></div>
+                    <div id="step3" class="step-circle bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-2 text-sm">
+                <span class="px-8">Tour Info</span>
+                <span class="px-8">Upload Scenes</span>
+                <span class="px-8">Add Hotspots</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Tour Information -->
+        <div id="step1Content" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Tour Information</h2>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Tour Title <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="tourTitle" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="e.g., Modern Apartment Virtual Tour">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Description
+                </label>
+                <textarea id="tourDescription" rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Describe your virtual tour..."></textarea>
+            </div>
+
+            <button onclick="nextStep()" class="bg-primary text-gray-900 px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                Next Step <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <!-- Step 2: Upload Panoramas -->
+        <div id="step2Content" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6 hidden">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Upload Panorama Scenes</h2>
+            
+            <!-- Drop Zone -->
+            <div id="dropZone" class="drop-zone border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-lg p-12 text-center mb-6 cursor-pointer hover:border-primary transition">
+                <i class="fas fa-cloud-upload-alt text-5xl text-gray-400 mb-4"></i>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-2">Drag & Drop your 360° panoramas here</p>
+                <p class="text-sm text-gray-500 dark:text-gray-500 mb-4">or click to browse</p>
+                <input type="file" id="fileInput" class="hidden" accept="image/*" multiple>
+                <button onclick="document.getElementById('fileInput').click()" class="bg-primary text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                    Choose Files
+                </button>
+                <p class="text-xs text-gray-500 dark:text-gray-500 mt-4">Supported formats: JPG, PNG, WebP (Max 50MB each)</p>
+            </div>
+
+            <!-- Uploaded Files List -->
+            <div id="filesList" class="space-y-3 mb-6">
+                <!-- Files will be listed here -->
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevStep()" class="bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                </button>
+                <button onclick="nextStep()" class="bg-primary text-gray-900 px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                    Next Step <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Configure Hotspots -->
+        <div id="step3Content" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6 hidden">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Configure Hotspots</h2>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Select Scene to Edit
+                </label>
+                <select id="sceneSelector" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white">
+                    <option>Select a scene...</option>
+                </select>
+            </div>
+
+            <!-- Preview Container -->
+            <div class="preview-container bg-gray-100 dark:bg-gray-700 rounded-lg mb-6 h-96 relative">
+                <img id="scenePreview" src="" alt="Scene preview" class="w-full h-full object-cover hidden">
+                <div id="hotspotOverlay" class="absolute inset-0"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-gray-500" id="previewPlaceholder">
+                    <div class="text-center">
+                        <i class="fas fa-image text-4xl mb-2"></i>
+                        <p>Select a scene to add hotspots</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotspot Controls -->
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-3">Add Hotspot</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Type</label>
+                        <select id="hotspotType" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white">
+                            <option value="scene">Scene Link</option>
+                            <option value="info">Information</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Target/Text</label>
+                        <input type="text" id="hotspotTarget" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white" placeholder="Scene ID or info text">
+                    </div>
+                </div>
+                <button onclick="addHotspot()" class="mt-3 bg-primary text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition">
+                    <i class="fas fa-plus mr-2"></i>Add Hotspot
+                </button>
+            </div>
+
+            <!-- Hotspots List -->
+            <div id="hotspotsList" class="space-y-2 mb-6">
+                <!-- Hotspots will be listed here -->
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="prevStep()" class="bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-600 transition">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                </button>
+                <button onclick="createTour()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition">
+                    <i class="fas fa-check mr-2"></i> Create Tour
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="bg-green-100 dark:bg-green-900 border border-green-400 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg hidden">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-2xl mr-3"></i>
+                <div>
+                    <p class="font-bold">Tour Created Successfully!</p>
+                    <p class="text-sm">Your virtual tour has been created. <a href="#" id="viewTourLink" class="underline">View Tour</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="bg-red-100 dark:bg-red-900 border border-red-400 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg hidden">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle text-2xl mr-3"></i>
+                <div>
+                    <p class="font-bold">Error</p>
+                    <p class="text-sm" id="errorText">Something went wrong.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/responsive.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

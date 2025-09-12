@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:klapty.com)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(powershell.exe:*)",
+      "Read(//mnt/d/**)",
+      "Bash(lsof:*)",
+      "Bash(ss:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm start)",
+      "Bash(netstat:*)",
+      "Bash(ip addr:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

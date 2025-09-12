@@ -1,0 +1,668 @@
+{
+  "tours": [
+    {
+      "id": "demo-tour-1",
+      "title": "Modern Apartment Tour",
+      "description": "Experience a beautiful modern apartment with 360° views",
+      "thumbnail": "/uploads/demo/living-room-thumb.jpg",
+      "created": "2025-09-08T10:56:35.796Z",
+      "scenes": [
+        {
+          "id": "scene-1",
+          "title": "Living Room",
+          "image": "/uploads/demo/living-room.jpg",
+          "preview": "/uploads/demo/living-room-thumb.jpg",
+          "hotspots": [
+            {
+              "pitch": -5,
+              "yaw": 90,
+              "type": "scene",
+              "text": "Go to Kitchen",
+              "sceneId": "scene-2"
+            },
+            {
+              "pitch": -10,
+              "yaw": -45,
+              "type": "scene",
+              "text": "Go to Bedroom",
+              "sceneId": "scene-3"
+            },
+            {
+              "pitch": 15,
+              "yaw": 180,
+              "type": "info",
+              "text": "Modern chandelier with LED lighting"
+            }
+          ]
+        },
+        {
+          "id": "scene-2",
+          "title": "Kitchen",
+          "image": "/uploads/demo/kitchen.jpg",
+          "preview": "/uploads/demo/kitchen-thumb.jpg",
+          "hotspots": [
+            {
+              "pitch": -5,
+              "yaw": -90,
+              "type": "scene",
+              "text": "Back to Living Room",
+              "sceneId": "scene-1"
+            },
+            {
+              "pitch": 0,
+              "yaw": 45,
+              "type": "scene",
+              "text": "Go to Bedroom",
+              "sceneId": "scene-3"
+            },
+            {
+              "pitch": -20,
+              "yaw": 0,
+              "type": "info",
+              "text": "Marble countertop with built-in appliances"
+            }
+          ]
+        },
+        {
+          "id": "scene-3",
+          "title": "Master Bedroom",
+          "image": "/uploads/demo/bedroom.jpg",
+          "preview": "/uploads/demo/bedroom-thumb.jpg",
+          "hotspots": [
+            {
+              "pitch": -8,
+              "yaw": 180,
+              "type": "scene",
+              "text": "Back to Living Room",
+              "sceneId": "scene-1"
+            },
+            {
+              "pitch": -5,
+              "yaw": -135,
+              "type": "scene",
+              "text": "Go to Kitchen",
+              "sceneId": "scene-2"
+            },
+            {
+              "pitch": 10,
+              "yaw": 90,
+              "type": "info",
+              "text": "King-size bed with premium bedding"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cead8b2e-3486-447f-8d73-b4bf85b268b3",
+      "title": "home tour",
+      "description": "“My virtual tour allows viewers to explore a space in 360 degrees, move between different rooms using hotspots, and view additional information such as text, images, or videos as if they were physically present.”",
+      "thumbnail": "/uploads/f37dbf6c-60f7-411a-bbed-f1f37cefb7e0.jpg",
+      "created": "2025-09-08T11:13:24.785Z",
+      "scenes": [
+        {
+          "id": "scene-b11710db-3b0f-42de-806c-23e0d6d9fd9f",
+          "title": "one-zen-hRLnetuNyMQ-unsplash",
+          "image": "/uploads/f37dbf6c-60f7-411a-bbed-f1f37cefb7e0.jpg",
+          "preview": "/uploads/f37dbf6c-60f7-411a-bbed-f1f37cefb7e0.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-e7c6fd8f-3fcc-42c4-a8d0-6e733406d5cd",
+          "title": "syed-bilal-javaid-uc9GjDHj1yA-unsplash",
+          "image": "/uploads/f74f2c0e-93c0-4a42-9e8e-684b576068e5.jpg",
+          "preview": "/uploads/f74f2c0e-93c0-4a42-9e8e-684b576068e5.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-06caffc2-6431-4ef9-ad81-152b2a61ae3d",
+          "title": "ari-dinar-pblfFBBL2gE-unsplash",
+          "image": "/uploads/edbb030a-1c0e-4364-a265-25dd663d867b.jpg",
+          "preview": "/uploads/edbb030a-1c0e-4364-a265-25dd663d867b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b52d38b6-20e4-45cd-923f-2fe4aa37d00f",
+      "title": "home tour",
+      "description": "“My virtual tour allows viewers to explore a space in 360 degrees, move between different rooms using hotspots, and view additional information such as text, images, or videos as if they were physically present.”",
+      "thumbnail": "/uploads/7c0d4e49-3662-40f6-8a9f-4148ae4e869d.jpg",
+      "created": "2025-09-08T11:38:10.300Z",
+      "scenes": [
+        {
+          "id": "scene-ddab7ea7-d145-4074-b9d3-3f5528c5f284",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/7c0d4e49-3662-40f6-8a9f-4148ae4e869d.jpg",
+          "preview": "/uploads/7c0d4e49-3662-40f6-8a9f-4148ae4e869d.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-aed19cc4-57e0-498c-b9de-db2f54b58f25",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/901246a0-0d99-44b3-875b-1b0e70f650e9.jpg",
+          "preview": "/uploads/901246a0-0d99-44b3-875b-1b0e70f650e9.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "dc03d815-f6a4-4ce1-8099-9cce814bc3c2",
+      "title": "home tour",
+      "description": "“My virtual tour allows viewers to explore a space in 360 degrees, move between different rooms using hotspots, and view additional information such as text, images, or videos as if they were physically present.”",
+      "thumbnail": "/uploads/6fe90f56-7a64-4b24-bbab-bdb8f04d6374.jpg",
+      "created": "2025-09-08T11:53:12.685Z",
+      "scenes": [
+        {
+          "id": "scene-7273fc17-f625-4c16-a44a-4531b4521f3a",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/6fe90f56-7a64-4b24-bbab-bdb8f04d6374.jpg",
+          "preview": "/uploads/6fe90f56-7a64-4b24-bbab-bdb8f04d6374.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-88ec2359-c09b-463d-baa9-9698ea04d525",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/599d339b-dbfb-410a-851a-0047902b55a6.jpg",
+          "preview": "/uploads/599d339b-dbfb-410a-851a-0047902b55a6.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-bc7f6bda-125a-481b-9335-fbc6b4f68265",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/2801b720-179f-4519-be0b-85d94af86a0f.jpg",
+          "preview": "/uploads/2801b720-179f-4519-be0b-85d94af86a0f.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-e5ba81fd-b7e0-4ce5-a96d-54327c62218c",
+          "title": "WhatsApp Image 2025-09-08 at 16",
+          "image": "/uploads/555feccf-951b-4711-b6b8-9408a39a8824.jpg",
+          "preview": "/uploads/555feccf-951b-4711-b6b8-9408a39a8824.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "932c29ac-a9f5-4cb3-a35c-88eda7819e90",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/3fda67a1-eb2a-4737-a25b-07b8b53ecff5.jpeg",
+      "created": "2025-09-10T08:55:17.818Z",
+      "scenes": [
+        {
+          "id": "scene-4d4be029-bf4f-4a38-a83a-240a83d244f3",
+          "title": "tpwits",
+          "image": "/uploads/3fda67a1-eb2a-4737-a25b-07b8b53ecff5.jpeg",
+          "preview": "/uploads/3fda67a1-eb2a-4737-a25b-07b8b53ecff5.jpeg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "57cf1d0d-204f-4303-ba60-5dad7c8bd863",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/316f928a-6bb9-4d8a-a3cb-7e7fbabf49f9.jpeg",
+      "created": "2025-09-10T08:57:37.033Z",
+      "scenes": [
+        {
+          "id": "scene-3e1a65b1-cb0d-47bc-8119-a7632c7fcf90",
+          "title": "tpwits",
+          "image": "/uploads/316f928a-6bb9-4d8a-a3cb-7e7fbabf49f9.jpeg",
+          "preview": "/uploads/316f928a-6bb9-4d8a-a3cb-7e7fbabf49f9.jpeg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "7a9a4cea-0b85-46e9-a11a-645f1f762b64",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/c1efa6a1-df73-41a2-b749-016eed53d140.jpg",
+      "created": "2025-09-10T10:05:35.385Z",
+      "scenes": [
+        {
+          "id": "scene-4618806f-1f4f-468c-a908-d6ef4c589062",
+          "title": "vecteezy_ruined-old-dirty-building-in-abandoned-city-ghetto-generated_25042869",
+          "image": "/uploads/c1efa6a1-df73-41a2-b749-016eed53d140.jpg",
+          "preview": "/uploads/c1efa6a1-df73-41a2-b749-016eed53d140.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-719c0e36-298c-4bcd-b59e-931759e4979c",
+          "title": "vecteezy_old-skyscraper-looms-over-dark-abandoned-city-generated-by-ai_25042844",
+          "image": "/uploads/e6f32149-9414-4c4d-be04-72cdf90a3f00.jpg",
+          "preview": "/uploads/e6f32149-9414-4c4d-be04-72cdf90a3f00.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ece8b24d-7cb7-4341-85e2-fb3bd8fa38c7",
+          "title": "vecteezy_the-spooky-old-warehouse-a-vanishing-point-of-city-history_24746589",
+          "image": "/uploads/d2e6c779-957f-466d-b23d-c141d1e4938e.jpg",
+          "preview": "/uploads/d2e6c779-957f-466d-b23d-c141d1e4938e.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "de72d309-0a55-4eb7-8866-12257e082473",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/18dbcf76-53ad-4e44-a057-ec7a7c9483f2.jpeg",
+      "created": "2025-09-10T10:34:19.649Z",
+      "scenes": [
+        {
+          "id": "scene-1d4f625c-2c4c-44ef-99a1-b5817058ab29",
+          "title": "WhatsApp Image 2025-09-09 at 12",
+          "image": "/uploads/18dbcf76-53ad-4e44-a057-ec7a7c9483f2.jpeg",
+          "preview": "/uploads/18dbcf76-53ad-4e44-a057-ec7a7c9483f2.jpeg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "edc48630-3276-4dce-a9e6-626f56dfbf1c",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/96e6b18e-742e-463f-a687-0bf71fc663e4.jpg",
+      "created": "2025-09-11T07:45:27.982Z",
+      "scenes": [
+        {
+          "id": "scene-ee9510cc-8673-46aa-a5ad-a83fb6ca15b8",
+          "title": "evening_museum_courtyard",
+          "image": "/uploads/96e6b18e-742e-463f-a687-0bf71fc663e4.jpg",
+          "preview": "/uploads/96e6b18e-742e-463f-a687-0bf71fc663e4.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "16854b98-f6df-4e38-b850-c418dd354024",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/7721d59f-00ab-4b2d-8805-700906293b2c.jpg",
+      "created": "2025-09-11T08:35:38.219Z",
+      "scenes": [
+        {
+          "id": "scene-85d0ed78-31bc-4b5d-9153-28e5736c5165",
+          "title": "brown_photostudio_02",
+          "image": "/uploads/7721d59f-00ab-4b2d-8805-700906293b2c.jpg",
+          "preview": "/uploads/7721d59f-00ab-4b2d-8805-700906293b2c.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b5c85303-502b-468d-b159-41f04b580b7d",
+      "title": "tour 5",
+      "description": "",
+      "thumbnail": "/uploads/8607726d-a558-4f28-b49d-4b61a29909c9.webp",
+      "created": "2025-09-11T08:53:13.310Z",
+      "scenes": [
+        {
+          "id": "scene-3aedc43d-167d-466b-99e5-b325e07296b8",
+          "title": "christmas_photo_studio_07",
+          "image": "/uploads/8607726d-a558-4f28-b49d-4b61a29909c9.webp",
+          "preview": "/uploads/8607726d-a558-4f28-b49d-4b61a29909c9.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-09723ba3-9426-4344-843d-3a87345c9368",
+          "title": "cobblestone_street_night",
+          "image": "/uploads/8d3aae4a-557d-4674-a19b-ed2d0e23ba39.webp",
+          "preview": "/uploads/8d3aae4a-557d-4674-a19b-ed2d0e23ba39.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f82cfaaf-420a-4516-82c8-397799947801",
+          "title": "docklands_01",
+          "image": "/uploads/66a2c2fd-14fb-43d0-af05-1fd6f6e1f107.webp",
+          "preview": "/uploads/66a2c2fd-14fb-43d0-af05-1fd6f6e1f107.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-a694dba5-784d-445e-81bf-132aefd55ea9",
+          "title": "evening_museum_courtyard",
+          "image": "/uploads/bee2b2d9-bc2a-4b3e-9e14-ab39f78f72fc.jpg",
+          "preview": "/uploads/bee2b2d9-bc2a-4b3e-9e14-ab39f78f72fc.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-214f3430-1479-4e4b-b434-5d395a1e9606",
+          "title": "golden_bay",
+          "image": "/uploads/72cc4154-6652-48f1-a1b5-d366270556bd.webp",
+          "preview": "/uploads/72cc4154-6652-48f1-a1b5-d366270556bd.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-c15ed185-bea6-42db-94ac-0a3236ed50da",
+          "title": "little_paris_eiffel_tower",
+          "image": "/uploads/236412d6-6d32-44b4-b20c-94d62da0d13b.webp",
+          "preview": "/uploads/236412d6-6d32-44b4-b20c-94d62da0d13b.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-a0a3b805-dead-4bd6-bab4-1d384db49071",
+          "title": "lythwood_lounge",
+          "image": "/uploads/b6d54806-f442-4ae8-bd18-60fea4e75a31.webp",
+          "preview": "/uploads/b6d54806-f442-4ae8-bd18-60fea4e75a31.webp",
+          "hotspots": []
+        },
+        {
+          "id": "scene-768285ba-f215-4e93-aef4-8646de63dbdf",
+          "title": "workshop",
+          "image": "/uploads/207c1c37-6a03-4d62-b00d-d98a36a5769f.webp",
+          "preview": "/uploads/207c1c37-6a03-4d62-b00d-d98a36a5769f.webp",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "f37dd7eb-5533-4c90-b183-c95718e4de79",
+      "title": "tour 1",
+      "description": "",
+      "thumbnail": "/uploads/7d7fdee4-2ca4-4f8e-bbe4-6381d47e24ff.webp",
+      "created": "2025-09-11T08:54:03.109Z",
+      "scenes": [
+        {
+          "id": "scene-4e25602d-3345-4cdd-9e46-6f9698b9557d",
+          "title": "lythwood_lounge",
+          "image": "/uploads/7d7fdee4-2ca4-4f8e-bbe4-6381d47e24ff.webp",
+          "preview": "/uploads/7d7fdee4-2ca4-4f8e-bbe4-6381d47e24ff.webp",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "23dca39a-f21f-41b1-9e9c-8a2b6fe0d6f7",
+      "title": "tour 1",
+      "description": "",
+      "thumbnail": "/uploads/b29f9049-9fcf-4d7a-86b3-ab3ed7daa101.jpg",
+      "created": "2025-09-11T08:57:37.998Z",
+      "scenes": [
+        {
+          "id": "scene-7c75c222-8024-4b09-861b-558d00387939",
+          "title": "stuttgart_suburbs",
+          "image": "/uploads/b29f9049-9fcf-4d7a-86b3-ab3ed7daa101.jpg",
+          "preview": "/uploads/b29f9049-9fcf-4d7a-86b3-ab3ed7daa101.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8a5b715f-287d-47f6-91ac-450507dc083e",
+      "title": "tour 1",
+      "description": "",
+      "thumbnail": "/uploads/1e556669-8b36-40d4-b0c7-c08bf191d8d5.jpg",
+      "created": "2025-09-11T09:01:59.750Z",
+      "scenes": [
+        {
+          "id": "scene-75666545-881e-411c-b3cd-a609eb7a2a2f",
+          "title": "urban_street_01",
+          "image": "/uploads/1e556669-8b36-40d4-b0c7-c08bf191d8d5.jpg",
+          "preview": "/uploads/1e556669-8b36-40d4-b0c7-c08bf191d8d5.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "fd367adb-c26a-44e0-8e48-c2da65e711ee",
+      "title": "Rawaad tour",
+      "description": "",
+      "thumbnail": "/uploads/e2fa2999-2604-4c1c-b65c-51f5d5b141ac.JPG",
+      "created": "2025-09-12T13:59:16.169Z",
+      "scenes": [
+        {
+          "id": "scene-6bb33397-e944-47b1-8f70-7e23e3fdfb1e",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/e2fa2999-2604-4c1c-b65c-51f5d5b141ac.JPG",
+          "preview": "/uploads/e2fa2999-2604-4c1c-b65c-51f5d5b141ac.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f24ffa37-042b-4d87-a95e-eb8a831c3a71",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/6c0eef43-8f15-4230-8730-1e0f43e973cb.JPG",
+          "preview": "/uploads/6c0eef43-8f15-4230-8730-1e0f43e973cb.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-06b31474-efe2-4c4d-91b2-ad4669de8b6f",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/f09f2b66-522a-41d5-b9ce-20bcd72dd9a6.JPG",
+          "preview": "/uploads/f09f2b66-522a-41d5-b9ce-20bcd72dd9a6.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-93957316-93b6-4d31-b9b0-8d5196c8f7ce",
+          "title": "DJI_20241107211424_0046_D",
+          "image": "/uploads/05e26b59-2622-40bb-a376-5f011ba7c752.JPG",
+          "preview": "/uploads/05e26b59-2622-40bb-a376-5f011ba7c752.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-6954f998-414d-4a78-b4e1-84e189f06d6e",
+          "title": "DJI_20241107211700_0047_D",
+          "image": "/uploads/f756028d-fa5a-488b-b6cb-f37a20637061.JPG",
+          "preview": "/uploads/f756028d-fa5a-488b-b6cb-f37a20637061.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-9ad7b974-bf74-4cfb-9261-38c5f69938c4",
+          "title": "DJI_20241107212245_0049_D",
+          "image": "/uploads/6d5d6824-1775-4675-aedc-44836c4224d9.JPG",
+          "preview": "/uploads/6d5d6824-1775-4675-aedc-44836c4224d9.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8b7f0b2c-9022-4c00-969b-57f94e239bca",
+          "title": "DJI_20241107212721_0050_D",
+          "image": "/uploads/4f0e56cf-edec-41af-9352-b6e8d055d1a1.JPG",
+          "preview": "/uploads/4f0e56cf-edec-41af-9352-b6e8d055d1a1.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8e99b011-e83b-46cc-a49e-748816069d6b",
+          "title": "DJI_20241107213014_0051_D",
+          "image": "/uploads/bd0a1820-75c7-440a-abf6-6dbc839eb45a.JPG",
+          "preview": "/uploads/bd0a1820-75c7-440a-abf6-6dbc839eb45a.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-9e12fbbd-b7bc-4091-919d-8a747846c4c5",
+          "title": "DJI_20241107213239_0052_D",
+          "image": "/uploads/cbd4fe2b-35a1-4c38-9165-94f6bc9cf8cc.JPG",
+          "preview": "/uploads/cbd4fe2b-35a1-4c38-9165-94f6bc9cf8cc.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-583d95b9-226d-4f91-97bb-c4636c592aff",
+          "title": "DJI_20241107215506_0055_D",
+          "image": "/uploads/10de44ce-2dcc-4b5d-be65-0438409ef602.JPG",
+          "preview": "/uploads/10de44ce-2dcc-4b5d-be65-0438409ef602.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-7c43459a-a4fc-48ff-9dcc-a8182f3acd4b",
+          "title": "DJI_20241107215734_0056_D",
+          "image": "/uploads/9edbe1ca-11eb-47cd-b75b-27f34745842d.JPG",
+          "preview": "/uploads/9edbe1ca-11eb-47cd-b75b-27f34745842d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-9c4fe233-c46e-484d-adca-e613eab5d743",
+          "title": "DJI_20241107215948_0057_D",
+          "image": "/uploads/90b3b692-d317-47f6-b710-929599bf7052.JPG",
+          "preview": "/uploads/90b3b692-d317-47f6-b710-929599bf7052.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d842b9e0-fad7-4598-b6cf-37e5bb704743",
+          "title": "DJI_20241107220404_0059_D",
+          "image": "/uploads/4d0405ec-5436-4f3d-8f2a-dc1ff514b97d.JPG",
+          "preview": "/uploads/4d0405ec-5436-4f3d-8f2a-dc1ff514b97d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-bffdbf9b-cb55-491f-b01e-532e376cc4d0",
+          "title": "DJI_20241107220633_0060_D",
+          "image": "/uploads/2056ec83-713b-4773-b48f-76c9d18d85db.JPG",
+          "preview": "/uploads/2056ec83-713b-4773-b48f-76c9d18d85db.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-36af2dca-0c67-4681-afa7-1fed14893f64",
+          "title": "DJI_20241107220849_0061_D",
+          "image": "/uploads/7fa58f1d-103f-4f7f-9cd8-757cbbe1fc67.JPG",
+          "preview": "/uploads/7fa58f1d-103f-4f7f-9cd8-757cbbe1fc67.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d1ca7c7d-7db3-4178-b666-8e34ae53bbfd",
+          "title": "DJI_20241107221107_0062_D",
+          "image": "/uploads/812c194d-2231-4b50-8ee8-acc0151db32a.JPG",
+          "preview": "/uploads/812c194d-2231-4b50-8ee8-acc0151db32a.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ea638a30-8011-4f32-a601-ec23c1f0fc4c",
+          "title": "DJI_20241107221352_0063_D",
+          "image": "/uploads/5ac38163-f663-4282-a8a5-05a10d12a84d.JPG",
+          "preview": "/uploads/5ac38163-f663-4282-a8a5-05a10d12a84d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d2f54744-2168-4a30-a3ba-162e41fbd449",
+          "title": "DJI_20241107222004_0064_D",
+          "image": "/uploads/a5ad048d-f819-410d-95ff-34a7e1e974a1.JPG",
+          "preview": "/uploads/a5ad048d-f819-410d-95ff-34a7e1e974a1.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f13ececc-5418-4837-890e-5a2454753e2c",
+          "title": "DJI_20241107222301_0065_D",
+          "image": "/uploads/c038c449-0007-4fb5-9c9e-bc4dae0120d5.JPG",
+          "preview": "/uploads/c038c449-0007-4fb5-9c9e-bc4dae0120d5.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d46ed8be-4616-49ef-abb6-562faae798b7",
+          "title": "DJI_20241107222702_0066_D",
+          "image": "/uploads/ca3b224b-f911-440b-8f93-daabe012369a.JPG",
+          "preview": "/uploads/ca3b224b-f911-440b-8f93-daabe012369a.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d215ddf7-d6df-4102-9e7c-d094105e27f0",
+          "title": "DJI_20241107222912_0067_D",
+          "image": "/uploads/d13cc901-a73e-49af-8226-1c75ab988830.JPG",
+          "preview": "/uploads/d13cc901-a73e-49af-8226-1c75ab988830.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-a2654d50-b9aa-4705-991a-9299e4909b9b",
+          "title": "DJI_20241107223251_0068_D",
+          "image": "/uploads/a6350612-a215-4b33-99f2-0ef1dc2ef612.JPG",
+          "preview": "/uploads/a6350612-a215-4b33-99f2-0ef1dc2ef612.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-000f327d-e4f3-40dd-afb2-bd4283b719c7",
+          "title": "DJI_20241107223547_0069_D",
+          "image": "/uploads/4b4917bd-5e6d-417a-be71-0cdcf7a61ffa.JPG",
+          "preview": "/uploads/4b4917bd-5e6d-417a-be71-0cdcf7a61ffa.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-358d9b42-f34d-48c0-b9df-90418da02ee4",
+          "title": "DJI_20241107223838_0070_D",
+          "image": "/uploads/cc1b7818-729e-49c9-8046-d251c170c749.JPG",
+          "preview": "/uploads/cc1b7818-729e-49c9-8046-d251c170c749.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-72085825-a6c4-411b-99f3-969d7a365369",
+          "title": "DJI_20241107231448_0072_D",
+          "image": "/uploads/5a07d64c-aaf2-4a20-9ead-02923d92fd73.JPG",
+          "preview": "/uploads/5a07d64c-aaf2-4a20-9ead-02923d92fd73.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "fd01fdd6-631f-4d19-9b0f-fb0e0bf4c751",
+      "title": "tour 1",
+      "description": "",
+      "thumbnail": "/uploads/001b1933-afa8-4144-8e1d-772abc7c5bb3.JPG",
+      "created": "2025-09-12T17:01:18.710Z",
+      "scenes": [
+        {
+          "id": "scene-11b8d9b3-2e39-4248-8110-8012861b5348",
+          "title": "DJI_20241107223838_0070_D",
+          "image": "/uploads/001b1933-afa8-4144-8e1d-772abc7c5bb3.JPG",
+          "preview": "/uploads/001b1933-afa8-4144-8e1d-772abc7c5bb3.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "11c22b2e-eab3-4d4d-9bd1-fb35117992ac",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/320a54f7-48cd-42fa-bb23-8f86b917e003.JPG",
+      "created": "2025-09-12T17:02:26.771Z",
+      "scenes": [
+        {
+          "id": "scene-00b19483-980f-4562-9767-cc180de38ec5",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/320a54f7-48cd-42fa-bb23-8f86b917e003.JPG",
+          "preview": "/uploads/320a54f7-48cd-42fa-bb23-8f86b917e003.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-21f2b115-2efd-4f20-b3e9-3ac39ffc3637",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/57016df2-2545-4e39-95a7-8aa66f83e3a8.JPG",
+          "preview": "/uploads/57016df2-2545-4e39-95a7-8aa66f83e3a8.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-982754d4-34ec-48aa-a63b-c0fde53abaff",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/1620defe-4358-4c5a-800b-437ca2cb0ab6.JPG",
+          "preview": "/uploads/1620defe-4358-4c5a-800b-437ca2cb0ab6.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-233c6314-8c79-4888-8e12-0820f436e5ff",
+          "title": "DJI_20241107211424_0046_D",
+          "image": "/uploads/cbe8a401-7704-4bad-b593-3d816b93ae3c.JPG",
+          "preview": "/uploads/cbe8a401-7704-4bad-b593-3d816b93ae3c.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-b6b11efa-b7d3-45cb-a7e6-8915e970001f",
+          "title": "DJI_20241107211700_0047_D",
+          "image": "/uploads/5cd0df06-3d43-4b78-8698-3748f07a309c.JPG",
+          "preview": "/uploads/5cd0df06-3d43-4b78-8698-3748f07a309c.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-de06935c-7a04-4294-9ee7-70b68bcfbec2",
+          "title": "DJI_20241107212245_0049_D",
+          "image": "/uploads/b8e9a87b-a633-4bae-881e-46d99b63adbe.JPG",
+          "preview": "/uploads/b8e9a87b-a633-4bae-881e-46d99b63adbe.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8a46d7eb-998b-47a9-bc5a-f65682f724e4",
+          "title": "DJI_20241107212721_0050_D",
+          "image": "/uploads/97467eba-0dbd-410e-a175-be0bd165f0f3.JPG",
+          "preview": "/uploads/97467eba-0dbd-410e-a175-be0bd165f0f3.JPG",
+          "hotspots": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Tour Platform - Immersive 360° Virtual Tours</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#39FF14',
+                        secondary: '#1a1a2e'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-vr-cardboard text-3xl text-primary"></i>
+                <span>VR Tour Platform</span>
+            </a>
+            
+            <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="convert.html" class="nav-link">Photo to 360°</a></li>
+                    <li><a href="upload.html" class="nav-link">Create Tour</a></li>
+                    <li><a href="viewer.html" class="nav-link">View Tours</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button onclick="window.location.href='convert.html'" class="btn btn-secondary">
+                        <i class="fas fa-magic"></i>Photo to 360°
+                    </button>
+                    <button onclick="window.location.href='upload.html'" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>Create Tour
+                    </button>
+                    <button id="darkModeToggle" class="btn" style="background: transparent; padding: 0.5rem;">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Immersive 360° Virtual Tours</h2>
+            <p>Create, share, and explore stunning virtual experiences</p>
+            <div class="hero-buttons">
+                <button onclick="window.location.href='convert.html'" class="btn" style="background: white; color: #667eea;">
+                    <i class="fas fa-magic"></i>Convert Photo to 360°
+                </button>
+                <button onclick="window.location.href='upload.html'" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                    <i class="fas fa-upload"></i>Upload 360° Panorama
+                </button>
+                <button onclick="exploreDemoTour()" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+                    <i class="fas fa-play"></i>Try Demo Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="background: white; padding: 2rem 0;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="toursCount">0</div>
+                    <div class="stat-label">Active Tours</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="scenesCount">0</div>
+                    <div class="stat-label">Total Scenes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">VR</div>
+                    <div class="stat-label">Mode Support</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">360°</div>
+                    <div class="stat-label">Full Panorama</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tours Grid -->
+    <section style="padding: 3rem 0;">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="tourSearch" placeholder="Search virtual tours..." class="search-input">
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; align-items: flex-start;">
+                <h3 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: bold;">Featured Tours</h3>
+                <div class="filter-container">
+                    <button onclick="filterTours('all')" class="filter-btn active">
+                        <i class="fas fa-globe"></i>All
+                    </button>
+                    <button onclick="filterTours('real-estate')" class="filter-btn">
+                        <i class="fas fa-home"></i>Real Estate
+                    </button>
+                    <button onclick="filterTours('hotel')" class="filter-btn">
+                        <i class="fas fa-bed"></i>Hotels
+                    </button>
+                    <button onclick="filterTours('restaurant')" class="filter-btn">
+                        <i class="fas fa-utensils"></i>Restaurants
+                    </button>
+                    <button onclick="filterTours('showroom')" class="filter-btn">
+                        <i class="fas fa-store"></i>Showrooms
+                    </button>
+                    <button onclick="filterTours('recent')" class="filter-btn">
+                        <i class="fas fa-clock"></i>Recent
+                    </button>
+                </div>
+            </div>
+
+            <div id="toursGrid" class="grid">
+                <!-- Tours will be loaded here dynamically -->
+                <div class="card skeleton">
+                    <div style="height: 200px; background: #e5e7eb;"></div>
+                    <div class="card-content">
+                        <div style="height: 1rem; background: #e5e7eb; margin-bottom: 0.5rem; width: 75%;"></div>
+                        <div style="height: 0.75rem; background: #e5e7eb; width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section style="background: #f3f4f6; padding: 4rem 0;">
+        <div class="container">
+            <h3 style="text-align: center; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: bold; margin-bottom: 3rem;">Platform Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-panorama text-3xl text-primary"></i>
+                    </div>
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">360° Panoramas</h4>
+                    <p>Full spherical panoramas with smooth navigation and high resolution support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-vr-cardboard text-3xl text-primary"></i>
+                    </div>
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">VR Mode</h4>
+                    <p>Immersive VR experience with headset support and stereoscopic viewing</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-share-alt text-3xl text-primary"></i>
+                    </div>
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Easy Sharing</h4>
+                    <p>Generate embed codes and share links for your virtual tours instantly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p style="margin-bottom: 1rem;">© 2024 VR Tour Platform. Built with <i class="fas fa-heart text-primary"></i> for immersive experiences</p>
+            <div class="social-links">
+                <a href="#" style="color: white; transition: color 0.3s ease;"><i class="fab fa-github text-xl"></i></a>
+                <a href="#" style="color: white; transition: color 0.3s ease;"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" style="color: white; transition: color 0.3s ease;"><i class="fab fa-linkedin text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/responsive.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

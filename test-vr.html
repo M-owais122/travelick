@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Test - 360° Tour</title>
+    <meta http-equiv="Permissions-Policy" content="xr-spatial-tracking=(self), accelerometer=(self), gyroscope=(self), magnetometer=(self)">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+        }
+        .test-results {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 3px solid #39FF14;
+            background: rgba(255,255,255,0.05);
+        }
+        .status {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .success { color: #39FF14; }
+        .warning { color: #ffa500; }
+        .error { color: #ff4444; }
+        .vr-test-button {
+            background: #39FF14;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .viewer-link {
+            color: #39FF14;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-results">
+        <h1>🥽 VR Support Test Results</h1>
+        
+        <div class="test-item">
+            <strong>Browser Support:</strong>
+            <span class="status" id="browserSupport">Testing...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>WebXR Support:</strong>
+            <span class="status" id="webxrSupport">Testing...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>Device Orientation (Mobile VR):</strong>
+            <span class="status" id="orientationSupport">Testing...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>HTTPS Status:</strong>
+            <span class="status" id="httpsStatus">Testing...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>Fullscreen API:</strong>
+            <span class="status" id="fullscreenSupport">Testing...</span>
+        </div>
+        
+        <div class="test-item">
+            <strong>Device Type:</strong>
+            <span class="status" id="deviceType">Testing...</span>
+        </div>
+        
+        <hr style="margin: 30px 0; border-color: rgba(255,255,255,0.2);">
+        
+        <h2>Test VR Mode</h2>
+        <p>Click the button below to test VR functionality:</p>
+        <button class="vr-test-button" onclick="testVRMode()">🥽 Test VR Mode</button>
+        
+        <div id="vrTestResult" style="margin-top: 20px;"></div>
+        
+        <hr style="margin: 30px 0; border-color: rgba(255,255,255,0.2);">
+        
+        <h2>Open Virtual Tour</h2>
+        <a href="/frontend/viewer.html?tour=demo-tour-1" class="viewer-link">
+            🌟 Open Demo Tour with VR Support
+        </a>
+        
+        <div style="margin-top: 30px; padding: 20px; background: rgba(57, 255, 20, 0.1); border-radius: 8px;">
+            <h3>Instructions for VR Testing:</h3>
+            <ol style="text-align: left;">
+                <li><strong>Desktop:</strong> Click the VR button to enter fullscreen VR mode</li>
+                <li><strong>Mobile:</strong> Click the VR button, allow device sensors, rotate device</li>
+                <li><strong>VR Headset:</strong> Connect headset, click VR button, put on headset</li>
+                <li><strong>HTTPS Required:</strong> VR mode requires secure connection (https://)</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Test browser support
+        function testBrowserSupport() {
+            const isChrome = /Chrome/.test(navigator.userAgent);
+            const isFirefox = /Firefox/.test(navigator.userAgent);
+            const isEdge = /Edg/.test(navigator.userAgent);
+            const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+            
+            const supported = isChrome || isFirefox || isEdge;
+            
+            document.getElementById('browserSupport').innerHTML = supported ? 
+                '<span class="success">✅ Compatible Browser</span>' : 
+                '<span class="warning">⚠️ Limited Support</span>';
+        }
+
+        // Test WebXR support
+        async function testWebXRSupport() {
+            if ('xr' in navigator && navigator.xr) {
+                try {
+                    const isSupported = await navigator.xr.isSessionSupported('immersive-vr');
+                    document.getElementById('webxrSupport').innerHTML = isSupported ? 
+                        '<span class="success">✅ WebXR VR Supported</span>' : 
+                        '<span class="warning">⚠️ WebXR Available (No VR device)</span>';
+                } catch (e) {
+                    document.getElementById('webxrSupport').innerHTML = 
+                        '<span class="warning">⚠️ WebXR Available (Check permissions)</span>';
+                }
+            } else {
+                document.getElementById('webxrSupport').innerHTML = 
+                    '<span class="error">❌ WebXR Not Supported</span>';
+            }
+        }
+
+        // Test device orientation support
+        function testOrientationSupport() {
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const hasOrientation = 'DeviceOrientationEvent' in window;
+            
+            if (isMobile && hasOrientation) {
+                document.getElementById('orientationSupport').innerHTML = 
+                    '<span class="success">✅ Mobile VR Supported</span>';
+            } else if (hasOrientation) {
+                document.getElementById('orientationSupport').innerHTML = 
+                    '<span class="warning">⚠️ Orientation API Available</span>';
+            } else {
+                document.getElementById('orientationSupport').innerHTML = 
+                    '<span class="error">❌ Not Supported</span>';
+            }
+        }
+
+        // Test HTTPS status
+        function testHTTPS() {
+            const isHTTPS = location.protocol === 'https:';
+            const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            
+            if (isHTTPS) {
+                document.getElementById('httpsStatus').innerHTML = 
+                    '<span class="success">✅ Secure (HTTPS)</span>';
+            } else if (isLocalhost) {
+                document.getElementById('httpsStatus').innerHTML = 
+                    '<span class="warning">⚠️ Localhost (Testing OK)</span>';
+            } else {
+                document.getElementById('httpsStatus').innerHTML = 
+                    '<span class="error">❌ Not Secure (VR Limited)</span>';
+            }
+        }
+
+        // Test fullscreen support
+        function testFullscreenSupport() {
+            const hasFullscreen = document.documentElement.requestFullscreen || 
+                                 document.documentElement.webkitRequestFullscreen || 
+                                 document.documentElement.mozRequestFullScreen;
+            
+            document.getElementById('fullscreenSupport').innerHTML = hasFullscreen ? 
+                '<span class="success">✅ Supported</span>' : 
+                '<span class="error">❌ Not Supported</span>';
+        }
+
+        // Detect device type
+        function detectDeviceType() {
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isTablet = /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent);
+            
+            let deviceType = 'Desktop';
+            if (isMobile) deviceType = 'Mobile Phone';
+            if (isTablet) deviceType = 'Tablet';
+            
+            document.getElementById('deviceType').innerHTML = 
+                `<span class="success">${deviceType}</span>`;
+        }
+
+        // Test VR mode
+        async function testVRMode() {
+            const resultDiv = document.getElementById('vrTestResult');
+            resultDiv.innerHTML = '<div style="color: #39FF14;">Testing VR mode...</div>';
+            
+            // Test WebXR first
+            if ('xr' in navigator && navigator.xr) {
+                try {
+                    const isSupported = await navigator.xr.isSessionSupported('immersive-vr');
+                    if (isSupported) {
+                        const session = await navigator.xr.requestSession('immersive-vr');
+                        resultDiv.innerHTML = '<div style="color: #39FF14;">✅ WebXR VR Mode Working! (Session started)</div>';
+                        setTimeout(() => session.end(), 2000);
+                        return;
+                    }
+                } catch (e) {
+                    console.log('WebXR test failed:', e);
+                }
+            }
+            
+            // Test fullscreen fallback
+            try {
+                await document.documentElement.requestFullscreen();
+                resultDiv.innerHTML = '<div style="color: #ffa500;">⚠️ Fullscreen VR Fallback Working</div>';
+                setTimeout(() => {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                }, 3000);
+            } catch (e) {
+                resultDiv.innerHTML = '<div style="color: #ff4444;">❌ VR Mode Test Failed</div>';
+            }
+        }
+
+        // Run all tests when page loads
+        window.addEventListener('load', () => {
+            testBrowserSupport();
+            testWebXRSupport();
+            testOrientationSupport();
+            testHTTPS();
+            testFullscreenSupport();
+            detectDeviceType();
+        });
+    </script>
+</body>
+</html>

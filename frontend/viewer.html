@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360° Tour Viewer</title>
+    <!-- VR/XR permissions -->
+    <meta http-equiv="Permissions-Policy" content="xr-spatial-tracking=(self), accelerometer=(self), gyroscope=(self), magnetometer=(self)">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #panorama {
+            width: 100%;
+            height: 100vh;
+        }
+        .control-panel {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            color: white;
+            max-width: min(300px, calc(100vw - 2rem));
+        }
+        
+        @media (max-width: 768px) {
+            .control-panel {
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                right: 1rem;
+                max-width: none;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+            .control-panel.active {
+                transform: translateY(0);
+            }
+        }
+        .scene-thumb {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .scene-thumb:hover {
+            transform: scale(1.05);
+            border-color: #39FF14;
+        }
+        .scene-thumb.active {
+            border-color: #39FF14;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+        }
+        .toolbar {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .toolbar {
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                border-radius: 15px;
+                padding: 0.75rem;
+            }
+        }
+            display: flex;
+            gap: 15px;
+        }
+        .toolbar button {
+            background: black;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .toolbar button:hover {
+            background: white;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+        .toolbar button.active {
+            background: white;
+            color: black;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+        .embed-mode .control-panel {
+            display: none;
+        }
+        .embed-mode .toolbar {
+            bottom: 10px;
+        }
+        .hotspot-tooltip {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+        .share-modal.active {
+            display: flex;
+        }
+        .share-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+        .map-overlay {
+            position: absolute;
+            bottom: 100px;
+            right: 20px;
+            width: 200px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 90;
+            display: none;
+        }
+        .map-overlay.active {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .control-panel {
+                max-width: 200px;
+                padding: 10px;
+            }
+            .toolbar {
+                bottom: 15px;
+                padding: 8px 15px;
+                gap: 10px;
+            }
+            .toolbar button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+        .vr-active {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .vr-active.active {
+            display: block;
+        }
+        .toolbar button i {
+            color: white;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .toolbar button:hover i {
+            color: black;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+        .toolbar button.active i {
+            color: black;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="h-full bg-black">
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#39FF14]"></div>
+            <p class="text-white mt-4">Loading Virtual Tour...</p>
+        </div>
+    </div>
+
+    <!-- Panorama Container -->
+    <div id="panorama"></div>
+    
+    <!-- Hidden VR Button for Pannellum -->
+    <button id="vrButton" style="display: none;"></button>
+    
+    <!-- VR Status Indicator -->
+    <div id="vrStatus" class="vr-active">
+        <h3>🥽 VR Mode Active</h3>
+        <p>Put on your VR headset or rotate your device to look around</p>
+        <button onclick="toggleVR()" class="bg-primary text-black px-4 py-2 rounded-lg mt-3">
+            Exit VR Mode
+        </button>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel" id="controlPanel">
+        <h2 class="text-lg font-bold mb-3" id="tourTitle">Loading Tour...</h2>
+        <p class="text-sm text-gray-300 mb-4" id="sceneTitle">Scene Name</p>
+        
+        <!-- Scene Thumbnails -->
+        <div class="mb-4">
+            <h3 class="text-sm font-semibold mb-2">Scenes</h3>
+            <div id="sceneThumbs" class="grid grid-cols-3 gap-2">
+                <!-- Thumbnails will be loaded here -->
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button onclick="toggleAutoRotate()" id="autoRotateBtn" title="Auto Rotate">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        <button onclick="toggleFullscreen()" title="Fullscreen">
+            <i class="fas fa-expand"></i>
+        </button>
+        <button onclick="toggleVR()" id="vrBtn" title="VR Mode">
+            <i class="fas fa-vr-cardboard"></i>
+        </button>
+        <button onclick="toggleMap()" id="mapBtn" title="Map View">
+            <i class="fas fa-map"></i>
+        </button>
+        <button onclick="showShareModal()" title="Share">
+            <i class="fas fa-share-alt"></i>
+        </button>
+        <button onclick="generateQRCode()" title="QR Code">
+            <i class="fas fa-qrcode"></i>
+        </button>
+        <button onclick="showTourInfo()" title="Tour Information">
+            <i class="fas fa-info-circle"></i>
+        </button>
+        <button onclick="toggleSound()" id="soundBtn" title="Sound">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
+
+    <!-- Map Overlay -->
+    <div class="map-overlay" id="mapOverlay">
+        <h3 class="text-white text-sm font-bold mb-2">Floor Plan</h3>
+        <div class="bg-gray-800 rounded p-2 h-full">
+            <canvas id="miniMap" width="180" height="100"></canvas>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <h3 class="text-xl font-bold mb-4">Share This Tour</h3>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Direct Link</label>
+                <div class="flex">
+                    <input type="text" id="shareLink" class="flex-1 px-3 py-2 border rounded-l-lg" readonly>
+                    <button onclick="copyLink()" class="bg-[#39FF14] text-black px-4 py-2 rounded-r-lg hover:bg-opacity-90">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Embed Code</label>
+                <textarea id="embedCode" class="w-full px-3 py-2 border rounded-lg" rows="4" readonly></textarea>
+                <button onclick="copyEmbed()" class="mt-2 bg-[#39FF14] text-black px-4 py-2 rounded-lg hover:bg-opacity-90">
+                    Copy Embed Code
+                </button>
+            </div>
+
+            <div class="flex justify-between">
+                <div class="flex gap-2">
+                    <button onclick="shareToSocial('facebook')" class="bg-blue-600 text-white px-3 py-2 rounded-lg">
+                        <i class="fab fa-facebook"></i>
+                    </button>
+                    <button onclick="shareToSocial('twitter')" class="bg-blue-400 text-white px-3 py-2 rounded-lg">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button onclick="shareToSocial('whatsapp')" class="bg-green-500 text-white px-3 py-2 rounded-lg">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+                <button onclick="closeShareModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="share-modal" id="qrModal">
+        <div class="share-content">
+            <h3 class="text-xl font-bold mb-4">
+                <i class="fas fa-qrcode mr-2 text-primary"></i>QR Code for This Tour
+            </h3>
+            
+            <div class="text-center mb-6">
+                <div id="qrCodeContainer" class="inline-block p-4 bg-white rounded-lg shadow-inner">
+                    <!-- QR code will be generated here -->
+                </div>
+                <p class="text-sm text-gray-600 mt-3">Scan with your mobile device to view this tour</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Short Link</label>
+                <div class="flex">
+                    <input type="text" id="shortLink" class="flex-1 px-3 py-2 border rounded-l-lg" readonly>
+                    <button onclick="copyShortLink()" class="bg-[#39FF14] text-black px-4 py-2 rounded-r-lg hover:bg-opacity-90">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <button onclick="downloadQRCode()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-download mr-2"></i>Download QR
+                </button>
+                <button onclick="closeQRModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Info Modal -->
+    <div class="share-modal" id="tourInfoModal">
+        <div class="share-content">
+            <h3 class="text-xl font-bold mb-4">
+                <i class="fas fa-info-circle mr-2 text-primary"></i>Tour Information
+            </h3>
+            
+            <div class="space-y-4" id="tourInfoContent">
+                <!-- Tour details will be populated here -->
+            </div>
+
+            <!-- Comments Section -->
+            <div class="mt-6 border-t pt-4">
+                <h4 class="font-semibold mb-3">
+                    <i class="fas fa-comments mr-2"></i>Comments & Reviews
+                </h4>
+                
+                <div class="mb-4">
+                    <div class="flex gap-3">
+                        <textarea id="newComment" placeholder="Share your thoughts about this tour..." 
+                                  class="flex-1 px-3 py-2 border rounded-lg resize-none" rows="3"></textarea>
+                        <button onclick="addComment()" class="bg-[#39FF14] text-black px-4 py-2 rounded-lg h-fit hover:bg-opacity-90">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="commentsList" class="space-y-3 max-h-60 overflow-y-auto">
+                    <!-- Comments will be loaded here -->
+                </div>
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <button onclick="closeTourInfoModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/responsive.js"></script>
+    <script src="js/viewer.js"></script>
+</body>
+</html>

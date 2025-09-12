@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VR Tour Test</title>
+</head>
+<body>
+    <h1>🎯 VR Tour Platform Test</h1>
+    <p>If you can see this page, your server is working!</p>
+    
+    <h2>Navigation Links:</h2>
+    <ul>
+        <li><a href="/">Home Page</a></li>
+        <li><a href="/viewer.html?tour=demo-tour-1">Demo Tour</a></li>
+        <li><a href="/upload.html">Upload Tour</a></li>
+    </ul>
+    
+    <h2>API Test:</h2>
+    <button onclick="testAPI()">Test API Connection</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/tours');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = `
+                    <h3>API Response:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `
+                    <h3>API Error:</h3>
+                    <p style="color: red;">${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
