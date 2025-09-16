@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Image Stitching - VR Tour Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#39FF14'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #39FF14;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.dragover {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: #39FF14;
+            transform: scale(1.02);
+        }
+        .image-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+        .image-preview img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .method-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .method-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .method-card.selected {
+            border-color: #39FF14;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body class="h-full bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div style="display: flex; align-items: center;">
+                <button onclick="window.location.href='index.html'" class="btn" style="background: transparent; padding: 0.5rem; margin-right: 1rem;">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <a href="stitch.html" class="nav-brand">
+                    <img src="travel.png" alt="VR Tour Logo" class="h-12 w-auto" style="background: white; padding: 0.25rem; border-radius: 0.5rem;">
+                    <span style="font-size: 1.25rem;">Multi-Image Stitching</span>
+                </a>
+            </div>
+            
+            <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links" style="display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+                    <li><a href="index.html" class="nav-link" style="text-decoration: none; color: white;">Home</a></li>
+                    <li><a href="convert.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Photo to 360°</a></li>
+                    <li><a href="stitch.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Multi-Image Stitch</a></li>
+                    <li><a href="upload.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Create Tour</a></li>
+                    <li><a href="viewer.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">View Tours</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button id="darkModeToggle" class="btn" style="background: transparent; padding: 0.5rem;">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 2rem 1rem; color: white;">
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: bold; margin-bottom: 1rem;">
+                Create 360° Panorama from Multiple Images
+            </h2>
+            <p style="color: #e0e0e0; font-size: clamp(0.9rem, 2vw, 1.1rem);">
+                Upload 2-20 images to stitch them together into a seamless 360° panoramic experience
+            </p>
+        </div>
+
+        <!-- Upload Section -->
+        <div style="background: #374151; border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #39FF14;">
+                <i class="fas fa-images"></i> Select Images
+            </h3>
+            
+            <div class="drop-zone" id="dropZone" style="padding: 3rem; text-align: center; border-radius: 1rem; background: #1a1a2e; margin-bottom: 1rem;">
+                <div>
+                    <i class="fas fa-cloud-upload-alt text-6xl mb-4" style="color: #39FF14;"></i>
+                    <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        Drop your images here or click to browse
+                    </h4>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">
+                        Select 2-20 images (JPEG, PNG, WebP) - max 10MB each
+                    </p>
+                    <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                    <button onclick="document.getElementById('imageInput').click()" class="btn" style="background: #39FF14; color: black;">
+                        <i class="fas fa-plus"></i> Choose Images
+                    </button>
+                </div>
+            </div>
+
+            <!-- Selected Images Preview -->
+            <div id="imagePreview" class="image-grid" style="display: none; margin-top: 1rem;"></div>
+        </div>
+
+        <!-- Stitching Options -->
+        <div style="background: #374151; border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;" id="optionsSection" style="display: none;">
+            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #39FF14;">
+                <i class="fas fa-cogs"></i> Stitching Options
+            </h3>
+            
+            <!-- Stitching Method -->
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Choose Stitching Method</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="method-card selected" data-method="horizontal" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #39FF14; text-align: center;">
+                        <i class="fas fa-arrows-alt-h text-2xl mb-2" style="color: #39FF14;"></i>
+                        <h5 style="font-weight: 600; margin-bottom: 0.5rem;">Horizontal</h5>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Side-by-side stitching</p>
+                    </div>
+                    <div class="method-card" data-method="vertical" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #374151; text-align: center;">
+                        <i class="fas fa-arrows-alt-v text-2xl mb-2" style="color: #39FF14;"></i>
+                        <h5 style="font-weight: 600; margin-bottom: 0.5rem;">Vertical</h5>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Top-to-bottom stitching</p>
+                    </div>
+                    <div class="method-card" data-method="panoramic" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #374151; text-align: center;">
+                        <i class="fas fa-globe text-2xl mb-2" style="color: #39FF14;"></i>
+                        <h5 style="font-weight: 600; margin-bottom: 0.5rem;">360° Panoramic</h5>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Full spherical panorama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Options -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Tour Title</label>
+                    <input type="text" id="tourTitle" placeholder="My Stitched Panorama" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; background: #1a1a2e; border: 1px solid #374151; color: white;">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Overlap (0-50%)</label>
+                    <input type="range" id="overlapSlider" min="0" max="50" value="10" style="width: 100%;">
+                    <span id="overlapValue" style="color: #9ca3af; font-size: 0.875rem;">10%</span>
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Quality</label>
+                    <select id="qualitySelect" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; background: #1a1a2e; border: 1px solid #374151; color: white;">
+                        <option value="80">Good (80%)</option>
+                        <option value="90" selected>High (90%)</option>
+                        <option value="95">Maximum (95%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Stitch Button -->
+            <button id="stitchBtn" onclick="startStitching()" class="btn" style="width: 100%; padding: 1rem; background: #39FF14; color: black; font-size: 1.25rem; font-weight: 600;" disabled>
+                <i class="fas fa-magic"></i> Create 360° Panorama
+            </button>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progressSection" style="background: #374151; border-radius: 1rem; padding: 2rem; display: none;">
+            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #39FF14;">
+                <i class="fas fa-cog fa-spin"></i> Creating Your Panorama
+            </h3>
+            <div style="background: #1a1a2e; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span id="progressText">Preparing images...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div style="background: #374151; height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div id="progressBar" class="progress-bar" style="height: 100%; background: #39FF14; width: 0%;"></div>
+                </div>
+            </div>
+            <p style="color: #9ca3af; text-align: center;">This may take a few minutes depending on image size and quantity...</p>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultSection" style="background: #374151; border-radius: 1rem; padding: 2rem; display: none;">
+            <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #39FF14;">
+                <i class="fas fa-check-circle"></i> Panorama Created Successfully!
+            </h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedImages = [];
+        let selectedMethod = 'horizontal';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const dropZone = document.getElementById('dropZone');
+            const imageInput = document.getElementById('imageInput');
+            const overlapSlider = document.getElementById('overlapSlider');
+            const overlapValue = document.getElementById('overlapValue');
+
+            // Drag and drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+
+            // File input
+            imageInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            // Overlap slider
+            overlapSlider.addEventListener('input', (e) => {
+                overlapValue.textContent = e.target.value + '%';
+            });
+
+            // Method selection
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.method-card').forEach(c => {
+                        c.classList.remove('selected');
+                        c.style.borderColor = '#374151';
+                    });
+                    card.classList.add('selected');
+                    card.style.borderColor = '#39FF14';
+                    selectedMethod = card.dataset.method;
+                });
+            });
+        }
+
+        function handleFiles(files) {
+            selectedImages = Array.from(files).slice(0, 20); // Max 20 images
+
+            if (selectedImages.length < 2) {
+                alert('Please select at least 2 images for stitching.');
+                return;
+            }
+
+            updateImagePreview();
+            document.getElementById('optionsSection').style.display = 'block';
+            document.getElementById('stitchBtn').disabled = false;
+        }
+
+        function updateImagePreview() {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            preview.style.display = 'grid';
+
+            selectedImages.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const div = document.createElement('div');
+                    div.className = 'image-preview';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Image ${index + 1}">
+                        <div style="position: absolute; top: 0.5rem; right: 0.5rem;">
+                            <button onclick="removeImage(${index})" style="background: rgba(255,0,0,0.7); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 0.5rem; font-size: 0.75rem;">
+                            Image ${index + 1}
+                        </div>
+                    `;
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            updateImagePreview();
+            
+            if (selectedImages.length < 2) {
+                document.getElementById('optionsSection').style.display = 'none';
+                document.getElementById('stitchBtn').disabled = true;
+            }
+        }
+
+        async function startStitching() {
+            if (selectedImages.length < 2) {
+                alert('Please select at least 2 images.');
+                return;
+            }
+
+            // Show progress
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('optionsSection').style.display = 'none';
+            
+            updateProgress('Preparing images...', 10);
+
+            try {
+                const formData = new FormData();
+                
+                // Add images
+                selectedImages.forEach((file, index) => {
+                    formData.append('images', file);
+                });
+
+                // Add options
+                formData.append('method', selectedMethod);
+                formData.append('title', document.getElementById('tourTitle').value || 'Stitched Panorama');
+                formData.append('overlap', document.getElementById('overlapSlider').value / 100);
+                formData.append('quality', document.getElementById('qualitySelect').value);
+
+                updateProgress('Uploading images...', 30);
+
+                const response = await fetch('/api/conversion/stitch', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                updateProgress('Stitching images...', 60);
+
+                // Check if response is OK and content type is JSON
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Server error (${response.status}): ${errorText}`);
+                }
+
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    const responseText = await response.text();
+                    console.error('Non-JSON response:', responseText);
+                    throw new Error('Server returned non-JSON response. Check console for details.');
+                }
+
+                const result = await response.json();
+                console.log('Stitching result:', result);
+
+                if (result.success) {
+                    updateProgress('Finalizing panorama...', 90);
+                    setTimeout(() => {
+                        updateProgress('Complete!', 100);
+                        showResult(result);
+                        
+                        // Fallback: Show alert with result URLs
+                        alert(`✅ Panorama created successfully!\n\nView VR Tour: ${result.tourUrl}\nDirect Image: ${result.panoramaUrl}`);
+                    }, 1000);
+                } else {
+                    throw new Error(result.error || 'Stitching failed');
+                }
+
+            } catch (error) {
+                console.error('Stitching error:', error);
+                console.error('Error stack:', error.stack);
+                alert('Error: ' + error.message);
+                document.getElementById('progressSection').style.display = 'none';
+                document.getElementById('optionsSection').style.display = 'block';
+            }
+        }
+
+        function updateProgress(text, percent) {
+            console.log('Progress update:', text, percent + '%');
+            document.getElementById('progressText').textContent = text;
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
+
+        function showResult(result) {
+            console.log('Showing result:', result);
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('resultSection').style.display = 'block';
+            
+            document.getElementById('resultContent').innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="${result.thumbnailUrl}" alt="Panorama Preview" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <p style="color: #e0e0e0; margin-bottom: 1rem;">${result.message}</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="${result.tourUrl}" class="btn" style="background: #39FF14; color: black; text-decoration: none;">
+                            <i class="fas fa-vr-cardboard"></i> View in VR
+                        </a>
+                        <a href="${result.panoramaUrl}" target="_blank" class="btn" style="background: #374151; color: white; text-decoration: none;">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                        <button onclick="location.reload()" class="btn" style="background: #1a1a2e; color: white;">
+                            <i class="fas fa-plus"></i> Create Another
+                        </button>
+                    </div>
+                </div>
+                <div style="background: #1a1a2e; padding: 1rem; border-radius: 0.5rem;">
+                    <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Stitching Details:</h4>
+                    <ul style="color: #9ca3af; font-size: 0.875rem;">
+                        <li>Method: ${result.stitchingResult.stitchingMethod}</li>
+                        <li>Input Images: ${result.stitchingResult.inputImages}</li>
+                        <li>Dimensions: ${result.stitchingResult.dimensions.width} × ${result.stitchingResult.dimensions.height}</li>
+                        <li>Overlap: ${(result.stitchingResult.overlap * 100).toFixed(1)}%</li>
+                    </ul>
+                </div>
+            `;
+        }
+    </script>
+
+    <script src="js/responsive.js"></script>
+</body>
+</html>

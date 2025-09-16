@@ -1,6 +1,176 @@
 {
   "tours": [
     {
+      "id": "7bd92389-334b-44ef-9e11-397e91573b5a",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_7bd92389-334b-44ef-9e11-397e91573b5a.jpg",
+      "created": "2025-09-16T10:29:24.216Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_7bd92389-334b-44ef-9e11-397e91573b5a",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_7bd92389-334b-44ef-9e11-397e91573b5a.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "2bba82fb-542f-4929-aced-35cb44e05ab4",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_2bba82fb-542f-4929-aced-35cb44e05ab4.jpg",
+      "created": "2025-09-16T10:28:13.937Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_2bba82fb-542f-4929-aced-35cb44e05ab4",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_2bba82fb-542f-4929-aced-35cb44e05ab4.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "d6513930-7c37-4a1b-af49-2790e1e2cb92",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_d6513930-7c37-4a1b-af49-2790e1e2cb92.jpg",
+      "created": "2025-09-16T10:27:05.248Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_d6513930-7c37-4a1b-af49-2790e1e2cb92",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_d6513930-7c37-4a1b-af49-2790e1e2cb92.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "4f22c61f-8c00-4502-9900-1b0139d9fa45",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_4f22c61f-8c00-4502-9900-1b0139d9fa45.jpg",
+      "created": "2025-09-16T10:26:30.265Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_4f22c61f-8c00-4502-9900-1b0139d9fa45",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_4f22c61f-8c00-4502-9900-1b0139d9fa45.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "61d03f96-77d0-4289-9cf0-9de6a9d98cc5",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_61d03f96-77d0-4289-9cf0-9de6a9d98cc5.jpg",
+      "created": "2025-09-16T10:26:08.001Z",
+      "stitchingMethod": "vertical",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_61d03f96-77d0-4289-9cf0-9de6a9d98cc5",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_61d03f96-77d0-4289-9cf0-9de6a9d98cc5.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "2e9168d0-d95f-430d-a453-e1c7dfc29fe1",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_2e9168d0-d95f-430d-a453-e1c7dfc29fe1.jpg",
+      "created": "2025-09-16T10:25:38.971Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_2e9168d0-d95f-430d-a453-e1c7dfc29fe1",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_2e9168d0-d95f-430d-a453-e1c7dfc29fe1.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8ec12bbb-0beb-4b45-973b-8c172b95144a",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_8ec12bbb-0beb-4b45-973b-8c172b95144a.jpg",
+      "created": "2025-09-16T10:24:50.743Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_8ec12bbb-0beb-4b45-973b-8c172b95144a",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_8ec12bbb-0beb-4b45-973b-8c172b95144a.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "bb0499e9-5627-4cb7-9118-4ae482dd1f0b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_bb0499e9-5627-4cb7-9118-4ae482dd1f0b.jpg",
+      "created": "2025-09-16T10:23:45.988Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_bb0499e9-5627-4cb7-9118-4ae482dd1f0b",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_bb0499e9-5627-4cb7-9118-4ae482dd1f0b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "26edeabb-d90f-45fd-8829-22e5fc1a25c2",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_26edeabb-d90f-45fd-8829-22e5fc1a25c2.jpg",
+      "created": "2025-09-16T10:22:57.625Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_26edeabb-d90f-45fd-8829-22e5fc1a25c2",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_26edeabb-d90f-45fd-8829-22e5fc1a25c2.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b6e20356-b220-4c36-91e7-ac8c522625c3",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b6e20356-b220-4c36-91e7-ac8c522625c3.jpg",
+      "created": "2025-09-16T10:22:04.644Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b6e20356-b220-4c36-91e7-ac8c522625c3",
+          "title": "Stitched Panorama",
+          "panorama": "/uploads/panorama_b6e20356-b220-4c36-91e7-ac8c522625c3.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
       "id": "demo-tour-1",
       "title": "Modern Apartment Tour",
       "description": "Experience a beautiful modern apartment with 360° views",

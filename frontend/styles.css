@@ -79,6 +79,7 @@ p {
     padding: 1rem;
     max-width: 1280px;
     margin: 0 auto;
+    white-space: nowrap;
 }
 
 .nav-brand {
@@ -89,6 +90,8 @@ p {
     font-weight: bold;
     text-decoration: none;
     color: var(--text-dark);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* Hamburger Menu */
@@ -151,15 +154,18 @@ p {
     flex-direction: column;
     gap: 1.5rem;
     list-style: none;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-link {
-    font-size: 1.125rem;
+    font-size: 1rem;
     text-decoration: none;
     color: var(--text-dark);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
     transition: var(--transition-all);
+    white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -406,12 +412,17 @@ p {
     .nav-links {
         flex-direction: row;
         align-items: center;
+        gap: 1.5rem;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .nav-buttons {
         flex-direction: row;
         margin-top: 0;
         margin-left: auto;
+        gap: 0.75rem;
+        flex-shrink: 0;
     }
     
     .stats-grid {

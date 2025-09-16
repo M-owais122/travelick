@@ -439,6 +439,151 @@ app.post('/api/conversion/convert', async (req, res) => {
   }
 });
 
+// Multi-image stitching endpoint
+app.post('/api/conversion/stitch', async (req, res) => {
+  try {
+    console.log('Stitching request received');
+
+    // Check if images were uploaded
+    if (!req.files || !req.files.images) {
+      return res.status(400).json({ success: false, error: 'No images uploaded' });
+    }
+
+    const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+    console.log(`Received ${images.length} images for stitching`);
+
+    // Validate minimum images
+    if (images.length < 2) {
+      return res.status(400).json({ success: false, error: 'At least 2 images required for stitching' });
+    }
+
+    // Get options from request
+    const method = req.body.method || 'horizontal';
+    const title = req.body.title || 'Stitched Panorama';
+    const overlap = parseFloat(req.body.overlap) || 0.1;
+    const quality = parseInt(req.body.quality) || 90;
+
+    console.log('Stitching options:', { method, title, overlap, quality });
+
+    // Generate unique tour ID
+    const tourId = uuidv4();
+    const timestamp = Date.now();
+
+    // Save uploaded images
+    const savedImages = [];
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      const fileName = `stitch_input_${tourId}_${i}_${timestamp}.${image.name.split('.').pop()}`;
+      const imagePath = path.join(UPLOADS_DIR, fileName);
+
+      await image.mv(imagePath);
+      savedImages.push({
+        path: imagePath,
+        name: fileName,
+        url: `/uploads/${fileName}`
+      });
+    }
+
+    console.log('Images saved, starting stitching process...');
+
+    // Perform stitching using panorama converter
+    const stitchingResult = await panoramaConverter.stitchImages(savedImages, {
+      method,
+      overlap,
+      quality
+    });
+
+    console.log('Stitching result:', stitchingResult);
+
+    if (!stitchingResult.success) {
+      // Cleanup uploaded images
+      for (const img of savedImages) {
+        try {
+          await fs.unlink(img.path);
+        } catch (e) {
+          console.warn('Failed to cleanup image:', img.path);
+        }
+      }
+      return res.status(500).json({ success: false, error: stitchingResult.error });
+    }
+
+    // Create panorama filename
+    const panoramaFileName = `panorama_${tourId}.jpg`;
+    const panoramaPath = path.join(UPLOADS_DIR, panoramaFileName);
+    const panoramaUrl = `/uploads/${panoramaFileName}`;
+
+    // Save the stitched panorama
+    await fs.writeFile(panoramaPath, stitchingResult.imageData);
+
+    // Generate thumbnail
+    const thumbFileName = `thumb_${tourId}.jpg`;
+    const thumbnailUrl = `/uploads/${thumbFileName}`;
+
+    try {
+      const thumbnailData = await panoramaConverter.generateThumbnail(stitchingResult.imageData);
+      await fs.writeFile(path.join(UPLOADS_DIR, thumbFileName), thumbnailData);
+    } catch (thumbError) {
+      console.warn('Failed to generate thumbnail:', thumbError.message);
+    }
+
+    // Create tour entry
+    const newTour = {
+      id: tourId,
+      title: title,
+      description: `360° panorama created from ${images.length} stitched images`,
+      thumbnail: thumbnailUrl,
+      created: new Date().toISOString(),
+      stitchingMethod: method,
+      inputImages: images.length,
+      scenes: [{
+        id: `scene_${tourId}`,
+        title: title,
+        panorama: panoramaUrl,
+        hotspots: []
+      }]
+    };
+
+    // Save to database
+    const data = await readTours();
+    data.tours.unshift(newTour);
+    await writeTours(data);
+
+    // Cleanup input images (keep only the stitched result)
+    for (const img of savedImages) {
+      try {
+        await fs.unlink(img.path);
+      } catch (e) {
+        console.warn('Failed to cleanup input image:', img.path);
+      }
+    }
+
+    console.log('Stitching completed successfully');
+
+    // Return success response
+    res.json({
+      success: true,
+      message: `Successfully stitched ${images.length} images into a 360° panorama`,
+      tourId: tourId,
+      tourUrl: `/viewer.html?tour=${tourId}`,
+      panoramaUrl: panoramaUrl,
+      thumbnailUrl: thumbnailUrl,
+      stitchingResult: {
+        stitchingMethod: method,
+        inputImages: images.length,
+        dimensions: stitchingResult.dimensions || { width: 'unknown', height: 'unknown' },
+        overlap: overlap
+      }
+    });
+
+  } catch (error) {
+    console.error('Stitching error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to stitch images'
+    });
+  }
+});
+
 // Validate photo for conversion
 app.post('/api/conversion/validate', async (req, res) => {
   try {
