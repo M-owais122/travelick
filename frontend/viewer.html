@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Enhanced Features Stylesheets -->
+    <link rel="stylesheet" href="css/enhanced-hotspots.css">
+    <link rel="stylesheet" href="css/object-highlight.css">
     <style>
         #panorama {
             width: 100%;
@@ -269,6 +272,9 @@
         <button onclick="toggleVR()" id="vrBtn" title="VR Mode">
             <i class="fas fa-vr-cardboard"></i>
         </button>
+        <button onclick="toggleObjectHighlighting()" id="objectHighlightBtn" title="Object Highlighting" style="color: #39FF14;">
+            <i class="fas fa-cube"></i>
+        </button>
         <button onclick="toggleMap()" id="mapBtn" title="Map View">
             <i class="fas fa-map"></i>
         </button>
@@ -411,6 +417,15 @@
         </div>
     </div>
 
+    <!-- Enhanced Features Scripts -->
+    <script src="js/enhanced-hotspots.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/i18n-manager.js"></script>
+    <script src="js/analytics-manager.js"></script>
+    <script src="js/live-tour-manager.js"></script>
+    <script src="js/theme-manager.js"></script>
+    <script src="js/object-highlight-3d.js"></script>
+    <script src="js/object-test.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/viewer.js"></script>
 </body>

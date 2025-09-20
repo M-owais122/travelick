@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern VR Tour Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/modern-theme.css">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        }
+
+        .tour-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tour-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .tour-card:hover::before {
+            opacity: 1;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.1) 0%, rgba(26, 26, 26, 0.9) 100%);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .filter-chip {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary-color);
+            background: rgba(57, 255, 20, 0.1);
+        }
+
+        .filter-chip.active {
+            background: var(--primary-color);
+            color: black;
+            border-color: var(--primary-color);
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+            border: none;
+            color: black;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-action:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(57, 255, 20, 0.6);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            padding-left: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .floating-action {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="h-full bg-black text-white">
+    <!-- Header -->
+    <header class="hero-gradient border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="mb-6 lg:mb-0">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-green-200 to-green-400 bg-clip-text text-transparent">
+                        <i class="fas fa-vr-cardboard mr-3"></i>VR Tour Hub
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-2xl">
+                        Discover immersive virtual tours with seamless panoramic navigation and interactive hotspots.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Search tours..."
+                               class="modern-input search-input">
+                    </div>
+                    <button onclick="window.location.href='/modern-tour-creator.html'"
+                            class="modern-button">
+                        <i class="fas fa-plus mr-2"></i>Create Tour
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="stats-card modern-card p-6 text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2" id="totalTours">0</div>
+                    <div class="text-gray-300">Total Tours</div>
+                </div>
+                <div class="stats-card modern-card p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-400 mb-2" id="totalScenes">0</div>
+                    <div class="text-gray-300">Total Scenes</div>
+                </div>
+                <div class="stats-card modern-card p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-400 mb-2" id="totalViews">12.5K</div>
+                    <div class="text-gray-300">Total Views</div>
+                </div>
+                <div class="stats-card modern-card p-6 text-center">
+                    <div class="text-3xl font-bold text-yellow-400 mb-2" id="avgRating">4.8</div>
+                    <div class="text-gray-300">Avg Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="py-6">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-wrap gap-3 mb-6">
+                <div class="filter-chip active" data-filter="all">
+                    <i class="fas fa-globe mr-2"></i>All Tours
+                </div>
+                <div class="filter-chip" data-filter="recent">
+                    <i class="fas fa-clock mr-2"></i>Recent
+                </div>
+                <div class="filter-chip" data-filter="popular">
+                    <i class="fas fa-fire mr-2"></i>Popular
+                </div>
+                <div class="filter-chip" data-filter="360">
+                    <i class="fas fa-360-degrees mr-2"></i>360° Panoramic
+                </div>
+                <div class="filter-chip" data-filter="connected">
+                    <i class="fas fa-link mr-2"></i>Connected Tours
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tours Grid -->
+    <section class="pb-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Loading State -->
+            <div id="loadingState" class="text-center py-20">
+                <div class="loading-spinner mx-auto mb-4"></div>
+                <p class="text-gray-400">Loading virtual tours...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-20">
+                <i class="fas fa-search text-6xl text-gray-600 mb-6"></i>
+                <h3 class="text-2xl font-bold mb-4">No tours found</h3>
+                <p class="text-gray-400 mb-8">Try adjusting your search or create a new tour</p>
+                <button onclick="window.location.href='/modern-tour-creator.html'"
+                        class="modern-button">
+                    <i class="fas fa-plus mr-2"></i>Create Your First Tour
+                </button>
+            </div>
+
+            <!-- Tours Grid -->
+            <div id="toursGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tours will be populated here -->
+            </div>
+
+            <!-- Load More Button -->
+            <div id="loadMoreContainer" class="hidden text-center mt-12">
+                <button id="loadMoreBtn" class="modern-button secondary">
+                    <i class="fas fa-chevron-down mr-2"></i>Load More Tours
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Why Choose Our VR Tours?</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Experience the next generation of virtual reality tours with cutting-edge technology and seamless navigation.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Immersive Experience</h3>
+                    <p class="text-gray-300">
+                        Full 360° panoramic views with high-resolution imagery for the most realistic virtual experience.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Navigation</h3>
+                    <p class="text-gray-300">
+                        Intelligent hotspot placement with bidirectional navigation for seamless tour exploration.
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cross-Platform</h3>
+                    <p class="text-gray-300">
+                        Works perfectly on desktop, mobile, and VR headsets for maximum accessibility.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <h3 class="text-xl font-bold mb-4 text-green-400">VR Tour Platform</h3>
+                    <p class="text-gray-300 mb-4 max-w-md">
+                        Creating immersive virtual experiences with modern web technology and seamless panoramic navigation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/modern-tour-creator.html" class="hover:text-green-400 transition-colors">Create Tour</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Browse Tours</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">API</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 VR Tour Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="floating-action" onclick="window.location.href='/modern-tour-creator.html'"
+            title="Create New Tour">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Tour Details Modal -->
+    <div id="tourModal" class="modal-overlay">
+        <div class="modal-content max-w-4xl">
+            <div class="flex justify-between items-start mb-6">
+                <h2 id="modalTitle" class="text-2xl font-bold"></h2>
+                <button id="closeTourModal" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <img id="modalThumbnail" class="w-full h-64 object-cover rounded-lg mb-4" />
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-calendar text-green-400"></i>
+                            <span id="modalDate" class="text-gray-300"></span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-images text-green-400"></i>
+                            <span id="modalScenes" class="text-gray-300"></span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-eye text-green-400"></i>
+                            <span class="text-gray-300">2.3K views</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p id="modalDescription" class="text-gray-300 mb-6"></p>
+
+                    <div class="space-y-3">
+                        <a id="modalViewBtn" href="#" class="modern-button w-full text-center">
+                            <i class="fas fa-eye mr-2"></i>View Tour
+                        </a>
+                        <button id="modalShareBtn" class="modern-button secondary w-full">
+                            <i class="fas fa-share mr-2"></i>Share Tour
+                        </button>
+                        <button id="modalEmbedBtn" class="modern-button secondary w-full">
+                            <i class="fas fa-code mr-2"></i>Embed Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ModernDashboard {
+            constructor() {
+                this.tours = [];
+                this.filteredTours = [];
+                this.currentFilter = 'all';
+                this.searchQuery = '';
+                this.page = 1;
+                this.pageSize = 12;
+
+                this.init();
+            }
+
+            async init() {
+                this.setupEventListeners();
+                await this.loadTours();
+                this.updateStats();
+                this.renderTours();
+            }
+
+            setupEventListeners() {
+                // Search functionality
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.searchQuery = e.target.value.toLowerCase();
+                    this.filterTours();
+                });
+
+                // Filter chips
+                document.querySelectorAll('.filter-chip').forEach(chip => {
+                    chip.addEventListener('click', (e) => {
+                        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentFilter = e.target.dataset.filter;
+                        this.filterTours();
+                    });
+                });
+
+                // Modal controls
+                document.getElementById('closeTourModal').addEventListener('click', this.closeTourModal.bind(this));
+                document.getElementById('tourModal').addEventListener('click', (e) => {
+                    if (e.target.id === 'tourModal') {
+                        this.closeTourModal();
+                    }
+                });
+
+                // Load more button
+                document.getElementById('loadMoreBtn').addEventListener('click', this.loadMoreTours.bind(this));
+            }
+
+            async loadTours() {
+                try {
+                    const response = await fetch('/api/tours');
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.tours = data.tours.map(tour => ({
+                            ...tour,
+                            views: Math.floor(Math.random() * 5000) + 100,
+                            rating: (Math.random() * 2 + 3).toFixed(1),
+                            isConnected: tour.scenesCount > 1
+                        }));
+                        this.filteredTours = [...this.tours];
+                    }
+                } catch (error) {
+                    console.error('Error loading tours:', error);
+                    this.showEmptyState();
+                }
+            }
+
+            filterTours() {
+                let filtered = [...this.tours];
+
+                // Apply search filter
+                if (this.searchQuery) {
+                    filtered = filtered.filter(tour =>
+                        tour.title.toLowerCase().includes(this.searchQuery) ||
+                        tour.description.toLowerCase().includes(this.searchQuery)
+                    );
+                }
+
+                // Apply category filter
+                switch (this.currentFilter) {
+                    case 'recent':
+                        filtered = filtered.sort((a, b) => new Date(b.created) - new Date(a.created));
+                        break;
+                    case 'popular':
+                        filtered = filtered.sort((a, b) => b.views - a.views);
+                        break;
+                    case '360':
+                        filtered = filtered.filter(tour => tour.stitchingMethod === 'panoramic');
+                        break;
+                    case 'connected':
+                        filtered = filtered.filter(tour => tour.isConnected);
+                        break;
+                }
+
+                this.filteredTours = filtered;
+                this.page = 1;
+                this.renderTours();
+            }
+
+            renderTours() {
+                const loadingState = document.getElementById('loadingState');
+                const emptyState = document.getElementById('emptyState');
+                const toursGrid = document.getElementById('toursGrid');
+                const loadMoreContainer = document.getElementById('loadMoreContainer');
+
+                loadingState.classList.add('hidden');
+
+                if (this.filteredTours.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    toursGrid.classList.add('hidden');
+                    loadMoreContainer.classList.add('hidden');
+                    return;
+                }
+
+                emptyState.classList.add('hidden');
+                toursGrid.classList.remove('hidden');
+
+                // Get tours for current page
+                const startIndex = 0;
+                const endIndex = this.page * this.pageSize;
+                const toursToShow = this.filteredTours.slice(startIndex, endIndex);
+
+                toursGrid.innerHTML = '';
+
+                toursToShow.forEach(tour => {
+                    const tourCard = this.createTourCard(tour);
+                    toursGrid.appendChild(tourCard);
+                });
+
+                // Show/hide load more button
+                if (endIndex < this.filteredTours.length) {
+                    loadMoreContainer.classList.remove('hidden');
+                } else {
+                    loadMoreContainer.classList.add('hidden');
+                }
+            }
+
+            createTourCard(tour) {
+                const card = document.createElement('div');
+                card.className = 'tour-card modern-card p-6 cursor-pointer';
+
+                const createdDate = new Date(tour.created).toLocaleDateString();
+                const thumbnail = tour.thumbnail || '/uploads/default-thumbnail.jpg';
+
+                card.innerHTML = `
+                    <div class="relative mb-4">
+                        <img src="${thumbnail}" alt="${tour.title}"
+                             class="w-full h-48 object-cover rounded-lg"
+                             onerror="this.src='/uploads/default-thumbnail.jpg'">
+                        <div class="absolute top-2 right-2 bg-black bg-opacity-70 text-green-400 px-2 py-1 rounded text-xs font-semibold">
+                            ${tour.scenesCount} ${tour.scenesCount === 1 ? 'Scene' : 'Scenes'}
+                        </div>
+                        ${tour.isConnected ? '<div class="absolute top-2 left-2 bg-green-500 text-black px-2 py-1 rounded text-xs font-semibold"><i class="fas fa-link mr-1"></i>Connected</div>' : ''}
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-lg font-bold text-white truncate">${tour.title}</h3>
+                        <p class="text-gray-300 text-sm line-clamp-2">${tour.description}</p>
+
+                        <div class="flex items-center justify-between text-sm text-gray-400">
+                            <div class="flex items-center space-x-4">
+                                <span><i class="fas fa-eye mr-1"></i>${this.formatNumber(tour.views)}</span>
+                                <span><i class="fas fa-star mr-1 text-yellow-400"></i>${tour.rating}</span>
+                            </div>
+                            <span>${createdDate}</span>
+                        </div>
+
+                        <div class="flex space-x-2 pt-2">
+                            <button onclick="window.location.href='/modern-viewer.html?tour=${tour.id}'"
+                                    class="flex-1 modern-button text-sm py-2">
+                                <i class="fas fa-eye mr-1"></i>View
+                            </button>
+                            <button onclick="dashboard.showTourModal('${tour.id}')"
+                                    class="modern-button secondary text-sm py-2 px-3">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                return card;
+            }
+
+            showTourModal(tourId) {
+                const tour = this.tours.find(t => t.id === tourId);
+                if (!tour) return;
+
+                document.getElementById('modalTitle').textContent = tour.title;
+                document.getElementById('modalDescription').textContent = tour.description;
+                document.getElementById('modalDate').textContent = new Date(tour.created).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                document.getElementById('modalScenes').textContent = `${tour.scenesCount} scenes`;
+                document.getElementById('modalThumbnail').src = tour.thumbnail || '/uploads/default-thumbnail.jpg';
+                document.getElementById('modalViewBtn').href = `/modern-viewer.html?tour=${tour.id}`;
+
+                // Setup share button
+                document.getElementById('modalShareBtn').onclick = () => {
+                    this.shareTour(tour);
+                };
+
+                // Setup embed button
+                document.getElementById('modalEmbedBtn').onclick = () => {
+                    this.showEmbedCode(tour);
+                };
+
+                document.getElementById('tourModal').classList.add('show');
+            }
+
+            closeTourModal() {
+                document.getElementById('tourModal').classList.remove('show');
+            }
+
+            shareTour(tour) {
+                const shareUrl = `${window.location.origin}/modern-viewer.html?tour=${tour.id}`;
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: tour.title,
+                        text: tour.description,
+                        url: shareUrl
+                    });
+                } else {
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        this.showNotification('Tour link copied to clipboard!', 'success');
+                    });
+                }
+            }
+
+            showEmbedCode(tour) {
+                const embedCode = `<iframe src="${window.location.origin}/modern-viewer.html?tour=${tour.id}" width="800" height="600" frameborder="0" allowfullscreen></iframe>`;
+
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay show';
+                modal.innerHTML = `
+                    <div class="modal-content max-w-2xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Embed Code</h3>
+                            <button onclick="this.closest('.modal-overlay').remove()" class="text-gray-400 hover:text-white">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="text-gray-300">Copy and paste this code into your website:</p>
+                            <textarea readonly class="modern-input w-full h-20 resize-none font-mono text-sm">${embedCode}</textarea>
+                            <button onclick="navigator.clipboard.writeText('${embedCode}').then(() => dashboard.showNotification('Embed code copied!', 'success'))"
+                                    class="modern-button w-full">
+                                <i class="fas fa-copy mr-2"></i>Copy Embed Code
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            loadMoreTours() {
+                this.page++;
+                this.renderTours();
+            }
+
+            updateStats() {
+                document.getElementById('totalTours').textContent = this.tours.length;
+
+                const totalScenes = this.tours.reduce((sum, tour) => sum + tour.scenesCount, 0);
+                document.getElementById('totalScenes').textContent = totalScenes;
+
+                const totalViews = this.tours.reduce((sum, tour) => sum + tour.views, 0);
+                document.getElementById('totalViews').textContent = this.formatNumber(totalViews);
+
+                const avgRating = this.tours.reduce((sum, tour) => sum + parseFloat(tour.rating), 0) / this.tours.length;
+                document.getElementById('avgRating').textContent = avgRating.toFixed(1);
+            }
+
+            formatNumber(num) {
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + 'M';
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'K';
+                }
+                return num.toString();
+            }
+
+            showEmptyState() {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('emptyState').classList.remove('hidden');
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type} show`;
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize dashboard
+        window.dashboard = new ModernDashboard();
+
+        // Add some CSS for line-clamp
+        const style = document.createElement('style');
+        style.textContent = `
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

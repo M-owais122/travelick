@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klapty-Style 360° Virtual Tour</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        :root {
+            --primary-color: #39FF14;
+            --primary-glow: rgba(57, 255, 20, 0.6);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --border-color: #333;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        #panoramaViewer {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Klapty-style Navigation Hotspots */
+        .navigation-hotspot {
+            width: 40px !important;
+            height: 40px !important;
+            background: radial-gradient(circle, #ffffff 0%, #e0e0e0 100%) !important;
+            border: 4px solid #39FF14 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 25px var(--primary-glow), 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+            animation: pulse-navigation 2s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+        }
+
+        .navigation-hotspot::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: ripple-navigation 2s infinite;
+        }
+
+        .navigation-hotspot:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 35px var(--primary-glow), 0 6px 25px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Klapty-style Information Hotspots */
+        .info-hotspot {
+            width: 32px !important;
+            height: 32px !important;
+            background: #4285f4 !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(66, 133, 244, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            animation: pulse-info 3s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+        }
+
+        .info-hotspot:hover {
+            transform: scale(1.15) !important;
+            box-shadow: 0 0 30px rgba(66, 133, 244, 0.8), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* Media Gallery Hotspots */
+        .gallery-hotspot {
+            width: 36px !important;
+            height: 36px !important;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            animation: pulse-gallery 2.5s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            font-size: 14px !important;
+        }
+
+        .gallery-hotspot:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.8) !important;
+        }
+
+        /* Video Hotspots */
+        .video-hotspot {
+            width: 38px !important;
+            height: 38px !important;
+            background: linear-gradient(135deg, #9c88ff 0%, #8c7ae6 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(156, 136, 255, 0.6) !important;
+            animation: pulse-video 2s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            font-size: 16px !important;
+        }
+
+        .video-hotspot:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 30px rgba(156, 136, 255, 0.8) !important;
+        }
+
+        /* Audio Hotspots */
+        .audio-hotspot {
+            width: 34px !important;
+            height: 34px !important;
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(254, 202, 87, 0.6) !important;
+            animation: pulse-audio 1.8s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #333 !important;
+            font-size: 14px !important;
+        }
+
+        .audio-hotspot:hover {
+            transform: scale(1.15) !important;
+            box-shadow: 0 0 25px rgba(254, 202, 87, 0.8) !important;
+        }
+
+        /* Link/Website Hotspots */
+        .link-hotspot {
+            width: 35px !important;
+            height: 35px !important;
+            background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(0, 210, 211, 0.6) !important;
+            animation: pulse-link 2.2s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            font-size: 14px !important;
+        }
+
+        .link-hotspot:hover {
+            transform: scale(1.15) !important;
+            box-shadow: 0 0 25px rgba(0, 210, 211, 0.8) !important;
+        }
+
+        /* Animations */
+        @keyframes pulse-navigation {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        @keyframes pulse-info {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.03); }
+        }
+
+        @keyframes pulse-gallery {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.04); }
+        }
+
+        @keyframes pulse-video {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.06); }
+        }
+
+        @keyframes pulse-audio {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.08); }
+        }
+
+        @keyframes pulse-link {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.05); }
+        }
+
+        @keyframes ripple-navigation {
+            0% { opacity: 1; transform: scale(0.5); }
+            100% { opacity: 0; transform: scale(2.5); }
+        }
+
+        /* Klapty-style UI Elements */
+        .tour-controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .control-btn:hover {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .tour-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            max-width: 350px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .tour-info.minimized {
+            max-height: 60px;
+            overflow: hidden;
+        }
+
+        .scene-navigator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 250px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            z-index: 1000;
+        }
+
+        .scene-list {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) transparent;
+        }
+
+        .scene-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+            border: 1px solid transparent;
+        }
+
+        .scene-item:hover {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .scene-item.active {
+            background: var(--primary-color);
+            color: black;
+        }
+
+        /* Klapty-style Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            text-align: center;
+        }
+
+        .gallery-main-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .gallery-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-thumb:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .audio-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tour-controls {
+                flex-direction: row;
+                top: auto;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .tour-info {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
+
+            .scene-navigator {
+                top: 10px;
+                right: 10px;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Panoramic Viewer -->
+    <div id="panoramaViewer"></div>
+
+    <!-- Tour Controls -->
+    <div class="tour-controls">
+        <div class="control-btn" id="playBtn" title="Auto Tour">
+            <i class="fas fa-play"></i>
+        </div>
+        <div class="control-btn" id="soundBtn" title="Toggle Sound">
+            <i class="fas fa-volume-up"></i>
+        </div>
+        <div class="control-btn" id="fullscreenBtn" title="Fullscreen">
+            <i class="fas fa-expand"></i>
+        </div>
+        <div class="control-btn" id="shareBtn" title="Share Tour">
+            <i class="fas fa-share"></i>
+        </div>
+    </div>
+
+    <!-- Scene Navigator -->
+    <div class="scene-navigator">
+        <h3 class="text-lg font-bold mb-3 flex items-center">
+            <i class="fas fa-map text-primary mr-2"></i>
+            Tour Navigation
+        </h3>
+        <div class="scene-list" id="sceneList">
+            <!-- Scenes will be populated here -->
+        </div>
+    </div>
+
+    <!-- Tour Information -->
+    <div class="tour-info" id="tourInfo">
+        <div class="flex justify-between items-start mb-3">
+            <h2 id="sceneTitle" class="text-xl font-bold">Scene Title</h2>
+            <button id="toggleInfo" class="text-gray-400 hover:text-white">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+        <div id="infoContent">
+            <p id="sceneDescription" class="text-gray-300 text-sm mb-3">Scene description</p>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span id="hotspotCount">0 hotspots</span>
+                <span id="tourProgress">Scene 1 of 1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal-overlay">
+        <div class="modal-content gallery-modal">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold">Photo Gallery</h3>
+                <button id="closeGallery" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <img id="galleryMainImage" class="gallery-main-image" src="" alt="">
+            <div id="galleryThumbnails" class="gallery-thumbnails"></div>
+            <div id="galleryInfo" class="text-gray-300"></div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold">Video Content</h3>
+                <button id="closeVideo" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <video id="modalVideo" controls style="width: 100%; max-height: 60vh; border-radius: 12px;">
+                Your browser does not support the video tag.
+            </video>
+            <div id="videoInfo" class="mt-4 text-gray-300"></div>
+        </div>
+    </div>
+
+    <!-- Audio Modal -->
+    <div id="audioModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold">Audio Content</h3>
+                <button id="closeAudio" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="audio-player">
+                <h4 id="audioTitle" class="text-lg font-semibold mb-2">Audio Title</h4>
+                <p id="audioDescription" class="text-gray-300 text-sm mb-4">Audio description</p>
+                <audio id="modalAudio" style="width: 100%; margin-bottom: 15px;">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="audio-controls">
+                    <button id="audioPlayBtn" class="audio-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="audioStopBtn" class="audio-btn">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <button id="audioMuteBtn" class="audio-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="infoTitle" class="text-2xl font-bold">Information</h3>
+                <button id="closeInfo" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="infoContent" class="space-y-4">
+                <div id="infoImage" class="hidden">
+                    <img id="infoImg" class="w-full max-h-64 object-cover rounded-lg mb-4" src="" alt="">
+                </div>
+                <div id="infoText" class="text-gray-300"></div>
+                <div id="infoActions" class="flex gap-3 pt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let viewer = null;
+        let currentTour = null;
+        let currentScene = null;
+        let currentAudio = null;
+        let autoTourInterval = null;
+        let soundEnabled = true;
+
+        // Klapty-style tour data with comprehensive hotspot types
+        const klaptyStyleTour = {
+            id: "klapty-demo",
+            title: "Professional Virtual Tour",
+            description: "Experience a Klapty-style virtual tour with multiple hotspot types",
+            scenes: [
+                {
+                    id: "scene1",
+                    title: "Living Room",
+                    description: "A beautiful living room with multiple interactive elements and navigation options",
+                    image: "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+                    hotspots: [
+                        {
+                            id: "nav1",
+                            type: "navigation",
+                            pitch: -5,
+                            yaw: 45,
+                            sceneId: "scene2",
+                            title: "Go to Kitchen",
+                            text: "Kitchen"
+                        },
+                        {
+                            id: "info1",
+                            type: "info",
+                            pitch: -10,
+                            yaw: -45,
+                            title: "Living Room Features",
+                            text: "Modern living room with premium furniture and excellent lighting. Perfect for relaxation and entertainment.",
+                            image: "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg"
+                        },
+                        {
+                            id: "gallery1",
+                            type: "gallery",
+                            pitch: 10,
+                            yaw: 90,
+                            title: "Room Photos",
+                            text: "View photo gallery",
+                            gallery: [
+                                {
+                                    url: "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+                                    caption: "Living Room Main View",
+                                    description: "The main seating area with comfortable sofas"
+                                },
+                                {
+                                    url: "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+                                    caption: "Alternative Angle",
+                                    description: "Different perspective of the same space"
+                                }
+                            ]
+                        },
+                        {
+                            id: "video1",
+                            type: "video",
+                            pitch: 0,
+                            yaw: 180,
+                            title: "Room Tour Video",
+                            text: "Watch video tour",
+                            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+                            description: "A detailed video walkthrough of this beautiful living space"
+                        },
+                        {
+                            id: "audio1",
+                            type: "audio",
+                            pitch: -15,
+                            yaw: -90,
+                            title: "Ambient Sounds",
+                            text: "Listen to room ambience",
+                            audio: "https://www.soundjay.com/misc/sounds/wind-chimes-1.mp3",
+                            description: "Relaxing ambient sounds of this peaceful living space"
+                        },
+                        {
+                            id: "link1",
+                            type: "link",
+                            pitch: 15,
+                            yaw: 135,
+                            title: "Furniture Details",
+                            text: "More information",
+                            link: "https://example.com/furniture",
+                            description: "Learn more about the premium furniture in this room"
+                        }
+                    ]
+                },
+                {
+                    id: "scene2",
+                    title: "Kitchen",
+                    description: "Modern kitchen with state-of-the-art appliances and interactive hotspots",
+                    image: "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+                    hotspots: [
+                        {
+                            id: "nav2",
+                            type: "navigation",
+                            pitch: -5,
+                            yaw: -45,
+                            sceneId: "scene1",
+                            title: "Back to Living Room",
+                            text: "Living Room"
+                        },
+                        {
+                            id: "info2",
+                            type: "info",
+                            pitch: -8,
+                            yaw: 90,
+                            title: "Kitchen Appliances",
+                            text: "Premium stainless steel appliances including refrigerator, oven, and dishwasher. Energy efficient and modern design.",
+                            image: "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg"
+                        },
+                        {
+                            id: "gallery2",
+                            type: "gallery",
+                            pitch: 5,
+                            yaw: 180,
+                            title: "Kitchen Gallery",
+                            text: "View kitchen photos",
+                            gallery: [
+                                {
+                                    url: "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+                                    caption: "Modern Kitchen Overview",
+                                    description: "Complete view of the modern kitchen space"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Initialize tour
+        async function initKlaptyTour() {
+            try {
+                console.log('🚀 Initializing Klapty-style tour...');
+
+                // Get tour from URL or use demo
+                const urlParams = new URLSearchParams(window.location.search);
+                const tourId = urlParams.get('tour');
+
+                if (tourId) {
+                    await loadTourFromAPI(tourId);
+                } else {
+                    currentTour = klaptyStyleTour;
+                }
+
+                setupTourInterface();
+
+                if (currentTour.scenes && currentTour.scenes.length > 0) {
+                    await loadScene(currentTour.scenes[0]);
+                }
+
+                console.log('✅ Klapty-style tour initialized');
+
+            } catch (error) {
+                console.error('❌ Error initializing tour:', error);
+                showNotification('Failed to load tour', 'error');
+            }
+        }
+
+        // Load tour from API
+        async function loadTourFromAPI(tourId) {
+            try {
+                const response = await fetch(`/api/tours/${tourId}`);
+                if (!response.ok) throw new Error('Tour not found');
+
+                const data = await response.json();
+
+                // Transform API data to Klapty format
+                currentTour = {
+                    id: data.tour.id,
+                    title: data.tour.title,
+                    description: data.tour.description,
+                    scenes: data.tour.scenes.map(scene => ({
+                        id: scene.id,
+                        title: scene.title,
+                        description: scene.description || 'Navigate through this panoramic scene',
+                        image: scene.panorama || scene.image,
+                        hotspots: scene.hotspots ? scene.hotspots.map(hotspot => ({
+                            id: hotspot.id || Math.random().toString(36).substr(2, 9),
+                            type: hotspot.category === 'scene' ? 'navigation' : 'info',
+                            pitch: hotspot.pitch || 0,
+                            yaw: hotspot.yaw || 0,
+                            sceneId: hotspot.sceneId,
+                            title: hotspot.title || hotspot.text,
+                            text: hotspot.text || hotspot.title,
+                            description: hotspot.description
+                        })) : []
+                    }))
+                };
+
+                console.log('✅ Tour loaded and transformed:', currentTour);
+            } catch (error) {
+                console.error('❌ API Error:', error);
+                throw error;
+            }
+        }
+
+        // Setup tour interface
+        function setupTourInterface() {
+            updateSceneNavigator();
+            setupEventListeners();
+        }
+
+        // Load scene with Klapty-style features
+        async function loadScene(scene) {
+            try {
+                console.log('🎬 Loading scene:', scene.title);
+                currentScene = scene;
+
+                if (viewer) {
+                    viewer.destroy();
+                }
+
+                viewer = pannellum.viewer('panoramaViewer', {
+                    type: 'equirectangular',
+                    panorama: scene.image,
+                    autoLoad: true,
+                    pitch: 0,
+                    yaw: 0,
+                    hfov: 100,
+                    minHfov: 50,
+                    maxHfov: 120,
+                    showControls: false,
+                    hotSpotDebug: false,
+                    compass: false
+                });
+
+                viewer.on('load', () => {
+                    addKlaptyHotspots(scene);
+                    updateSceneInfo(scene);
+                    updateSceneNavigator();
+                });
+
+                viewer.on('error', (error) => {
+                    console.error('❌ Viewer error:', error);
+                    showNotification('Failed to load scene', 'error');
+                });
+
+            } catch (error) {
+                console.error('❌ Error loading scene:', error);
+            }
+        }
+
+        // Add Klapty-style hotspots
+        function addKlaptyHotspots(scene) {
+            if (!scene.hotspots) return;
+
+            console.log('🎯 Adding Klapty-style hotspots:', scene.hotspots.length);
+
+            scene.hotspots.forEach((hotspot, index) => {
+                const hotspotConfig = {
+                    id: hotspot.id,
+                    pitch: hotspot.pitch,
+                    yaw: hotspot.yaw,
+                    type: 'custom',
+                    cssClass: getKlaptyHotspotClass(hotspot.type),
+                    text: getKlaptyHotspotContent(hotspot),
+                    clickHandlerFunc: () => handleKlaptyHotspotClick(hotspot)
+                };
+
+                viewer.addHotSpot(hotspotConfig);
+                console.log(`✅ Added ${hotspot.type} hotspot:`, hotspot.title);
+            });
+        }
+
+        // Get Klapty-style hotspot CSS class
+        function getKlaptyHotspotClass(type) {
+            const classes = {
+                'navigation': 'navigation-hotspot',
+                'info': 'info-hotspot',
+                'gallery': 'gallery-hotspot',
+                'video': 'video-hotspot',
+                'audio': 'audio-hotspot',
+                'link': 'link-hotspot'
+            };
+            return classes[type] || 'info-hotspot';
+        }
+
+        // Get hotspot content
+        function getKlaptyHotspotContent(hotspot) {
+            const icons = {
+                'navigation': '<i class="fas fa-arrow-right"></i>',
+                'info': 'i',
+                'gallery': '<i class="fas fa-images"></i>',
+                'video': '<i class="fas fa-play"></i>',
+                'audio': '<i class="fas fa-volume-up"></i>',
+                'link': '<i class="fas fa-external-link-alt"></i>'
+            };
+            return icons[hotspot.type] || 'i';
+        }
+
+        // Handle Klapty-style hotspot clicks
+        function handleKlaptyHotspotClick(hotspot) {
+            console.log('🎯 Klapty hotspot clicked:', hotspot.type, hotspot.title);
+
+            // Play interaction sound
+            playInteractionSound(hotspot.type);
+
+            switch (hotspot.type) {
+                case 'navigation':
+                    handleNavigation(hotspot);
+                    break;
+                case 'info':
+                    showInfoModal(hotspot);
+                    break;
+                case 'gallery':
+                    showGalleryModal(hotspot);
+                    break;
+                case 'video':
+                    showVideoModal(hotspot);
+                    break;
+                case 'audio':
+                    showAudioModal(hotspot);
+                    break;
+                case 'link':
+                    handleLinkHotspot(hotspot);
+                    break;
+                default:
+                    showInfoModal(hotspot);
+            }
+        }
+
+        // Navigation handler
+        function handleNavigation(hotspot) {
+            const targetScene = currentTour.scenes.find(s => s.id === hotspot.sceneId);
+            if (targetScene) {
+                showNotification(`Moving to ${hotspot.title}...`);
+                setTimeout(() => loadScene(targetScene), 500);
+            } else {
+                showNotification('Scene not found', 'error');
+            }
+        }
+
+        // Show info modal
+        function showInfoModal(hotspot) {
+            document.getElementById('infoTitle').textContent = hotspot.title;
+            document.getElementById('infoText').innerHTML = hotspot.text || hotspot.description || 'No information available';
+
+            if (hotspot.image) {
+                document.getElementById('infoImage').classList.remove('hidden');
+                document.getElementById('infoImg').src = hotspot.image;
+            } else {
+                document.getElementById('infoImage').classList.add('hidden');
+            }
+
+            showModal('infoModal');
+        }
+
+        // Show gallery modal
+        function showGalleryModal(hotspot) {
+            if (!hotspot.gallery || hotspot.gallery.length === 0) {
+                showNotification('No gallery images available', 'error');
+                return;
+            }
+
+            const gallery = hotspot.gallery;
+            let currentIndex = 0;
+
+            function showImage(index) {
+                const image = gallery[index];
+                document.getElementById('galleryMainImage').src = image.url;
+                document.getElementById('galleryInfo').innerHTML = `
+                    <h4 class="font-semibold">${image.caption || 'Image ' + (index + 1)}</h4>
+                    <p class="text-sm text-gray-400">${image.description || ''}</p>
+                    <p class="text-xs text-gray-500 mt-2">${index + 1} of ${gallery.length}</p>
+                `;
+
+                // Update thumbnails
+                document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+            }
+
+            // Create thumbnails
+            const thumbnailsContainer = document.getElementById('galleryThumbnails');
+            thumbnailsContainer.innerHTML = '';
+
+            gallery.forEach((image, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = image.url;
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => {
+                    currentIndex = index;
+                    showImage(index);
+                };
+                thumbnailsContainer.appendChild(thumb);
+            });
+
+            showImage(0);
+            showModal('galleryModal');
+
+            // Keyboard navigation
+            function handleGalleryKeyboard(e) {
+                if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    currentIndex--;
+                    showImage(currentIndex);
+                } else if (e.key === 'ArrowRight' && currentIndex < gallery.length - 1) {
+                    currentIndex++;
+                    showImage(currentIndex);
+                }
+            }
+
+            document.addEventListener('keydown', handleGalleryKeyboard);
+            document.getElementById('closeGallery').onclick = () => {
+                document.removeEventListener('keydown', handleGalleryKeyboard);
+                hideModal('galleryModal');
+            };
+        }
+
+        // Show video modal
+        function showVideoModal(hotspot) {
+            const video = document.getElementById('modalVideo');
+            video.src = hotspot.video;
+            document.getElementById('videoInfo').innerHTML = `
+                <h4 class="font-semibold">${hotspot.title}</h4>
+                <p class="text-sm text-gray-400">${hotspot.description || ''}</p>
+            `;
+            showModal('videoModal');
+        }
+
+        // Show audio modal
+        function showAudioModal(hotspot) {
+            const audio = document.getElementById('modalAudio');
+            audio.src = hotspot.audio;
+
+            document.getElementById('audioTitle').textContent = hotspot.title;
+            document.getElementById('audioDescription').textContent = hotspot.description || '';
+
+            // Audio controls
+            const playBtn = document.getElementById('audioPlayBtn');
+            const stopBtn = document.getElementById('audioStopBtn');
+            const muteBtn = document.getElementById('audioMuteBtn');
+
+            playBtn.onclick = () => {
+                if (audio.paused) {
+                    audio.play();
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            };
+
+            stopBtn.onclick = () => {
+                audio.pause();
+                audio.currentTime = 0;
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            };
+
+            muteBtn.onclick = () => {
+                audio.muted = !audio.muted;
+                muteBtn.innerHTML = audio.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            };
+
+            showModal('audioModal');
+        }
+
+        // Handle link hotspots
+        function handleLinkHotspot(hotspot) {
+            if (hotspot.link) {
+                showNotification(`Opening ${hotspot.title}...`);
+                window.open(hotspot.link, '_blank');
+            }
+        }
+
+        // Update scene info
+        function updateSceneInfo(scene) {
+            document.getElementById('sceneTitle').textContent = scene.title;
+            document.getElementById('sceneDescription').textContent = scene.description;
+            document.getElementById('hotspotCount').textContent = `${scene.hotspots ? scene.hotspots.length : 0} hotspots`;
+
+            const sceneIndex = currentTour.scenes.findIndex(s => s.id === scene.id) + 1;
+            document.getElementById('tourProgress').textContent = `Scene ${sceneIndex} of ${currentTour.scenes.length}`;
+        }
+
+        // Update scene navigator
+        function updateSceneNavigator() {
+            const sceneList = document.getElementById('sceneList');
+            sceneList.innerHTML = '';
+
+            currentTour.scenes.forEach((scene, index) => {
+                const sceneItem = document.createElement('div');
+                sceneItem.className = `scene-item ${scene.id === currentScene?.id ? 'active' : ''}`;
+                sceneItem.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="w-6 h-6 rounded-full bg-gray-600 text-white text-xs flex items-center justify-center mr-3">${index + 1}</span>
+                        <div>
+                            <div class="font-medium">${scene.title}</div>
+                            <div class="text-xs text-gray-400">${scene.hotspots ? scene.hotspots.length : 0} hotspots</div>
+                        </div>
+                    </div>
+                `;
+                sceneItem.onclick = () => loadScene(scene);
+                sceneList.appendChild(sceneItem);
+            });
+        }
+
+        // Event listeners setup
+        function setupEventListeners() {
+            // Control buttons
+            document.getElementById('playBtn').onclick = toggleAutoTour;
+            document.getElementById('soundBtn').onclick = toggleSound;
+            document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
+            document.getElementById('shareBtn').onclick = shareTour;
+
+            // Info panel toggle
+            document.getElementById('toggleInfo').onclick = toggleInfoPanel;
+
+            // Modal close buttons
+            document.getElementById('closeGallery').onclick = () => hideModal('galleryModal');
+            document.getElementById('closeVideo').onclick = () => hideModal('videoModal');
+            document.getElementById('closeAudio').onclick = () => hideModal('audioModal');
+            document.getElementById('closeInfo').onclick = () => hideModal('infoModal');
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', handleKeyboardShortcuts);
+        }
+
+        // Modal utilities
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Utility functions
+        function toggleAutoTour() {
+            // Auto tour implementation
+            showNotification('Auto tour feature coming soon!');
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundBtn');
+            btn.innerHTML = soundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+            showNotification(soundEnabled ? 'Sound enabled' : 'Sound disabled');
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                document.exitFullscreen();
+                document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        }
+
+        function shareTour() {
+            const shareData = {
+                title: currentTour.title,
+                text: currentTour.description,
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showNotification('Tour link copied to clipboard!');
+            }
+        }
+
+        function toggleInfoPanel() {
+            const info = document.getElementById('tourInfo');
+            const button = document.getElementById('toggleInfo');
+            info.classList.toggle('minimized');
+            button.innerHTML = info.classList.contains('minimized')
+                ? '<i class="fas fa-chevron-down"></i>'
+                : '<i class="fas fa-chevron-up"></i>';
+        }
+
+        function handleKeyboardShortcuts(e) {
+            switch(e.key) {
+                case 'f':
+                    toggleFullscreen();
+                    break;
+                case 'm':
+                    toggleSound();
+                    break;
+                case 'Escape':
+                    hideModal('galleryModal');
+                    hideModal('videoModal');
+                    hideModal('audioModal');
+                    hideModal('infoModal');
+                    break;
+            }
+        }
+
+        function playInteractionSound(type) {
+            if (!soundEnabled) return;
+
+            // Create audio context for interaction sounds
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                const frequencies = {
+                    navigation: 800,
+                    info: 600,
+                    gallery: 700,
+                    video: 750,
+                    audio: 650,
+                    link: 550
+                };
+
+                oscillator.frequency.setValueAtTime(frequencies[type] || 600, audioContext.currentTime);
+                oscillator.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log('Audio context not available');
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            // Simple notification system
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'error' ? '#ef4444' : '#39FF14'};
+                color: ${type === 'error' ? 'white' : 'black'};
+                padding: 12px 24px;
+                border-radius: 12px;
+                font-weight: 600;
+                z-index: 10001;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => notification.style.opacity = '1', 10);
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initKlaptyTour);
+
+        // Make functions globally available
+        window.loadScene = loadScene;
+        window.currentTour = () => currentTour;
+        window.currentScene = () => currentScene;
+    </script>
+</body>
+</html>

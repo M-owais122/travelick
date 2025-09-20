@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour Creator - Connect Panoramic Images</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .drop-zone {
+            border: 3px dashed #39FF14;
+            transition: all 0.3s ease;
+            min-height: 200px;
+        }
+        .drop-zone.dragover {
+            background: rgba(57, 255, 20, 0.1);
+            border-color: #39FF14;
+            transform: scale(1.02);
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">
+            <i class="fas fa-vr-cardboard text-primary"></i>
+            Virtual Tour Creator
+        </h1>
+        <p class="text-center text-gray-300 mb-12">Connect your panoramic images with interactive hotspots</p>
+
+        <!-- Step 1: Upload Images -->
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gray-800 rounded-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6">
+                    <span class="bg-primary text-black px-3 py-1 rounded-full mr-3">1</span>
+                    Upload Your Panoramic Images
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- First Panoramic Image -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">First Panoramic Image</h3>
+                        <div class="drop-zone flex flex-col items-center justify-center p-6 rounded-lg"
+                             ondrop="handleDrop(event, 'image1')"
+                             ondragover="handleDragOver(event)"
+                             ondragleave="handleDragLeave(event)">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-primary mb-4"></i>
+                            <p class="text-center">Drag & drop your first panoramic image</p>
+                            <p class="text-sm text-gray-400 mt-2">or click to browse</p>
+                            <input type="file" id="image1Input" accept="image/*" class="hidden" onchange="handleFileSelect(event, 'image1')">
+                        </div>
+                        <div id="image1Preview" class="mt-4 hidden">
+                            <img id="image1Img" class="image-preview" alt="First panoramic image">
+                            <p id="image1Name" class="text-sm text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+
+                    <!-- Second Panoramic Image -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Second Panoramic Image</h3>
+                        <div class="drop-zone flex flex-col items-center justify-center p-6 rounded-lg"
+                             ondrop="handleDrop(event, 'image2')"
+                             ondragover="handleDragOver(event)"
+                             ondragleave="handleDragLeave(event)">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-primary mb-4"></i>
+                            <p class="text-center">Drag & drop your second panoramic image</p>
+                            <p class="text-sm text-gray-400 mt-2">or click to browse</p>
+                            <input type="file" id="image2Input" accept="image/*" class="hidden" onchange="handleFileSelect(event, 'image2')">
+                        </div>
+                        <div id="image2Preview" class="mt-4 hidden">
+                            <img id="image2Img" class="image-preview" alt="Second panoramic image">
+                            <p id="image2Name" class="text-sm text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Configure Tour -->
+            <div class="bg-gray-800 rounded-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6">
+                    <span class="bg-primary text-black px-3 py-1 rounded-full mr-3">2</span>
+                    Configure Your Virtual Tour
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Tour Title</label>
+                        <input type="text" id="tourTitle"
+                               value="My Virtual Tour"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Tour Description</label>
+                        <input type="text" id="tourDescription"
+                               value="Navigate between panoramic scenes"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">First Scene Title</label>
+                        <input type="text" id="scene1Title"
+                               value="Living Room"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Second Scene Title</label>
+                        <input type="text" id="scene2Title"
+                               value="Kitchen"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                    </div>
+                </div>
+
+                <!-- Hotspot Configuration -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold mb-4">
+                        <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                        Hotspot Configuration
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-medium mb-3">Hotspot from Scene 1 → Scene 2</h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs mb-1">Horizontal Position (Yaw)</label>
+                                    <input type="range" id="hotspot1Yaw" min="-180" max="180" value="45"
+                                           class="w-full" oninput="updateHotspotValue('hotspot1Yaw')">
+                                    <span id="hotspot1YawValue" class="text-xs text-gray-400">45°</span>
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1">Vertical Position (Pitch)</label>
+                                    <input type="range" id="hotspot1Pitch" min="-30" max="30" value="-5"
+                                           class="w-full" oninput="updateHotspotValue('hotspot1Pitch')">
+                                    <span id="hotspot1PitchValue" class="text-xs text-gray-400">-5°</span>
+                                </div>
+                            </div>
+                            <input type="text" id="hotspot1Text" value="Go to Kitchen"
+                                   placeholder="Hotspot label"
+                                   class="w-full mt-3 p-2 bg-gray-600 border border-gray-500 rounded text-sm">
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-medium mb-3">Hotspot from Scene 2 → Scene 1</h4>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs mb-1">Horizontal Position (Yaw)</label>
+                                    <input type="range" id="hotspot2Yaw" min="-180" max="180" value="-135"
+                                           class="w-full" oninput="updateHotspotValue('hotspot2Yaw')">
+                                    <span id="hotspot2YawValue" class="text-xs text-gray-400">-135°</span>
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1">Vertical Position (Pitch)</label>
+                                    <input type="range" id="hotspot2Pitch" min="-30" max="30" value="-5"
+                                           class="w-full" oninput="updateHotspotValue('hotspot2Pitch')">
+                                    <span id="hotspot2PitchValue" class="text-xs text-gray-400">-5°</span>
+                                </div>
+                            </div>
+                            <input type="text" id="hotspot2Text" value="Go to Living Room"
+                                   placeholder="Hotspot label"
+                                   class="w-full mt-3 p-2 bg-gray-600 border border-gray-500 rounded text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Create Tour -->
+            <div class="bg-gray-800 rounded-lg p-8">
+                <h2 class="text-2xl font-bold mb-6">
+                    <span class="bg-primary text-black px-3 py-1 rounded-full mr-3">3</span>
+                    Create Your Virtual Tour
+                </h2>
+
+                <button onclick="createVirtualTour()"
+                        id="createTourBtn"
+                        disabled
+                        class="w-full bg-primary text-black font-bold py-4 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-400 transition-colors">
+                    <i class="fas fa-magic mr-2"></i>
+                    Create Virtual Tour
+                </button>
+
+                <div id="progress" class="mt-6 hidden">
+                    <div class="bg-gray-700 rounded-full h-2 mb-2">
+                        <div id="progressBar" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <p id="progressText" class="text-sm text-gray-400">Preparing...</p>
+                </div>
+
+                <div id="tourResult" class="mt-6 hidden">
+                    <div class="bg-green-900 border border-green-700 rounded-lg p-4">
+                        <h3 class="text-green-400 font-bold mb-2">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Virtual Tour Created Successfully!
+                        </h3>
+                        <p class="text-green-300 mb-4">Your panoramic images have been connected with navigation hotspots.</p>
+                        <a id="tourLink" href="#" target="_blank"
+                           class="inline-block bg-primary text-black font-bold py-2 px-4 rounded hover:bg-green-400 transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            View Virtual Tour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let uploadedImages = { image1: null, image2: null };
+
+        // Drag and drop handlers
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dragover');
+        }
+
+        function handleDrop(e, imageId) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0], imageId);
+            }
+        }
+
+        // Click to select file
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.addEventListener('click', function() {
+                    const input = zone.querySelector('input[type="file"]');
+                    input.click();
+                });
+            });
+        });
+
+        function handleFileSelect(e, imageId) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file, imageId);
+            }
+        }
+
+        function handleFile(file, imageId) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            uploadedImages[imageId] = file;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById(imageId + 'Img');
+                const preview = document.getElementById(imageId + 'Preview');
+                const name = document.getElementById(imageId + 'Name');
+
+                img.src = e.target.result;
+                name.textContent = file.name;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+
+            // Check if both images are uploaded
+            updateCreateButton();
+        }
+
+        function updateCreateButton() {
+            const btn = document.getElementById('createTourBtn');
+            const hasImage1 = uploadedImages.image1 !== null;
+            const hasImage2 = uploadedImages.image2 !== null;
+
+            btn.disabled = !(hasImage1 && hasImage2);
+
+            if (hasImage1 && hasImage2) {
+                btn.innerHTML = '<i class="fas fa-magic mr-2"></i>Create Virtual Tour';
+            } else {
+                const missing = [];
+                if (!hasImage1) missing.push('first image');
+                if (!hasImage2) missing.push('second image');
+                btn.innerHTML = `<i class="fas fa-upload mr-2"></i>Upload ${missing.join(' and ')} to continue`;
+            }
+        }
+
+        function updateHotspotValue(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const valueSpan = document.getElementById(sliderId + 'Value');
+            valueSpan.textContent = slider.value + '°';
+        }
+
+        async function createVirtualTour() {
+            const btn = document.getElementById('createTourBtn');
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const result = document.getElementById('tourResult');
+
+            btn.disabled = true;
+            progress.classList.remove('hidden');
+            result.classList.add('hidden');
+
+            try {
+                // Step 1: Upload images
+                progressText.textContent = 'Uploading first panoramic image...';
+                progressBar.style.width = '20%';
+
+                const formData1 = new FormData();
+                formData1.append('panorama', uploadedImages.image1);
+                formData1.append('title', document.getElementById('scene1Title').value);
+                formData1.append('description', 'First panoramic scene');
+
+                const upload1 = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData1
+                });
+                const result1 = await upload1.json();
+
+                progressText.textContent = 'Uploading second panoramic image...';
+                progressBar.style.width = '40%';
+
+                const formData2 = new FormData();
+                formData2.append('panorama', uploadedImages.image2);
+                formData2.append('title', document.getElementById('scene2Title').value);
+                formData2.append('description', 'Second panoramic scene');
+
+                const upload2 = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData2
+                });
+                const result2 = await upload2.json();
+
+                if (!result1.success || !result2.success) {
+                    throw new Error('Failed to upload images');
+                }
+
+                // Step 2: Create connected tour
+                progressText.textContent = 'Creating virtual tour with hotspots...';
+                progressBar.style.width = '70%';
+
+                const tourData = {
+                    title: document.getElementById('tourTitle').value,
+                    description: document.getElementById('tourDescription').value,
+                    scenes: [
+                        {
+                            id: result1.tour.scenes[0].id,
+                            title: document.getElementById('scene1Title').value,
+                            image: result1.tour.scenes[0].panorama,
+                            panorama: result1.tour.scenes[0].panorama,
+                            preview: result1.tour.scenes[0].preview,
+                            hotspots: [
+                                {
+                                    category: 'scene',
+                                    pitch: parseFloat(document.getElementById('hotspot1Pitch').value),
+                                    yaw: parseFloat(document.getElementById('hotspot1Yaw').value),
+                                    sceneId: result2.tour.scenes[0].id,
+                                    title: document.getElementById('hotspot1Text').value,
+                                    text: document.getElementById('hotspot1Text').value,
+                                    description: `Navigate to ${document.getElementById('scene2Title').value}`
+                                }
+                            ]
+                        },
+                        {
+                            id: result2.tour.scenes[0].id,
+                            title: document.getElementById('scene2Title').value,
+                            image: result2.tour.scenes[0].panorama,
+                            panorama: result2.tour.scenes[0].panorama,
+                            preview: result2.tour.scenes[0].preview,
+                            hotspots: [
+                                {
+                                    category: 'scene',
+                                    pitch: parseFloat(document.getElementById('hotspot2Pitch').value),
+                                    yaw: parseFloat(document.getElementById('hotspot2Yaw').value),
+                                    sceneId: result1.tour.scenes[0].id,
+                                    title: document.getElementById('hotspot2Text').value,
+                                    text: document.getElementById('hotspot2Text').value,
+                                    description: `Navigate to ${document.getElementById('scene1Title').value}`
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                progressText.textContent = 'Finalizing virtual tour...';
+                progressBar.style.width = '90%';
+
+                const createTour = await fetch('/api/tours', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(tourData)
+                });
+
+                const tourResult = await createTour.json();
+
+                if (!tourResult.success) {
+                    throw new Error('Failed to create tour');
+                }
+
+                // Success!
+                progressText.textContent = 'Virtual tour created successfully!';
+                progressBar.style.width = '100%';
+
+                setTimeout(() => {
+                    progress.classList.add('hidden');
+                    result.classList.remove('hidden');
+
+                    const tourLink = document.getElementById('tourLink');
+                    tourLink.href = `viewer.html?tour=${tourResult.tour.id}`;
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error creating tour:', error);
+                progressText.textContent = 'Error: ' + error.message;
+                progressBar.style.width = '0%';
+                btn.disabled = false;
+            }
+        }
+
+        // Initialize hotspot value displays
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHotspotValue('hotspot1Yaw');
+            updateHotspotValue('hotspot1Pitch');
+            updateHotspotValue('hotspot2Yaw');
+            updateHotspotValue('hotspot2Pitch');
+        });
+    </script>
+</body>
+</html>

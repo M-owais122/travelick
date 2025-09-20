@@ -249,37 +249,71 @@ function showStep(step) {
 function setupHotspotEditor() {
     const sceneSelector = document.getElementById('sceneSelector');
     sceneSelector.innerHTML = '<option>Select a scene...</option>';
-    
+
     uploadedFiles.forEach((file, index) => {
         const option = document.createElement('option');
         option.value = file.id;
         option.textContent = `${index + 1}. ${file.title}`;
         sceneSelector.appendChild(option);
     });
-    
+
     sceneSelector.addEventListener('change', function() {
         if (this.value !== 'Select a scene...') {
             loadSceneForEditing(this.value);
         }
     });
+
+    // Initialize enhanced hotspot editor if available
+    if (typeof HotspotEditor !== 'undefined') {
+        window.hotspotEditor = new HotspotEditor();
+    }
 }
 
 // Load scene for hotspot editing
 function loadSceneForEditing(fileId) {
     const fileData = uploadedFiles.find(f => f.id === fileId);
     if (!fileData) return;
-    
+
     currentEditingScene = fileData;
-    
+
     const preview = document.getElementById('scenePreview');
     const placeholder = document.getElementById('previewPlaceholder');
-    
+
     preview.src = fileData.preview;
     preview.classList.remove('hidden');
     placeholder.classList.add('hidden');
-    
-    updateHotspotsList();
-    renderHotspots();
+
+    // Initialize enhanced hotspot editor for this scene
+    if (window.hotspotEditor) {
+        window.hotspotEditor.initialize({
+            imageElement: preview,
+            overlayElement: document.getElementById('hotspotOverlay'),
+            onHotspotAdd: (hotspot) => {
+                // Add hotspot to scene data
+                if (!currentEditingScene.hotspots) {
+                    currentEditingScene.hotspots = [];
+                }
+                currentEditingScene.hotspots.push(hotspot);
+                updateHotspotsList();
+            },
+            onHotspotRemove: (hotspotId) => {
+                // Remove hotspot from scene data
+                if (currentEditingScene.hotspots) {
+                    currentEditingScene.hotspots = currentEditingScene.hotspots.filter(h => h.id !== hotspotId);
+                    updateHotspotsList();
+                }
+            }
+        });
+
+        // Load existing hotspots
+        if (fileData.hotspots && fileData.hotspots.length > 0) {
+            window.hotspotEditor.loadHotspots(fileData.hotspots);
+        }
+    } else {
+        // Fallback to basic system
+        updateHotspotsList();
+        renderHotspots();
+    }
 }
 
 // Add hotspot
@@ -288,15 +322,37 @@ function addHotspot() {
         showError('Please select a scene first.');
         return;
     }
-    
+
+    // Use enhanced hotspot editor if available
+    if (window.hotspotEditor) {
+        const type = document.getElementById('hotspotType').value;
+        const target = document.getElementById('hotspotTarget').value.trim();
+
+        if (!target) {
+            showError('Please enter hotspot text or target scene ID.');
+            return;
+        }
+
+        window.hotspotEditor.showCreateModal({
+            category: type,
+            title: target,
+            description: type === 'scene' ? `Navigate to ${target}` : target
+        });
+
+        // Clear form
+        document.getElementById('hotspotTarget').value = '';
+        return;
+    }
+
+    // Fallback to basic system
     const type = document.getElementById('hotspotType').value;
     const target = document.getElementById('hotspotTarget').value.trim();
-    
+
     if (!target) {
         showError('Please enter hotspot text or target scene ID.');
         return;
     }
-    
+
     const hotspot = {
         id: generateId(),
         type: type,
@@ -305,11 +361,11 @@ function addHotspot() {
         pitch: Math.random() * 20 - 10, // Random position for demo
         yaw: Math.random() * 360 - 180
     };
-    
+
     currentEditingScene.hotspots.push(hotspot);
     updateHotspotsList();
     renderHotspots();
-    
+
     // Clear form
     document.getElementById('hotspotTarget').value = '';
 }
@@ -336,7 +392,14 @@ function updateHotspotsList() {
 // Remove hotspot
 function removeHotspot(hotspotId) {
     if (!currentEditingScene) return;
-    
+
+    // Use enhanced hotspot editor if available
+    if (window.hotspotEditor) {
+        window.hotspotEditor.removeHotspot(hotspotId);
+        return;
+    }
+
+    // Fallback to basic system
     currentEditingScene.hotspots = currentEditingScene.hotspots.filter(h => h.id !== hotspotId);
     updateHotspotsList();
     renderHotspots();

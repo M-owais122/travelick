@@ -93,9 +93,9 @@ function showDemoData() {
             id: 'demo-tour-1',
             title: 'Modern Apartment Tour',
             description: 'Experience a beautiful modern apartment with 360° views',
-            thumbnail: '/uploads/demo/living-room-thumb.jpg',
+            thumbnail: '/uploads/thumb_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg',
             created: new Date().toISOString(),
-            scenesCount: 3
+            scenesCount: 4
         }
     ];
     
@@ -153,7 +153,7 @@ function renderTours(tours) {
     grid.innerHTML = tours.map(tour => `
         <div class="tour-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer" onclick="viewTour('${tour.id}')">
             <div class="relative">
-                <img src="${tour.thumbnail || '/uploads/demo/placeholder.jpg'}" alt="${tour.title}" class="w-full h-48 object-cover">
+                <img src="${tour.thumbnail || '/uploads/thumb_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg'}" alt="${tour.title}" class="w-full h-48 object-cover">
                 <div class="absolute top-2 right-2">
                     <span class="bg-primary text-black px-2 py-1 rounded-full text-xs font-semibold">
                         ${tour.scenesCount} scenes

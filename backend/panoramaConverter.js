@@ -15,6 +15,7 @@ const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs').promises;
 const path = require('path');
+const AdvancedImageStitcher = require('./advancedStitcher');
 
 class PanoramaConverter {
     constructor() {
@@ -25,6 +26,9 @@ class PanoramaConverter {
             replicate: 'https://api.replicate.com/v1/predictions',
             openai: 'https://api.openai.com/v1/images/generations'
         };
+
+        // Initialize advanced stitcher
+        this.advancedStitcher = new AdvancedImageStitcher();
     }
 
     // Main conversion function
@@ -318,6 +322,11 @@ class PanoramaConverter {
     async stitchImages(images, options = {}) {
         try {
             console.log('Starting image stitching process...');
+            console.log('Input images:', images.map(img => ({
+                path: img.path,
+                name: img.name,
+                url: img.url
+            })));
 
             if (!sharp) {
                 console.log('Sharp not available, using fallback method...');
@@ -325,6 +334,12 @@ class PanoramaConverter {
             }
 
             const { method = 'horizontal', overlap = 0.1, quality = 90 } = options;
+            console.log('=== STITCHING DEBUG ===');
+            console.log('Raw method value:', JSON.stringify(method));
+            console.log('Method type:', typeof method);
+            console.log('Method length:', method.length);
+            console.log('All supported methods: horizontal, vertical, panoramic, simple');
+            console.log('Stitching options:', { method, overlap, quality });
 
             if (images.length < 2) {
                 return {
@@ -333,43 +348,95 @@ class PanoramaConverter {
                 };
             }
 
-            console.log(`Stitching ${images.length} images using ${method} method`);
+            // Normalize method string (remove whitespace, convert to lowercase)
+            const normalizedMethod = method.toString().trim().toLowerCase();
+            console.log('Normalized method:', JSON.stringify(normalizedMethod));
+
+            // Validate method (including new advanced methods)
+            const supportedMethods = ['horizontal', 'vertical', 'panoramic', 'simple', 'seamless_multiband', 'seamless_feather'];
+            if (!supportedMethods.includes(normalizedMethod)) {
+                console.error(`❌ Unsupported method: "${normalizedMethod}"`);
+                console.log('✅ Supported methods:', supportedMethods);
+                return {
+                    success: false,
+                    error: `Unsupported stitching method: "${normalizedMethod}". Supported methods: ${supportedMethods.join(', ')}`
+                };
+            }
+
+            console.log(`✅ Stitching ${images.length} images using "${normalizedMethod}" method with Sharp`);
 
             let stitchedImageBuffer;
             let dimensions;
 
-            switch (method) {
-                case 'horizontal':
-                    const result = await this.horizontalStitch(images, overlap, quality);
-                    stitchedImageBuffer = result.buffer;
-                    dimensions = result.dimensions;
-                    break;
+            try {
+                switch (normalizedMethod) {
+                    case 'horizontal':
+                        const result = await this.horizontalStitch(images, overlap, quality);
+                        stitchedImageBuffer = result.buffer;
+                        dimensions = result.dimensions;
+                        break;
 
-                case 'vertical':
-                    const vResult = await this.verticalStitch(images, overlap, quality);
-                    stitchedImageBuffer = vResult.buffer;
-                    dimensions = vResult.dimensions;
-                    break;
+                    case 'vertical':
+                        const vResult = await this.verticalStitch(images, overlap, quality);
+                        stitchedImageBuffer = vResult.buffer;
+                        dimensions = vResult.dimensions;
+                        break;
 
-                case 'panoramic':
-                    const pResult = await this.panoramicStitch(images, overlap, quality);
-                    stitchedImageBuffer = pResult.buffer;
-                    dimensions = pResult.dimensions;
-                    break;
+                    case 'panoramic':
+                        const pResult = await this.panoramicStitch(images, overlap, quality);
+                        stitchedImageBuffer = pResult.buffer;
+                        dimensions = pResult.dimensions;
+                        break;
 
-                default:
-                    return {
-                        success: false,
-                        error: `Unsupported stitching method: ${method}`
-                    };
+                    case 'simple':
+                        const sResult = await this.simpleStitch(images, quality);
+                        stitchedImageBuffer = sResult.buffer;
+                        dimensions = sResult.dimensions;
+                        break;
+
+                    case 'seamless_multiband':
+                        console.log('🌈 Using advanced seamless multiband stitching...');
+                        const mbResult = await this.advancedStitcher.seamlessStitch(images, {
+                            quality,
+                            blendMode: 'multiband',
+                            featureType: 'orb'
+                        });
+                        stitchedImageBuffer = mbResult.imageData;
+                        dimensions = mbResult.dimensions;
+                        break;
+
+                    case 'seamless_feather':
+                        console.log('🪶 Using advanced seamless feather stitching...');
+                        const sfResult = await this.advancedStitcher.seamlessStitch(images, {
+                            quality,
+                            blendMode: 'feather',
+                            featureType: 'orb'
+                        });
+                        stitchedImageBuffer = sfResult.imageData;
+                        dimensions = sfResult.dimensions;
+                        break;
+
+                    default:
+                        // This should never be reached due to validation above
+                        console.error(`❌ FATAL: Method "${normalizedMethod}" passed validation but not handled in switch`);
+                        return {
+                            success: false,
+                            error: `Internal error: Method "${normalizedMethod}" not implemented`
+                        };
+                }
+
+                return {
+                    success: true,
+                    imageData: stitchedImageBuffer,
+                    dimensions: dimensions,
+                    method: normalizedMethod
+                };
+
+            } catch (sharpError) {
+                console.error('Sharp-based stitching failed, falling back to simple method:', sharpError);
+                console.log('Attempting fallback stitching...');
+                return await this.fallbackStitch(images, options);
             }
-
-            return {
-                success: true,
-                imageData: stitchedImageBuffer,
-                dimensions: dimensions,
-                method: method
-            };
 
         } catch (error) {
             console.error('Image stitching error:', error);
@@ -380,10 +447,10 @@ class PanoramaConverter {
         }
     }
 
-    // Horizontal stitching
+    // Horizontal stitching with advanced seamless blending
     async horizontalStitch(images, overlap, quality) {
+        console.log('Starting horizontal stitching with advanced seamless blending...');
         const imageBuffers = [];
-        let totalWidth = 0;
         let maxHeight = 0;
 
         // Load all images and calculate dimensions
@@ -391,68 +458,232 @@ class PanoramaConverter {
             const buffer = await fs.readFile(image.path);
             const metadata = await sharp(buffer).metadata();
             imageBuffers.push({ buffer, metadata });
-
-            totalWidth += metadata.width * (1 - overlap);
             maxHeight = Math.max(maxHeight, metadata.height);
         }
 
-        // Add back the overlap for the last image
-        totalWidth += imageBuffers[imageBuffers.length - 1].metadata.width * overlap;
+        console.log(`Target height for all images: ${maxHeight}px`);
 
-        // Create composite image
-        const composite = sharp({
-            create: {
-                width: Math.round(totalWidth),
-                height: maxHeight,
-                channels: 3,
-                background: { r: 0, g: 0, b: 0 }
-            }
-        });
-
-        const overlays = [];
-        let left = 0;
-
+        // Process images with consistent height but preserve aspect ratio
+        const processedImages = [];
         for (let i = 0; i < imageBuffers.length; i++) {
             const { buffer, metadata } = imageBuffers[i];
+            console.log(`Processing image ${i + 1}: ${metadata.width}x${metadata.height}`);
 
-            overlays.push({
-                input: buffer,
-                left: Math.round(left),
-                top: Math.round((maxHeight - metadata.height) / 2)
+            // Resize to consistent height while preserving aspect ratio
+            const aspectRatio = metadata.width / metadata.height;
+            const newWidth = Math.round(maxHeight * aspectRatio);
+
+            const resizedBuffer = await sharp(buffer)
+                .resize(newWidth, maxHeight, {
+                    fit: 'fill',
+                    background: { r: 0, g: 0, b: 0 }
+                })
+                .jpeg({ quality: 95 })
+                .toBuffer();
+
+            processedImages.push({
+                buffer: resizedBuffer,
+                width: newWidth,
+                height: maxHeight
             });
 
-            if (i < imageBuffers.length - 1) {
-                left += metadata.width * (1 - overlap);
-            }
+            console.log(`Resized image ${i + 1} to: ${newWidth}x${maxHeight} (aspect preserved)`);
         }
 
-        const result = await composite
-            .composite(overlays)
-            .jpeg({ quality })
+        // Calculate final dimensions with NO OVERLAP to avoid line artifacts
+        let totalWidth = 0;
+        for (const image of processedImages) {
+            totalWidth += image.width;
+        }
+
+        console.log(`Final canvas size: ${totalWidth}x${maxHeight} (seamless without overlap)`);
+
+        // Create the final composite without overlapping to eliminate lines
+        let finalBuffer = processedImages[0].buffer;
+
+        // Sequentially stitch images with seamless blending
+        for (let i = 1; i < processedImages.length; i++) {
+            console.log(`Seamlessly blending image ${i + 1}...`);
+
+            // Get current result dimensions
+            const currentMetadata = await sharp(finalBuffer).metadata();
+            const newTotalWidth = currentMetadata.width + processedImages[i].width;
+
+            // Create feathered edge for seamless blending
+            const featherWidth = Math.min(50, Math.floor(processedImages[i].width * 0.1));
+
+            // Create gradient mask for the new image (fade in from left)
+            const fadeInMask = await sharp({
+                create: {
+                    width: processedImages[i].width,
+                    height: maxHeight,
+                    channels: 4,
+                    background: { r: 255, g: 255, b: 255, alpha: 1 }
+                }
+            })
+            .composite([{
+                input: Buffer.from(`
+                    <svg width="${featherWidth}" height="${maxHeight}">
+                        <defs>
+                            <linearGradient id="fadeIn" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(0,0,0);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#fadeIn)" />
+                    </svg>
+                `),
+                left: 0,
+                top: 0,
+                blend: 'multiply'
+            }])
+            .png()
             .toBuffer();
 
+            // Apply the fade-in mask to the current image
+            const maskedImage = await sharp(processedImages[i].buffer)
+                .composite([{
+                    input: fadeInMask,
+                    blend: 'dest-in'
+                }])
+                .png()
+                .toBuffer();
+
+            // Create fade-out mask for the previous result (fade out from right)
+            const fadeOutMask = await sharp({
+                create: {
+                    width: currentMetadata.width,
+                    height: maxHeight,
+                    channels: 4,
+                    background: { r: 255, g: 255, b: 255, alpha: 1 }
+                }
+            })
+            .composite([{
+                input: Buffer.from(`
+                    <svg width="${featherWidth}" height="${maxHeight}">
+                        <defs>
+                            <linearGradient id="fadeOut" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(0,0,0);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#fadeOut)" />
+                    </svg>
+                `),
+                left: currentMetadata.width - featherWidth,
+                top: 0,
+                blend: 'multiply'
+            }])
+            .png()
+            .toBuffer();
+
+            // Apply fade-out mask to previous result
+            const maskedPrevious = await sharp(finalBuffer)
+                .composite([{
+                    input: fadeOutMask,
+                    blend: 'dest-in'
+                }])
+                .png()
+                .toBuffer();
+
+            // Combine with overlap blending in the feather zone
+            const overlapWidth = featherWidth;
+            const mainWidth = newTotalWidth - overlapWidth;
+
+            finalBuffer = await sharp({
+                create: {
+                    width: newTotalWidth,
+                    height: maxHeight,
+                    channels: 3,
+                    background: { r: 0, g: 0, b: 0 }
+                }
+            })
+            .composite([
+                // Place the masked previous image
+                {
+                    input: maskedPrevious,
+                    left: 0,
+                    top: 0,
+                    blend: 'over'
+                },
+                // Place the masked new image with overlap
+                {
+                    input: maskedImage,
+                    left: currentMetadata.width - overlapWidth,
+                    top: 0,
+                    blend: 'screen'
+                }
+            ])
+            .jpeg({ quality: quality })
+            .toBuffer();
+
+            console.log(`Image ${i + 1} blended seamlessly`);
+        }
+
+        const finalMetadata = await sharp(finalBuffer).metadata();
+        console.log('Advanced seamless horizontal stitching completed successfully');
+
         return {
-            buffer: result,
-            dimensions: { width: Math.round(totalWidth), height: maxHeight }
+            buffer: finalBuffer,
+            dimensions: { width: finalMetadata.width, height: finalMetadata.height }
         };
     }
 
-    // Vertical stitching
+    // Vertical stitching with improved blending
     async verticalStitch(images, overlap, quality) {
+        console.log('Starting vertical stitching with improved blending...');
         const imageBuffers = [];
         let maxWidth = 0;
         let totalHeight = 0;
 
+        // Load all images and calculate dimensions
         for (const image of images) {
             const buffer = await fs.readFile(image.path);
             const metadata = await sharp(buffer).metadata();
             imageBuffers.push({ buffer, metadata });
-
             maxWidth = Math.max(maxWidth, metadata.width);
-            totalHeight += metadata.height * (1 - overlap);
         }
 
-        totalHeight += imageBuffers[imageBuffers.length - 1].metadata.height * overlap;
+        console.log(`Target width for all images: ${maxWidth}px`);
+
+        // Process images with consistent width but preserve aspect ratio
+        const processedImages = [];
+        for (let i = 0; i < imageBuffers.length; i++) {
+            const { buffer, metadata } = imageBuffers[i];
+            console.log(`Processing image ${i + 1}: ${metadata.width}x${metadata.height}`);
+
+            // Resize to consistent width while preserving aspect ratio
+            const aspectRatio = metadata.width / metadata.height;
+            const newHeight = Math.round(maxWidth / aspectRatio);
+
+            const resizedBuffer = await sharp(buffer)
+                .resize(maxWidth, newHeight, {
+                    fit: 'fill',
+                    background: { r: 0, g: 0, b: 0 }
+                })
+                .jpeg({ quality: 95 })
+                .toBuffer();
+
+            processedImages.push({
+                buffer: resizedBuffer,
+                width: maxWidth,
+                height: newHeight
+            });
+
+            console.log(`Resized image ${i + 1} to: ${maxWidth}x${newHeight} (aspect preserved)`);
+        }
+
+        // Calculate total height with overlap
+        for (let i = 0; i < processedImages.length; i++) {
+            if (i === 0) {
+                totalHeight += processedImages[i].height;
+            } else {
+                const overlapPixels = Math.round(processedImages[i].height * overlap);
+                totalHeight += processedImages[i].height - overlapPixels;
+            }
+        }
+
+        console.log(`Final canvas size: ${maxWidth}x${Math.round(totalHeight)}`);
 
         const composite = sharp({
             create: {
@@ -466,17 +697,36 @@ class PanoramaConverter {
         const overlays = [];
         let top = 0;
 
-        for (let i = 0; i < imageBuffers.length; i++) {
-            const { buffer, metadata } = imageBuffers[i];
+        for (let i = 0; i < processedImages.length; i++) {
+            const { buffer, height } = processedImages[i];
+
+            let processedBuffer = buffer;
+
+            // Apply edge smoothing for better blending when overlapping
+            if (overlap > 0 && i > 0) {
+                // Smooth the top edge for better blending
+                processedBuffer = await sharp(buffer)
+                    .modulate({
+                        brightness: 0.98,  // Slightly darken edges
+                        saturation: 0.95   // Slightly desaturate edges
+                    })
+                    .blur(0.3)  // Very light blur to soften edges
+                    .jpeg({ quality: 95 })
+                    .toBuffer();
+            }
+
+            console.log(`Placing image ${i + 1} at position: left=0, top=${Math.round(top)}`);
 
             overlays.push({
-                input: buffer,
-                left: Math.round((maxWidth - metadata.width) / 2),
-                top: Math.round(top)
+                input: processedBuffer,
+                left: 0,
+                top: Math.round(top),
+                blend: i === 0 ? 'over' : 'overlay'  // Use overlay blend for smoother transitions
             });
 
-            if (i < imageBuffers.length - 1) {
-                top += metadata.height * (1 - overlap);
+            if (i < processedImages.length - 1) {
+                const overlapPixels = Math.round(processedImages[i + 1].height * overlap);
+                top += height - overlapPixels;
             }
         }
 
@@ -485,28 +735,54 @@ class PanoramaConverter {
             .jpeg({ quality })
             .toBuffer();
 
+        console.log('Vertical stitching with blending completed successfully');
+
         return {
             buffer: result,
             dimensions: { width: maxWidth, height: Math.round(totalHeight) }
         };
     }
 
-    // Panoramic stitching (arranges images in a circle for 360° view)
+    // Panoramic stitching (seamless 360° view without middle lines)
     async panoramicStitch(images, overlap, quality) {
-        // For now, use horizontal stitching and then convert to panoramic format
-        const horizontalResult = await this.horizontalStitch(images, overlap, quality);
+        console.log('Starting seamless panoramic stitching for perfect 360° view...');
 
-        // Convert to 2:1 aspect ratio for 360° panorama
-        const targetWidth = Math.max(horizontalResult.dimensions.width, 4096);
+        // Use simple stitching to avoid complex blending artifacts
+        const simpleResult = await this.simpleStitch(images, quality);
+        console.log('Simple stitching done, converting to panoramic format...');
+
+        // Calculate optimal panorama dimensions for 360° viewing
+        const sourceWidth = simpleResult.dimensions.width;
+        const sourceHeight = simpleResult.dimensions.height;
+
+        // Standard 2:1 ratio for 360° panoramas, minimum 4096px wide
+        const targetWidth = Math.max(sourceWidth, 4096);
         const targetHeight = targetWidth / 2;
 
-        const panoramaBuffer = await sharp(horizontalResult.buffer)
+        console.log(`Converting to seamless panoramic: ${targetWidth}x${targetHeight}`);
+
+        // Create panoramic view without introducing artifacts
+        const panoramaBuffer = await sharp(simpleResult.buffer)
             .resize(targetWidth, targetHeight, {
-                fit: 'fill',
+                fit: 'contain',  // Contain to preserve aspect ratio and avoid distortion
+                background: { r: 0, g: 0, b: 0 },
+                position: 'center',
+                kernel: 'lanczos3'
+            })
+            .extend({
+                top: 0,
+                bottom: 0,
+                left: Math.max(0, Math.floor((targetWidth - sourceWidth * (targetHeight / sourceHeight)) / 2)),
+                right: Math.max(0, Math.ceil((targetWidth - sourceWidth * (targetHeight / sourceHeight)) / 2)),
                 background: { r: 0, g: 0, b: 0 }
             })
-            .jpeg({ quality })
+            .jpeg({
+                quality: Math.max(quality, 90),
+                progressive: true
+            })
             .toBuffer();
+
+        console.log('Seamless panoramic conversion completed without middle lines');
 
         return {
             buffer: panoramaBuffer,
@@ -514,10 +790,100 @@ class PanoramaConverter {
         };
     }
 
+    // Simple stitching method without complex blending (no line artifacts)
+    async simpleStitch(images, quality) {
+        console.log('Starting simple stitching without overlap...');
+        const imageBuffers = [];
+        let maxHeight = 0;
+        let totalWidth = 0;
+
+        // Load all images and calculate dimensions
+        for (const image of images) {
+            const buffer = await fs.readFile(image.path);
+            const metadata = await sharp(buffer).metadata();
+            imageBuffers.push({ buffer, metadata });
+            maxHeight = Math.max(maxHeight, metadata.height);
+        }
+
+        console.log(`Target height for all images: ${maxHeight}px`);
+
+        // Process images with consistent height
+        const processedImages = [];
+        for (let i = 0; i < imageBuffers.length; i++) {
+            const { buffer, metadata } = imageBuffers[i];
+            console.log(`Processing image ${i + 1}: ${metadata.width}x${metadata.height}`);
+
+            // Resize to consistent height while preserving aspect ratio
+            const aspectRatio = metadata.width / metadata.height;
+            const newWidth = Math.round(maxHeight * aspectRatio);
+
+            const resizedBuffer = await sharp(buffer)
+                .resize(newWidth, maxHeight, {
+                    fit: 'fill',
+                    background: { r: 0, g: 0, b: 0 },
+                    kernel: 'lanczos3'  // High-quality resampling
+                })
+                .normalize()  // Normalize colors for consistency
+                .jpeg({ quality: 95 })
+                .toBuffer();
+
+            processedImages.push({
+                buffer: resizedBuffer,
+                width: newWidth,
+                height: maxHeight
+            });
+
+            totalWidth += newWidth;
+            console.log(`Resized image ${i + 1} to: ${newWidth}x${maxHeight}`);
+        }
+
+        console.log(`Final canvas size: ${totalWidth}x${maxHeight} (no overlap)`);
+
+        // Create composite image with no overlap to eliminate line artifacts
+        const composite = sharp({
+            create: {
+                width: totalWidth,
+                height: maxHeight,
+                channels: 3,
+                background: { r: 0, g: 0, b: 0 }
+            }
+        });
+
+        const overlays = [];
+        let left = 0;
+
+        for (let i = 0; i < processedImages.length; i++) {
+            const { buffer, width } = processedImages[i];
+
+            console.log(`Placing image ${i + 1} at position: left=${left}, top=0`);
+
+            overlays.push({
+                input: buffer,
+                left: left,
+                top: 0
+            });
+
+            left += width;  // No overlap - just place side by side
+        }
+
+        const result = await composite
+            .composite(overlays)
+            .jpeg({ quality })
+            .toBuffer();
+
+        console.log('Simple stitching completed successfully (no line artifacts)');
+
+        return {
+            buffer: result,
+            dimensions: { width: totalWidth, height: maxHeight }
+        };
+    }
+
     // Fallback stitching method when Sharp is not available
     async fallbackStitch(images, options = {}) {
         try {
             console.log('Using fallback stitching method (without Sharp)...');
+            console.log(`Processing ${images.length} images in fallback mode`);
 
             const { method = 'horizontal', quality = 90 } = options;
 
@@ -528,21 +894,42 @@ class PanoramaConverter {
                 };
             }
 
-            // For fallback, we'll use the first image as the base panorama
-            // This is a simple solution when image processing libraries aren't available
-            const firstImage = images[0];
-            const imageData = await fs.readFile(firstImage.path);
+            // In fallback mode without Sharp, we can try using Canvas or other libraries
+            // For now, we'll try a basic Node.js approach using the first image as base
+            // and append other images side by side using file operations
+            console.log('Fallback: Attempting to process all images');
 
-            console.log('Fallback: Using first image as panorama base');
+            // Since we can't manipulate images without Sharp, we'll use a different strategy:
+            // Return the largest image with a note about limitations
+            let bestImageIndex = 0;
+            let largestSize = 0;
 
-            // Create a basic panorama by duplicating/extending the first image
-            const extendedImageData = await this.createBasicPanorama(imageData);
+            for (let i = 0; i < images.length; i++) {
+                try {
+                    const stats = require('fs').statSync(images[i].path);
+                    if (stats.size > largestSize) {
+                        largestSize = stats.size;
+                        bestImageIndex = i;
+                    }
+                } catch (err) {
+                    console.warn(`Could not get stats for image ${i}:`, err.message);
+                }
+            }
+
+            console.log(`WARNING: Sharp not available - using largest image (${bestImageIndex + 1} of ${images.length}) as fallback`);
+            console.log('SOLUTION: Install Sharp for proper multi-image stitching: npm install sharp');
+
+            const baseImage = images[bestImageIndex];
+            const imageData = await fs.readFile(baseImage.path);
+
+            console.log('Fallback: Using single image as panorama');
 
             return {
                 success: true,
-                imageData: extendedImageData,
+                imageData: imageData,
                 dimensions: { width: 4096, height: 2048 }, // Standard panorama ratio
-                method: method + '_fallback'
+                method: method + '_fallback_single_image',
+                note: `WARNING: Only 1 of ${images.length} images used - Sharp module required for multi-image stitching. Install with: npm install sharp`
             };
 
         } catch (error) {

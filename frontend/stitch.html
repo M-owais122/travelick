@@ -85,7 +85,6 @@
             <div class="nav-menu" id="navMenu">
                 <ul class="nav-links" style="display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0;">
                     <li><a href="index.html" class="nav-link" style="text-decoration: none; color: white;">Home</a></li>
-                    <li><a href="convert.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Photo to 360°</a></li>
                     <li><a href="stitch.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Multi-Image Stitch</a></li>
                     <li><a href="upload.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">Create Tour</a></li>
                     <li><a href="viewer.html" class="nav-link" style="text-decoration: none; color: #39FF14; font-weight: 600;">View Tours</a></li>
@@ -105,9 +104,28 @@
             <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: bold; margin-bottom: 1rem;">
                 Create 360° Panorama from Multiple Images
             </h2>
-            <p style="color: #e0e0e0; font-size: clamp(0.9rem, 2vw, 1.1rem);">
+            <p style="color: #e0e0e0; font-size: clamp(0.9rem, 2vw, 1.1rem); margin-bottom: 1rem;">
                 Upload 2-20 images to stitch them together into a seamless 360° panoramic experience
             </p>
+            <div style="background: linear-gradient(135deg, rgba(57, 255, 20, 0.1), rgba(57, 255, 20, 0.05)); border: 1px solid #39FF14; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+                <h4 style="color: #39FF14; font-weight: 600; margin-bottom: 0.5rem;">
+                    <i class="fas fa-rocket"></i> NEW: Advanced Seamless Stitching!
+                </h4>
+                <p style="color: #e0e0e0; font-size: 0.9rem; margin: 0;">
+                    Professional-grade algorithms with feature matching and multiband blending - completely eliminates visible seams between images!
+                </p>
+            </div>
+            <div style="background: rgba(57, 255, 20, 0.1); border: 1px solid #39FF14; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+                <h4 style="color: #39FF14; font-weight: 600; margin-bottom: 0.5rem;">
+                    <i class="fas fa-lightbulb"></i> Pro Tips for Best Results:
+                </h4>
+                <ul style="color: #e0e0e0; font-size: 0.9rem; margin: 0; padding-left: 1.5rem;">
+                    <li>Use images with 20-30% overlap between adjacent photos</li>
+                    <li>Keep similar lighting and exposure settings</li>
+                    <li>Take photos from the same position (tripod recommended)</li>
+                    <li>For 360° panoramas, shoot in a complete circle</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Upload Section -->
@@ -146,10 +164,10 @@
             <div style="margin-bottom: 2rem;">
                 <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Choose Stitching Method</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div class="method-card selected" data-method="horizontal" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #39FF14; text-align: center;">
+                    <div class="method-card" data-method="horizontal" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #374151; text-align: center;">
                         <i class="fas fa-arrows-alt-h text-2xl mb-2" style="color: #39FF14;"></i>
-                        <h5 style="font-weight: 600; margin-bottom: 0.5rem;">Horizontal</h5>
-                        <p style="color: #9ca3af; font-size: 0.875rem;">Side-by-side stitching</p>
+                        <h5 style="font-weight: 600; margin-bottom: 0.5rem;">Basic Blend</h5>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Standard blending with gradients</p>
                     </div>
                     <div class="method-card" data-method="vertical" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #374151; text-align: center;">
                         <i class="fas fa-arrows-alt-v text-2xl mb-2" style="color: #39FF14;"></i>
@@ -159,7 +177,7 @@
                     <div class="method-card" data-method="panoramic" style="background: #1a1a2e; padding: 1.5rem; border-radius: 0.5rem; border: 2px solid #374151; text-align: center;">
                         <i class="fas fa-globe text-2xl mb-2" style="color: #39FF14;"></i>
                         <h5 style="font-weight: 600; margin-bottom: 0.5rem;">360° Panoramic</h5>
-                        <p style="color: #9ca3af; font-size: 0.875rem;">Full spherical panorama</p>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Clear 360° view</p>
                     </div>
                 </div>
             </div>
@@ -219,7 +237,7 @@
 
     <script>
         let selectedImages = [];
-        let selectedMethod = 'horizontal';
+        let selectedMethod = 'seamless_multiband';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -273,13 +291,40 @@
         }
 
         function handleFiles(files) {
-            selectedImages = Array.from(files).slice(0, 20); // Max 20 images
+            // Validate files first
+            const validFiles = Array.from(files).filter(file => {
+                const isValidType = file.type.startsWith('image/');
+                const isValidSize = file.size <= 10 * 1024 * 1024; // 10MB max
 
-            if (selectedImages.length < 2) {
-                alert('Please select at least 2 images for stitching.');
+                if (!isValidType) {
+                    console.log('Invalid file type:', file.name, file.type);
+                    return false;
+                }
+                if (!isValidSize) {
+                    console.log('File too large:', file.name, (file.size / 1024 / 1024).toFixed(2) + 'MB');
+                    return false;
+                }
+                return true;
+            });
+
+            if (validFiles.length !== files.length) {
+                const invalidCount = files.length - validFiles.length;
+                alert(`${invalidCount} file(s) were rejected. Only image files under 10MB are allowed.`);
+            }
+
+            selectedImages = validFiles.slice(0, 20); // Max 20 images
+
+            if (selectedImages.length === 0) {
+                alert('No valid images selected. Please choose image files under 10MB.');
                 return;
             }
 
+            if (selectedImages.length < 2) {
+                alert(`Please select at least 2 images for stitching. You selected ${selectedImages.length} image(s).`);
+                return;
+            }
+
+            console.log(`Processing ${selectedImages.length} valid images for stitching`);
             updateImagePreview();
             document.getElementById('optionsSection').style.display = 'block';
             document.getElementById('stitchBtn').disabled = false;
@@ -328,68 +373,92 @@
                 return;
             }
 
+            console.log('Starting stitching process with:', {
+                imageCount: selectedImages.length,
+                method: selectedMethod,
+                images: selectedImages.map(img => ({name: img.name, size: img.size, type: img.type}))
+            });
+
             // Show progress
             document.getElementById('progressSection').style.display = 'block';
             document.getElementById('optionsSection').style.display = 'none';
-            
+
             updateProgress('Preparing images...', 10);
 
             try {
                 const formData = new FormData();
-                
-                // Add images
+
+                // Add images with proper naming - using both array notations for compatibility
                 selectedImages.forEach((file, index) => {
-                    formData.append('images', file);
+                    console.log(`Adding image ${index}: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`);
+                    formData.append('images', file, `image_${index}_${Date.now()}.${file.name.split('.').pop()}`);
                 });
 
                 // Add options
-                formData.append('method', selectedMethod);
-                formData.append('title', document.getElementById('tourTitle').value || 'Stitched Panorama');
-                formData.append('overlap', document.getElementById('overlapSlider').value / 100);
-                formData.append('quality', document.getElementById('qualitySelect').value);
+                const options = {
+                    method: selectedMethod,
+                    title: document.getElementById('tourTitle').value || 'Stitched Panorama',
+                    overlap: parseFloat(document.getElementById('overlapSlider').value) / 100,
+                    quality: parseInt(document.getElementById('qualitySelect').value)
+                };
+
+                console.log('Stitching options:', options);
+
+                Object.keys(options).forEach(key => {
+                    formData.append(key, options[key]);
+                });
 
                 updateProgress('Uploading images...', 30);
 
+                console.log('Sending request to /api/conversion/stitch...');
                 const response = await fetch('/api/conversion/stitch', {
                     method: 'POST',
                     body: formData
                 });
 
-                updateProgress('Stitching images...', 60);
+                console.log('Response received:', response.status, response.statusText);
+                updateProgress('Processing images...', 60);
 
-                // Check if response is OK and content type is JSON
                 if (!response.ok) {
                     const errorText = await response.text();
+                    console.error('Server error response:', errorText);
                     throw new Error(`Server error (${response.status}): ${errorText}`);
                 }
 
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
+                let result;
+                try {
+                    result = await response.json();
+                    console.log('Stitching result:', result);
+                } catch (parseError) {
                     const responseText = await response.text();
-                    console.error('Non-JSON response:', responseText);
-                    throw new Error('Server returned non-JSON response. Check console for details.');
+                    console.error('Failed to parse JSON response:', responseText);
+                    throw new Error('Invalid response format from server. Check browser console.');
                 }
-
-                const result = await response.json();
-                console.log('Stitching result:', result);
 
                 if (result.success) {
                     updateProgress('Finalizing panorama...', 90);
                     setTimeout(() => {
                         updateProgress('Complete!', 100);
                         showResult(result);
-                        
-                        // Fallback: Show alert with result URLs
-                        alert(`✅ Panorama created successfully!\n\nView VR Tour: ${result.tourUrl}\nDirect Image: ${result.panoramaUrl}`);
                     }, 1000);
                 } else {
-                    throw new Error(result.error || 'Stitching failed');
+                    console.error('Stitching failed:', result.error);
+                    throw new Error(result.error || 'Stitching process failed');
                 }
 
             } catch (error) {
                 console.error('Stitching error:', error);
-                console.error('Error stack:', error.stack);
-                alert('Error: ' + error.message);
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    selectedImages: selectedImages.length,
+                    selectedMethod: selectedMethod
+                });
+
+                // Show detailed error message
+                const errorMsg = `Stitching failed: ${error.message}\n\nDetails:\n- Images: ${selectedImages.length}\n- Method: ${selectedMethod}\n\nCheck browser console for more details.`;
+                alert(errorMsg);
+
                 document.getElementById('progressSection').style.display = 'none';
                 document.getElementById('optionsSection').style.display = 'block';
             }

@@ -84,7 +84,7 @@
             <div class="nav-menu" id="navMenu">
                 <ul class="nav-links">
                     <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="convert.html" class="nav-link">Photo to 360°</a></li>
+                    <li><a href="stitch.html" class="nav-link">Multi-Image Stitch</a></li>
                     <li><a href="upload.html" class="nav-link">Create Tour</a></li>
                     <li><a href="viewer.html" class="nav-link">View Tours</a></li>
                 </ul>
@@ -198,12 +198,20 @@
             <!-- Hotspot Controls -->
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
                 <h3 class="font-semibold text-gray-900 dark:text-white mb-3">Add Hotspot</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    <i class="fas fa-info-circle text-primary mr-1"></i>
+                    Click on the image above to place hotspots precisely, or use the form below for quick creation.
+                </p>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm text-gray-600 dark:text-gray-400 mb-1">Type</label>
                         <select id="hotspotType" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-600 dark:text-white">
-                            <option value="scene">Scene Link</option>
-                            <option value="info">Information</option>
+                            <option value="scene">Scene Navigation</option>
+                            <option value="info">Information Point</option>
+                            <option value="media">Media Gallery</option>
+                            <option value="audio">Audio Narration</option>
+                            <option value="interactive">Interactive Element</option>
+                            <option value="custom">Custom Action</option>
                         </select>
                     </div>
                     <div>
@@ -255,6 +263,7 @@
     </div>
 
     <script src="js/responsive.js"></script>
+    <script src="js/enhanced-hotspot-editor.js"></script>
     <script src="js/upload.js"></script>
 </body>
 </html>

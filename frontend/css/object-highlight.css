@@ -1,0 +1,293 @@
+/* Object Highlight & 3D Models Styles */
+
+.object-hotspot {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.object-hotspot:hover {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+.object-hotspot::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid #39FF14;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.object-hotspot:hover::before {
+    opacity: 1;
+    transform: scale(1);
+    animation: ripple 1.5s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.4);
+    }
+}
+
+/* Object Modal Styles */
+.object-modal {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.object-modal .modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+.object-modal .tab-btn {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.object-modal .tab-btn:hover {
+    color: #39FF14 !important;
+}
+
+.object-modal .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #39FF14, #2bd610);
+}
+
+/* 3D Viewer Styles */
+#model3DContainer {
+    border: 2px solid #333;
+    overflow: hidden;
+}
+
+#model3DContainer:hover {
+    border-color: #39FF14;
+    transition: border-color 0.3s ease;
+}
+
+/* Gallery Styles */
+.object-gallery-item {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.object-gallery-item:hover {
+    border-color: #39FF14;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(57, 255, 20, 0.2);
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .object-modal .modal-content {
+        width: 95vw !important;
+        height: 90vh !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
+
+    .object-modal .modal-body {
+        padding: 15px;
+    }
+
+    .object-modal h2 {
+        font-size: 20px !important;
+    }
+
+    #model3DContainer {
+        height: 250px !important;
+    }
+}
+
+/* Object Information Cards */
+.object-spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.object-spec-row:last-child {
+    border-bottom: none;
+}
+
+.object-spec-label {
+    color: #39FF14;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.object-spec-value {
+    color: #e0e0e0;
+    text-align: right;
+    flex: 1;
+}
+
+/* Price Display */
+.price-container {
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.1), rgba(43, 214, 16, 0.1));
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.price-text {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #39FF14, #2bd610);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.brand-text {
+    color: #b0b0b0;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* AR Button */
+.ar-button {
+    background: linear-gradient(135deg, #39FF14, #2bd610);
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+}
+
+.ar-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(57, 255, 20, 0.4);
+}
+
+.ar-button:active {
+    transform: translateY(0);
+}
+
+/* Loading States */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(57, 255, 20, 0.3);
+    border-radius: 50%;
+    border-top-color: #39FF14;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltip for Object Hotspots */
+.object-tooltip {
+    position: absolute;
+    background: rgba(26, 26, 46, 0.95);
+    color: #39FF14;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 1000;
+    border: 1px solid #39FF14;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.object-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Category Badges */
+.category-badge {
+    display: inline-block;
+    background: rgba(57, 255, 20, 0.2);
+    color: #39FF14;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-badge.furniture {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+.category-badge.electronics {
+    background: rgba(0, 123, 255, 0.2);
+    color: #007bff;
+}
+
+.category-badge.appliances {
+    background: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.category-badge.fixtures {
+    background: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+}
+
+/* Animation for Modal Entrance */
+.object-modal.show .modal-content {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Scrollbar Styling */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #39FF14;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #2bd610;
+}

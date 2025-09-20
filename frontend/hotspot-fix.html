@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Tour with Working Hotspots</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body {
+            background: #0a0a0a;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        #panoramaViewer {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Custom hotspot styling */
+        .custom-hotspot {
+            width: 30px !important;
+            height: 30px !important;
+            background: radial-gradient(circle, #39FF14 0%, #2dd814 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            animation: pulse-hotspot 2s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 14px !important;
+            color: black !important;
+        }
+
+        .custom-hotspot:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.8), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        @keyframes pulse-hotspot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Scene info panel */
+        .scene-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+
+        /* Navigation controls */
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #39FF14;
+            color: black;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+        }
+
+        /* Loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #333;
+            border-top: 4px solid #39FF14;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Notification system */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #39FF14;
+            color: black;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <h2 class="text-2xl font-bold mb-2">Loading Virtual Tour</h2>
+        <p class="text-gray-400">Preparing your immersive experience...</p>
+    </div>
+
+    <!-- Main Panoramic Viewer -->
+    <div id="panoramaViewer"></div>
+
+    <!-- Scene Info Panel -->
+    <div id="sceneInfo" class="scene-info">
+        <h3 id="sceneTitle" class="text-xl font-bold mb-2">Scene Title</h3>
+        <p id="sceneDescription" class="text-gray-300 text-sm mb-3">Scene description</p>
+        <div class="text-xs text-gray-500">
+            Click the hotspots to navigate between scenes
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button id="resetViewBtn" class="nav-btn" title="Reset View">
+            <i class="fas fa-home"></i>
+        </button>
+        <button id="fullscreenBtn" class="nav-btn" title="Fullscreen">
+            <i class="fas fa-expand"></i>
+        </button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global variables
+        let viewer = null;
+        let currentTour = null;
+        let currentScene = null;
+
+        // Sample tour data with working hotspots
+        const sampleTour = {
+            id: "sample-tour",
+            title: "Sample Connected Tour",
+            scenes: [
+                {
+                    id: "scene1",
+                    title: "First Scene",
+                    description: "This is the first panoramic scene with navigation hotspots",
+                    image: "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+                    hotspots: [
+                        {
+                            id: "hotspot1",
+                            pitch: -5,
+                            yaw: 45,
+                            category: "scene",
+                            sceneId: "scene2",
+                            title: "Go to Second Scene",
+                            text: "Next Room",
+                            description: "Navigate to the second panoramic scene"
+                        }
+                    ]
+                },
+                {
+                    id: "scene2",
+                    title: "Second Scene",
+                    description: "This is the second panoramic scene with return navigation",
+                    image: "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+                    hotspots: [
+                        {
+                            id: "hotspot2",
+                            pitch: -5,
+                            yaw: -45,
+                            category: "scene",
+                            sceneId: "scene1",
+                            title: "Go to First Scene",
+                            text: "Previous Room",
+                            description: "Navigate back to the first panoramic scene"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Initialize the tour
+        async function initTour() {
+            try {
+                console.log('🚀 Initializing tour...');
+
+                // Get tour ID from URL or use sample
+                const urlParams = new URLSearchParams(window.location.search);
+                const tourId = urlParams.get('tour');
+
+                if (tourId) {
+                    console.log('📥 Loading tour from API:', tourId);
+                    await loadTourFromAPI(tourId);
+                } else {
+                    console.log('📋 Using sample tour data');
+                    currentTour = sampleTour;
+                }
+
+                // Load first scene
+                if (currentTour && currentTour.scenes && currentTour.scenes.length > 0) {
+                    await loadScene(currentTour.scenes[0]);
+                } else {
+                    throw new Error('No scenes found in tour');
+                }
+
+                hideLoading();
+                showNotification('Tour loaded successfully!');
+
+            } catch (error) {
+                console.error('❌ Error initializing tour:', error);
+                showError('Failed to load tour: ' + error.message);
+            }
+        }
+
+        // Load tour from API
+        async function loadTourFromAPI(tourId) {
+            try {
+                const response = await fetch(`/api/tours/${tourId}`);
+                if (!response.ok) {
+                    throw new Error('Tour not found');
+                }
+                const data = await response.json();
+                currentTour = data.tour;
+                console.log('✅ Tour loaded from API:', currentTour);
+            } catch (error) {
+                console.error('❌ API Error:', error);
+                throw error;
+            }
+        }
+
+        // Load a specific scene
+        async function loadScene(scene) {
+            try {
+                console.log('🎬 Loading scene:', scene);
+                currentScene = scene;
+
+                // Destroy existing viewer if it exists
+                if (viewer) {
+                    viewer.destroy();
+                    viewer = null;
+                }
+
+                // Create new panoramic viewer
+                viewer = pannellum.viewer('panoramaViewer', {
+                    type: 'equirectangular',
+                    panorama: scene.image,
+                    autoLoad: true,
+                    pitch: 0,
+                    yaw: 0,
+                    hfov: 100,
+                    minHfov: 50,
+                    maxHfov: 120,
+                    showControls: false,
+                    hotSpotDebug: false,
+                    compass: false,
+                    orientationOnByDefault: false
+                });
+
+                // Set up viewer events
+                viewer.on('load', () => {
+                    console.log('✅ Scene loaded successfully');
+                    addHotspotsToScene(scene);
+                    updateSceneInfo(scene);
+                });
+
+                viewer.on('error', (error) => {
+                    console.error('❌ Viewer error:', error);
+                    showNotification('Failed to load panoramic image', 'error');
+                });
+
+            } catch (error) {
+                console.error('❌ Error loading scene:', error);
+                showNotification('Failed to load scene', 'error');
+            }
+        }
+
+        // Add hotspots to the current scene
+        function addHotspotsToScene(scene) {
+            console.log('🎯 Adding hotspots to scene:', scene.hotspots);
+
+            if (!scene.hotspots || scene.hotspots.length === 0) {
+                console.log('⚠️ No hotspots found for this scene');
+                return;
+            }
+
+            scene.hotspots.forEach((hotspot, index) => {
+                console.log(`📍 Adding hotspot ${index + 1}:`, hotspot);
+
+                try {
+                    viewer.addHotSpot({
+                        id: hotspot.id || `hotspot_${index}`,
+                        pitch: hotspot.pitch || 0,
+                        yaw: hotspot.yaw || 0,
+                        type: 'custom',
+                        cssClass: 'custom-hotspot',
+                        text: getHotspotIcon(hotspot.category),
+                        clickHandlerFunc: () => handleHotspotClick(hotspot)
+                    });
+
+                    console.log(`✅ Hotspot ${index + 1} added successfully`);
+
+                } catch (error) {
+                    console.error(`❌ Error adding hotspot ${index + 1}:`, error);
+                }
+            });
+
+            console.log('🎯 All hotspots added');
+        }
+
+        // Get icon for hotspot based on category
+        function getHotspotIcon(category) {
+            const icons = {
+                'scene': '<i class="fas fa-arrow-right"></i>',
+                'navigation': '<i class="fas fa-arrow-right"></i>',
+                'info': '<i class="fas fa-info"></i>',
+                'media': '<i class="fas fa-images"></i>',
+                'interactive': '<i class="fas fa-hand-pointer"></i>'
+            };
+            return icons[category] || '<i class="fas fa-info"></i>';
+        }
+
+        // Handle hotspot clicks
+        function handleHotspotClick(hotspot) {
+            console.log('🎯 Hotspot clicked:', hotspot);
+
+            if (hotspot.category === 'scene' && hotspot.sceneId) {
+                console.log('🔄 Scene navigation detected, sceneId:', hotspot.sceneId);
+
+                // Find the target scene
+                const targetScene = currentTour.scenes.find(scene => scene.id === hotspot.sceneId);
+
+                if (targetScene) {
+                    console.log('✅ Target scene found:', targetScene);
+                    showNotification(`Moving to ${hotspot.text || targetScene.title}...`);
+
+                    // Add a small delay for better UX
+                    setTimeout(() => {
+                        loadScene(targetScene);
+                    }, 500);
+                } else {
+                    console.error('❌ Target scene not found:', hotspot.sceneId);
+                    showNotification('Scene not found', 'error');
+                }
+            } else {
+                console.log('ℹ️ Info hotspot clicked');
+                showNotification(hotspot.text || hotspot.title || 'Information');
+            }
+        }
+
+        // Update scene information display
+        function updateSceneInfo(scene) {
+            document.getElementById('sceneTitle').textContent = scene.title || 'Untitled Scene';
+            document.getElementById('sceneDescription').textContent = scene.description || 'No description available';
+        }
+
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+
+            if (type === 'error') {
+                notification.style.background = '#EF4444';
+                notification.style.color = 'white';
+            } else {
+                notification.style.background = '#39FF14';
+                notification.style.color = 'black';
+            }
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show error state
+        function showError(message) {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.innerHTML = `
+                <div class="text-center">
+                    <i class="fas fa-exclamation-triangle text-6xl text-red-400 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2 text-red-400">Error</h2>
+                    <p class="text-gray-400 mb-4">${message}</p>
+                    <button onclick="window.location.reload()" class="nav-btn">
+                        <i class="fas fa-refresh mr-2"></i>Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        // Hide loading screen
+        function hideLoading() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+
+        // Reset view to center
+        function resetView() {
+            if (viewer) {
+                viewer.setPitch(0);
+                viewer.setYaw(0);
+                viewer.setHfov(100);
+                showNotification('View reset');
+            }
+        }
+
+        // Toggle fullscreen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                document.exitFullscreen();
+                document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🎬 DOM loaded, initializing tour...');
+
+            // Set up control buttons
+            document.getElementById('resetViewBtn').addEventListener('click', resetView);
+            document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                switch(e.key) {
+                    case 'r':
+                        resetView();
+                        break;
+                    case 'f':
+                        toggleFullscreen();
+                        break;
+                    case 'Escape':
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                        }
+                        break;
+                }
+            });
+
+            // Initialize the tour
+            initTour();
+        });
+
+        // Make functions globally available for debugging
+        window.loadScene = loadScene;
+        window.handleHotspotClick = handleHotspotClick;
+        window.showNotification = showNotification;
+        window.currentTour = currentTour;
+        window.currentScene = currentScene;
+        window.viewer = viewer;
+
+        console.log('🎯 Hotspot fix loaded - ready for testing!');
+    </script>
+</body>
+</html>

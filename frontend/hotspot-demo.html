@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Hotspot Demo - How to Use</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .demo-hotspot {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            margin: 20px;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .demo-hotspot:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 0 rgba(57, 255, 20, 0.7); }
+            50% { box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 10px rgba(57, 255, 20, 0.3); }
+            100% { box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 0 rgba(57, 255, 20, 0); }
+        }
+
+        .sofa-hotspot { background: #FF4444; }
+        .tv-hotspot { background: #4444FF; }
+        .object-hotspot { background: #39FF14; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-green-400">
+            <i class="fas fa-cube mr-3"></i>
+            Object Hotspot Demo - How It Works
+        </h1>
+
+        <!-- Step 1: Understanding Hotspots -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Step 1: What are Object Hotspots?</h2>
+            <p class="text-lg mb-4">Object hotspots are clickable icons that appear on furniture and objects in the 360° tour. Here's what they look like:</p>
+
+            <div class="flex flex-wrap justify-center items-center">
+                <!-- Demo Sofa Hotspot -->
+                <div class="text-center">
+                    <div class="demo-hotspot sofa-hotspot" onclick="showDemo('sofa')">
+                        <i class="fas fa-couch text-white text-2xl"></i>
+                    </div>
+                    <p class="text-sm">Sofa Hotspot<br>(Red)</p>
+                </div>
+
+                <!-- Demo TV Hotspot -->
+                <div class="text-center">
+                    <div class="demo-hotspot tv-hotspot" onclick="showDemo('tv')">
+                        <i class="fas fa-tv text-white text-2xl"></i>
+                    </div>
+                    <p class="text-sm">TV Hotspot<br>(Blue)</p>
+                </div>
+
+                <!-- Demo Object Hotspot -->
+                <div class="text-center">
+                    <div class="demo-hotspot object-hotspot" onclick="showDemo('object')">
+                        <i class="fas fa-cube text-gray-900 text-2xl"></i>
+                    </div>
+                    <p class="text-sm">General Object<br>(Green)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: How to Access -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Step 2: How to Access the Demo Tour</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-700 p-4 rounded">
+                    <h3 class="font-bold text-yellow-400">Method 1: Direct Link</h3>
+                    <p>Click this link to go directly to the demo tour:</p>
+                    <a href="/viewer.html?tour=demo-tour-1" class="inline-block mt-2 bg-green-500 text-black px-6 py-2 rounded font-bold hover:bg-green-400">
+                        <i class="fas fa-play mr-2"></i>Start Demo Tour
+                    </a>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded">
+                    <h3 class="font-bold text-yellow-400">Method 2: From Home Page</h3>
+                    <ol class="list-decimal list-inside space-y-1">
+                        <li>Go to <a href="/" class="text-green-400 underline">http://localhost:3001</a></li>
+                        <li>Click "View Tours" button</li>
+                        <li>Select "Modern Apartment Demo Tour"</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: What to Look For -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Step 3: What to Look For in the 360° View</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-yellow-400 mb-2">Navigation Hotspots (Room to Room)</h3>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <div class="flex items-center mb-2">
+                            <div style="width: 40px; height: 40px; background: #39FF14; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                <i class="fas fa-arrow-right text-black"></i>
+                            </div>
+                            <span>Green circles with arrows</span>
+                        </div>
+                        <p class="text-sm text-gray-300">These move you between rooms (Kitchen, Bedroom, Bathroom)</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-yellow-400 mb-2">Object Hotspots (Furniture Details)</h3>
+                    <div class="bg-gray-700 p-4 rounded">
+                        <div class="flex items-center mb-2">
+                            <div style="width: 40px; height: 40px; background: #FF4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                                <i class="fas fa-cube text-white"></i>
+                            </div>
+                            <span>Colored circles with object icons</span>
+                        </div>
+                        <p class="text-sm text-gray-300">These show furniture/object details and 3D models</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: How to Use -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Step 4: How to Use Object Hotspots</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
+                    <div>
+                        <h3 class="font-bold">Look Around the 360° View</h3>
+                        <p>Use your mouse to drag and look around the panoramic view. Object hotspots will be positioned on furniture.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
+                    <div>
+                        <h3 class="font-bold">Click on Object Hotspots</h3>
+                        <p>When you see a colored circular hotspot with an icon, click on it to see object details.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
+                    <div>
+                        <h3 class="font-bold">Explore the Object Modal</h3>
+                        <p>A popup will show with three tabs: Details, 3D View, and Gallery. You can see prices, specifications, and interactive 3D models.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold">4</div>
+                    <div>
+                        <h3 class="font-bold">Toggle Object Highlighting</h3>
+                        <p>Use the cube icon in the toolbar (right side) to turn object hotspots on/off.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expected Locations -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-green-400">Object Locations in Demo Tour</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-gray-700 p-4 rounded text-center">
+                    <h3 class="font-bold text-yellow-400">Living Room</h3>
+                    <ul class="text-sm space-y-1 mt-2">
+                        <li><i class="fas fa-couch text-red-400"></i> Sofa</li>
+                        <li><i class="fas fa-tv text-blue-400"></i> Smart TV</li>
+                        <li><i class="fas fa-table text-green-400"></i> Coffee Table</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 p-4 rounded text-center">
+                    <h3 class="font-bold text-yellow-400">Kitchen</h3>
+                    <ul class="text-sm space-y-1 mt-2">
+                        <li><i class="fas fa-snowflake text-blue-400"></i> Refrigerator</li>
+                        <li><i class="fas fa-square text-green-400"></i> Kitchen Island</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 p-4 rounded text-center">
+                    <h3 class="font-bold text-yellow-400">Bedroom</h3>
+                    <ul class="text-sm space-y-1 mt-2">
+                        <li><i class="fas fa-bed text-green-400"></i> King Bed</li>
+                        <li><i class="fas fa-archive text-green-400"></i> Dresser</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 p-4 rounded text-center">
+                    <h3 class="font-bold text-yellow-400">Bathroom</h3>
+                    <ul class="text-sm space-y-1 mt-2">
+                        <li><i class="fas fa-sink text-green-400"></i> Vanity</li>
+                        <li><i class="fas fa-bath text-green-400"></i> Bathtub</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="bg-red-900 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-red-400">If You Don't See Hotspots:</h2>
+            <ul class="space-y-2">
+                <li><i class="fas fa-check text-green-400 mr-2"></i> Make sure you're in the <strong>Living Room</strong> scene (first scene)</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i> Look around by dragging your mouse in the 360° view</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i> Check if the cube icon in the toolbar is highlighted (object highlighting enabled)</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i> Refresh the page and wait for all scripts to load</li>
+                <li><i class="fas fa-check text-green-400 mr-2"></i> Open browser console (F12) to check for error messages</li>
+            </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center space-x-4">
+            <a href="/viewer.html?tour=demo-tour-1" class="bg-green-500 text-black px-8 py-3 rounded-lg font-bold hover:bg-green-400 inline-block">
+                <i class="fas fa-play mr-2"></i>Try the Demo Tour Now
+            </a>
+            <a href="/" class="bg-blue-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-400 inline-block">
+                <i class="fas fa-home mr-2"></i>Go to Home Page
+            </a>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
+        <div class="bg-gray-800 rounded-lg p-6 max-w-md mx-4">
+            <h3 class="text-xl font-bold mb-4 text-green-400" id="demoTitle">Demo Object Clicked!</h3>
+            <p id="demoContent" class="mb-4"></p>
+            <button onclick="closeDemoModal()" class="bg-green-500 text-black px-4 py-2 rounded font-bold hover:bg-green-400">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function showDemo(type) {
+            const modal = document.getElementById('demoModal');
+            const title = document.getElementById('demoTitle');
+            const content = document.getElementById('demoContent');
+
+            switch(type) {
+                case 'sofa':
+                    title.textContent = 'Sofa Hotspot Clicked!';
+                    content.innerHTML = 'This is how object hotspots work! In the real tour, clicking this would show:<br><br><strong>• Sofa specifications</strong><br><strong>• Price ($2,499)</strong><br><strong>• 3D model viewer</strong><br><strong>• Multiple product images</strong>';
+                    break;
+                case 'tv':
+                    title.textContent = 'TV Hotspot Clicked!';
+                    content.innerHTML = 'Great! You understand how it works. In the actual tour, this would show:<br><br><strong>• TV specifications</strong><br><strong>• Price ($1,299)</strong><br><strong>• Interactive 3D view</strong><br><strong>• Technical details</strong>';
+                    break;
+                case 'object':
+                    title.textContent = 'Object Hotspot Clicked!';
+                    content.innerHTML = 'Perfect! This is exactly how object hotspots work in the VR tour. Each furniture piece and object has its own hotspot with detailed information.';
+                    break;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeDemoModal() {
+            document.getElementById('demoModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

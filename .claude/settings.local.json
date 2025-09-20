@@ -15,7 +15,15 @@
       "Bash(npm ls:*)",
       "Bash(npm start)",
       "Bash(netstat:*)",
-      "Bash(ip addr:*)"
+      "Bash(ip addr:*)",
+      "Bash(npm install:*)",
+      "Bash(timeout:*)",
+      "Bash(xdg-open:*)",
+      "Bash(pkill:*)",
+      "Bash(fuser:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:www.klapty.com)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

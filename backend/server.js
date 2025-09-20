@@ -444,17 +444,63 @@ app.post('/api/conversion/stitch', async (req, res) => {
   try {
     console.log('Stitching request received');
 
-    // Check if images were uploaded
-    if (!req.files || !req.files.images) {
+    // Check if images were uploaded (support both 'images' and 'images[]' field names)
+    const images = req.files?.images || req.files?.['images[]'];
+    if (!req.files || !images) {
+      console.log('No images found in request. Files:', req.files);
       return res.status(400).json({ success: false, error: 'No images uploaded' });
     }
 
-    const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
-    console.log(`Received ${images.length} images for stitching`);
+    // Debug: log what we received
+    console.log('=== REQUEST FILES DEBUG ===');
+    console.log('req.files:', Object.keys(req.files));
+    console.log('images type:', typeof images);
+    console.log('images isArray:', Array.isArray(images));
+    if (images) {
+      if (Array.isArray(images)) {
+        console.log('Images array length:', images.length);
+        console.log('Image names:', images.map(img => img.name));
+      } else {
+        console.log('Single image name:', images.name);
+      }
+    }
+
+    // Ensure we have an array of images
+    let imageArray;
+    if (Array.isArray(images)) {
+      imageArray = images;
+    } else {
+      // Single image - convert to array
+      imageArray = [images];
+    }
+
+    console.log(`Received ${imageArray.length} images for stitching`);
+    console.log('Image details:', imageArray.map(img => ({ name: img.name, size: img.size, mimetype: img.mimetype })));
 
     // Validate minimum images
-    if (images.length < 2) {
+    if (imageArray.length < 2) {
       return res.status(400).json({ success: false, error: 'At least 2 images required for stitching' });
+    }
+
+    // Validate each image
+    for (let i = 0; i < imageArray.length; i++) {
+      const image = imageArray[i];
+      if (!image || !image.data || !image.name) {
+        console.error(`Invalid image at index ${i}:`, image);
+        return res.status(400).json({
+          success: false,
+          error: `Invalid image file at position ${i + 1}`
+        });
+      }
+
+      // Check file type
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      if (!allowedTypes.includes(image.mimetype)) {
+        return res.status(400).json({
+          success: false,
+          error: `Invalid file type for ${image.name}. Only JPEG, PNG, and WebP are allowed`
+        });
+      }
     }
 
     // Get options from request
@@ -471,8 +517,8 @@ app.post('/api/conversion/stitch', async (req, res) => {
 
     // Save uploaded images
     const savedImages = [];
-    for (let i = 0; i < images.length; i++) {
-      const image = images[i];
+    for (let i = 0; i < imageArray.length; i++) {
+      const image = imageArray[i];
       const fileName = `stitch_input_${tourId}_${i}_${timestamp}.${image.name.split('.').pop()}`;
       const imagePath = path.join(UPLOADS_DIR, fileName);
 
@@ -487,13 +533,26 @@ app.post('/api/conversion/stitch', async (req, res) => {
     console.log('Images saved, starting stitching process...');
 
     // Perform stitching using panorama converter
+    console.log('Calling stitchImages with:', {
+      imageCount: savedImages.length,
+      method,
+      overlap,
+      quality
+    });
+
     const stitchingResult = await panoramaConverter.stitchImages(savedImages, {
       method,
       overlap,
       quality
     });
 
-    console.log('Stitching result:', stitchingResult);
+    console.log('Stitching result:', {
+      success: stitchingResult.success,
+      method: stitchingResult.method,
+      dimensions: stitchingResult.dimensions,
+      error: stitchingResult.error,
+      note: stitchingResult.note
+    });
 
     if (!stitchingResult.success) {
       // Cleanup uploaded images
@@ -530,15 +589,17 @@ app.post('/api/conversion/stitch', async (req, res) => {
     const newTour = {
       id: tourId,
       title: title,
-      description: `360° panorama created from ${images.length} stitched images`,
+      description: `360° panorama created from ${imageArray.length} stitched images`,
       thumbnail: thumbnailUrl,
       created: new Date().toISOString(),
       stitchingMethod: method,
-      inputImages: images.length,
+      inputImages: imageArray.length,
       scenes: [{
         id: `scene_${tourId}`,
         title: title,
+        image: panoramaUrl,
         panorama: panoramaUrl,
+        preview: thumbnailUrl,
         hotspots: []
       }]
     };
@@ -562,16 +623,18 @@ app.post('/api/conversion/stitch', async (req, res) => {
     // Return success response
     res.json({
       success: true,
-      message: `Successfully stitched ${images.length} images into a 360° panorama`,
+      message: stitchingResult.note || `Successfully stitched ${imageArray.length} images into a 360° panorama`,
       tourId: tourId,
       tourUrl: `/viewer.html?tour=${tourId}`,
       panoramaUrl: panoramaUrl,
       thumbnailUrl: thumbnailUrl,
       stitchingResult: {
-        stitchingMethod: method,
-        inputImages: images.length,
+        stitchingMethod: stitchingResult.method || method,
+        inputImages: imageArray.length,
         dimensions: stitchingResult.dimensions || { width: 'unknown', height: 'unknown' },
-        overlap: overlap
+        overlap: overlap,
+        actualMethod: stitchingResult.method,
+        note: stitchingResult.note
       }
     });
 
@@ -650,6 +713,63 @@ function getConversionRecommendations(validation) {
 
   return recommendations;
 }
+
+// Create virtual tour with pre-configured scenes
+app.post('/api/tours', async (req, res) => {
+  try {
+    console.log('Creating new virtual tour...');
+    const { title, description, scenes } = req.body;
+
+    if (!title || !scenes || !Array.isArray(scenes) || scenes.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing required fields: title and scenes array'
+      });
+    }
+
+    // Generate tour ID
+    const tourId = generateUniqueId();
+
+    // Create tour object
+    const newTour = {
+      id: tourId,
+      title: title,
+      description: description || `Virtual tour with ${scenes.length} scenes`,
+      thumbnail: scenes[0].preview || '/images/default-thumb.jpg',
+      created: new Date().toISOString(),
+      type: 'custom_tour',
+      inputImages: scenes.length,
+      scenes: scenes.map(scene => ({
+        id: scene.id,
+        title: scene.title,
+        image: scene.image,
+        panorama: scene.panorama,
+        preview: scene.preview,
+        hotspots: scene.hotspots || []
+      }))
+    };
+
+    // Save to database
+    const data = await readTours();
+    data.tours.unshift(newTour);
+    await writeTours(data);
+
+    console.log('Virtual tour created successfully:', tourId);
+
+    res.json({
+      success: true,
+      message: `Virtual tour "${title}" created with ${scenes.length} connected scenes`,
+      tour: newTour
+    });
+
+  } catch (error) {
+    console.error('Error creating virtual tour:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Failed to create virtual tour'
+    });
+  }
+});
 
 // Initialize and start server
 initializeDB().then(() => {

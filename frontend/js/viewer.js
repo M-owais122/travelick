@@ -66,63 +66,187 @@ function loadDemoTour() {
             {
                 id: "scene-1",
                 title: "Living Room",
-                image: "https://pannellum.org/images/alma.jpg",
-                preview: "https://pannellum.org/images/alma.jpg", 
+                description: "A spacious and modern living area designed for comfort and entertainment with natural lighting and contemporary furnishings.",
+                image: "/uploads/panorama_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg",
+                preview: "/uploads/thumb_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg", 
                 hotspots: [
                     {
                         pitch: -5,
                         yaw: 90,
+                        category: "scene",
                         type: "scene",
                         text: "Go to Kitchen",
+                        title: "Kitchen Area",
                         sceneId: "scene-2"
                     },
                     {
                         pitch: 15,
                         yaw: 180,
-                        type: "info", 
-                        text: "Modern living space with natural lighting"
+                        category: "info",
+                        type: "info",
+                        text: "Modern living space with natural lighting",
+                        title: "Living Room Features",
+                        description: "This spacious living area features floor-to-ceiling windows that provide abundant natural light throughout the day."
+                    },
+                    {
+                        pitch: -8,
+                        yaw: -135,
+                        category: "scene",
+                        type: "scene",
+                        text: "Go to Bedroom",
+                        title: "Master Bedroom",
+                        sceneId: "scene-3"
+                    },
+                    {
+                        pitch: 5,
+                        yaw: 0,
+                        category: "scene",
+                        type: "scene",
+                        text: "Go to Bathroom",
+                        title: "Master Bathroom",
+                        sceneId: "scene-4"
+                    },
+                    {
+                        pitch: -10,
+                        yaw: -45,
+                        category: "media",
+                        type: "media",
+                        text: "View Photo Gallery",
+                        title: "Room Gallery",
+                        gallery: [
+                            { url: "/uploads/panorama_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg", caption: "Main View" },
+                            { url: "/uploads/panorama_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg", caption: "Another Angle" }
+                        ]
                     }
                 ]
             },
             {
-                id: "scene-2", 
+                id: "scene-2",
                 title: "Kitchen",
-                image: "https://pannellum.org/images/cerro-toco-0.jpg",
-                preview: "https://pannellum.org/images/cerro-toco-0.jpg",
+                description: "A modern kitchen featuring premium appliances, granite countertops, and an efficient layout perfect for cooking and entertaining.",
+                image: "/uploads/panorama_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
+                preview: "/uploads/thumb_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
                 hotspots: [
                     {
                         pitch: -5,
                         yaw: -90,
-                        type: "scene", 
+                        category: "scene",
+                        type: "scene",
                         text: "Back to Living Room",
+                        title: "Return to Living Room",
                         sceneId: "scene-1"
+                    },
+                    {
+                        pitch: -10,
+                        yaw: 90,
+                        category: "scene",
+                        type: "scene",
+                        text: "Go to Bedroom",
+                        title: "Master Bedroom",
+                        sceneId: "scene-3"
                     },
                     {
                         pitch: -20,
                         yaw: 0,
+                        category: "info",
                         type: "info",
-                        text: "State-of-the-art kitchen appliances"
+                        text: "State-of-the-art kitchen appliances",
+                        title: "Kitchen Features",
+                        description: "This modern kitchen features stainless steel appliances, granite countertops, and energy-efficient lighting."
+                    },
+                    {
+                        pitch: 10,
+                        yaw: 45,
+                        category: "media",
+                        type: "media",
+                        text: "Kitchen Gallery",
+                        title: "Kitchen Photos",
+                        gallery: [
+                            { url: "/uploads/panorama_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg", caption: "Main Kitchen View" },
+                            { url: "/uploads/panorama_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg", caption: "Kitchen Counter" }
+                        ]
                     }
                 ]
             },
             {
                 id: "scene-3",
-                title: "Mountain View", 
-                image: "https://pannellum.org/images/bma-0.jpg",
-                preview: "https://pannellum.org/images/bma-0.jpg",
+                title: "Master Bedroom",
+                description: "A peaceful and spacious master bedroom with comfortable furnishings, natural lighting, and a serene atmosphere for rest and relaxation.",
+                image: "/uploads/panorama_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
+                preview: "/uploads/thumb_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
                 hotspots: [
                     {
-                        pitch: -10,
+                        pitch: -8,
                         yaw: 180,
+                        category: "scene",
                         type: "scene",
-                        text: "Back to Living Room", 
+                        text: "Back to Living Room",
+                        title: "Return to Living Room",
                         sceneId: "scene-1"
+                    },
+                    {
+                        pitch: -5,
+                        yaw: -135,
+                        category: "scene",
+                        type: "scene",
+                        text: "Go to Kitchen",
+                        title: "Kitchen Area",
+                        sceneId: "scene-2"
                     },
                     {
                         pitch: 10,
                         yaw: 90,
+                        category: "info",
                         type: "info",
-                        text: "Beautiful mountain landscape view"
+                        text: "King-size bed with premium bedding",
+                        title: "Bedroom Features",
+                        description: "This spacious master bedroom features a king-size bed, walk-in closet, and beautiful mountain views."
+                    },
+                    {
+                        pitch: 0,
+                        yaw: 45,
+                        category: "interactive",
+                        type: "interactive",
+                        text: "Room Lighting Control",
+                        title: "Smart Lighting",
+                        description: "Control the room lighting with smart switches.",
+                        interactionType: "lighting"
+                    }
+                ]
+            },
+            {
+                id: "scene-4",
+                title: "Bathroom",
+                description: "A modern bathroom with contemporary fixtures, quality finishes, and thoughtful design that combines style with functionality.",
+                image: "/uploads/panorama_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+                preview: "/uploads/thumb_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+                hotspots: [
+                    {
+                        pitch: -5,
+                        yaw: 180,
+                        category: "scene",
+                        type: "scene",
+                        text: "Back to Living Room",
+                        title: "Return to Living Room",
+                        sceneId: "scene-1"
+                    },
+                    {
+                        pitch: -8,
+                        yaw: 90,
+                        category: "scene",
+                        type: "scene",
+                        text: "Go to Bedroom",
+                        title: "Master Bedroom",
+                        sceneId: "scene-3"
+                    },
+                    {
+                        pitch: 10,
+                        yaw: -45,
+                        category: "info",
+                        type: "info",
+                        text: "Luxurious bathroom with premium fixtures",
+                        title: "Bathroom Features",
+                        description: "This elegant bathroom features marble countertops, modern fixtures, and spa-like amenities."
                     }
                 ]
             }
@@ -150,7 +274,8 @@ function initializeTour() {
     
     // Set up share modal
     setupShareModal();
-    
+
+
     // Hide loading overlay
     document.getElementById('loadingOverlay').style.display = 'none';
 }
@@ -172,7 +297,7 @@ function loadScene(sceneId) {
     // Initialize or update Pannellum viewer
     const config = {
         type: "equirectangular",
-        panorama: scene.image,
+        panorama: scene.image || scene.panorama,
         autoLoad: true,
         autoRotate: autoRotateEnabled ? -2 : 0,
         compass: true,
@@ -186,25 +311,47 @@ function loadScene(sceneId) {
             enabled: true
         },
         orientationOnByDefault: checkMobileVR(),
-        hotSpots: scene.hotspots.map(hotspot => ({
-            pitch: hotspot.pitch,
-            yaw: hotspot.yaw,
-            type: hotspot.type === 'scene' ? 'scene' : 'info',
-            text: hotspot.text,
-            sceneId: hotspot.sceneId,
-            clickHandlerFunc: hotspot.type === 'scene' ? 
-                () => loadScene(hotspot.sceneId) : 
-                () => showInfoTooltip(hotspot.text),
-            createTooltipFunc: (hotSpotDiv) => {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'hotspot-tooltip';
-                tooltip.innerHTML = hotspot.text;
-                hotSpotDiv.appendChild(tooltip);
-                return tooltip;
+        hotSpots: (function() {
+            console.log('=== HOTSPOT LOADING START ===');
+            console.log('Current scene data:', scene);
+            console.log('Scene hotspots:', scene.hotspots);
+
+            // Check if createEnhancedHotspots function exists
+            if (typeof createEnhancedHotspots !== 'function') {
+                console.error('❌ createEnhancedHotspots function not found!');
+                return [];
             }
-        })),
+
+            const hotspots = createEnhancedHotspots(scene);
+            console.log('✅ Hotspots created successfully:', hotspots);
+            console.log('📊 Total hotspots:', hotspots.length);
+
+            if (hotspots.length === 0) {
+                console.warn('⚠️ No hotspots returned! Check scene data.');
+            }
+
+            console.log('=== HOTSPOT LOADING END ===');
+            return hotspots;
+        })(),
         onLoad: function() {
             console.log('Scene loaded:', scene.title);
+
+            // Load scene audio
+            if (typeof audioManager !== 'undefined') {
+                audioManager.loadSceneAudio(scene);
+            }
+
+            // Track scene analytics
+            if (typeof trackSceneChange === 'function') {
+                trackSceneChange(scene.id, scene.title);
+            }
+
+            // Apply translations
+            if (typeof i18nManager !== 'undefined') {
+                const translatedScene = i18nManager.translateSceneContent(scene);
+                document.getElementById('sceneTitle').textContent = translatedScene.title;
+            }
+
         },
         onError: function(error) {
             console.error('Error loading scene:', error);
@@ -615,10 +762,33 @@ function toggleSound() {
     soundEnabled = !soundEnabled;
     const btn = document.getElementById('soundBtn');
     const icon = btn.querySelector('i');
-    
+
     btn.classList.toggle('active', soundEnabled);
     icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
     btn.title = soundEnabled ? 'Mute Sound' : 'Unmute Sound';
+}
+
+function toggleObjectHighlighting() {
+    if (window.objectHighlight3D) {
+        const isEnabled = !window.objectHighlight3D.isEnabled;
+        window.objectHighlight3D.toggleObjectHighlighting(isEnabled);
+
+        const btn = document.getElementById('objectHighlightBtn');
+        const icon = btn.querySelector('i');
+
+        btn.classList.toggle('active', isEnabled);
+        btn.style.color = isEnabled ? '#39FF14' : '#ffffff';
+        btn.title = isEnabled ? 'Hide Object Highlights' : 'Show Object Highlights';
+
+        // Reload current scene to update hotspots
+        if (currentScene) {
+            loadScene(currentScene.id);
+        }
+
+        console.log('Object highlighting', isEnabled ? 'enabled' : 'disabled');
+    } else {
+        console.error('Object Highlight 3D system not available');
+    }
 }
 
 // Mini map functionality
@@ -1049,6 +1219,7 @@ function addComment() {
     
     showNotification('Comment added successfully!');
 }
+
 
 // Enhanced Search and Filter Functions for Main Page
 function initializeSearch() {

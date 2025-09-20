@@ -1,171 +1,1579 @@
 {
   "tours": [
     {
-      "id": "7bd92389-334b-44ef-9e11-397e91573b5a",
+      "id": "9f9ddb40-7e4e-4904-a0e4-c8ee34965482",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_7bd92389-334b-44ef-9e11-397e91573b5a.jpg",
-      "created": "2025-09-16T10:29:24.216Z",
+      "thumbnail": "/uploads/thumb_9f9ddb40-7e4e-4904-a0e4-c8ee34965482.jpg",
+      "created": "2025-09-20T16:18:02.647Z",
       "stitchingMethod": "horizontal",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_7bd92389-334b-44ef-9e11-397e91573b5a",
+          "id": "scene_9f9ddb40-7e4e-4904-a0e4-c8ee34965482",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_7bd92389-334b-44ef-9e11-397e91573b5a.jpg",
+          "image": "/uploads/panorama_9f9ddb40-7e4e-4904-a0e4-c8ee34965482.jpg",
+          "panorama": "/uploads/panorama_9f9ddb40-7e4e-4904-a0e4-c8ee34965482.jpg",
+          "preview": "/uploads/thumb_9f9ddb40-7e4e-4904-a0e4-c8ee34965482.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "2bba82fb-542f-4929-aced-35cb44e05ab4",
+      "id": "c0ab5069-7fd9-4963-9b91-54c0337dc52c",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_2bba82fb-542f-4929-aced-35cb44e05ab4.jpg",
-      "created": "2025-09-16T10:28:13.937Z",
+      "thumbnail": "/uploads/thumb_c0ab5069-7fd9-4963-9b91-54c0337dc52c.jpg",
+      "created": "2025-09-20T08:37:07.191Z",
       "stitchingMethod": "horizontal",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_2bba82fb-542f-4929-aced-35cb44e05ab4",
+          "id": "scene_c0ab5069-7fd9-4963-9b91-54c0337dc52c",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_2bba82fb-542f-4929-aced-35cb44e05ab4.jpg",
+          "image": "/uploads/panorama_c0ab5069-7fd9-4963-9b91-54c0337dc52c.jpg",
+          "panorama": "/uploads/panorama_c0ab5069-7fd9-4963-9b91-54c0337dc52c.jpg",
+          "preview": "/uploads/thumb_c0ab5069-7fd9-4963-9b91-54c0337dc52c.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "d6513930-7c37-4a1b-af49-2790e1e2cb92",
+      "id": "b5fb4662-d41a-415d-bd8a-5f1619ac7610",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_d6513930-7c37-4a1b-af49-2790e1e2cb92.jpg",
-      "created": "2025-09-16T10:27:05.248Z",
+      "thumbnail": "/uploads/thumb_b5fb4662-d41a-415d-bd8a-5f1619ac7610.jpg",
+      "created": "2025-09-20T07:24:38.532Z",
       "stitchingMethod": "horizontal",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_d6513930-7c37-4a1b-af49-2790e1e2cb92",
+          "id": "scene_b5fb4662-d41a-415d-bd8a-5f1619ac7610",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_d6513930-7c37-4a1b-af49-2790e1e2cb92.jpg",
+          "image": "/uploads/panorama_b5fb4662-d41a-415d-bd8a-5f1619ac7610.jpg",
+          "panorama": "/uploads/panorama_b5fb4662-d41a-415d-bd8a-5f1619ac7610.jpg",
+          "preview": "/uploads/thumb_b5fb4662-d41a-415d-bd8a-5f1619ac7610.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "4f22c61f-8c00-4502-9900-1b0139d9fa45",
+      "id": "2be73f19-1407-49e2-8303-40dec53c0de7",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_4f22c61f-8c00-4502-9900-1b0139d9fa45.jpg",
-      "created": "2025-09-16T10:26:30.265Z",
+      "thumbnail": "/uploads/thumb_2be73f19-1407-49e2-8303-40dec53c0de7.jpg",
+      "created": "2025-09-20T06:52:22.398Z",
       "stitchingMethod": "horizontal",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_4f22c61f-8c00-4502-9900-1b0139d9fa45",
+          "id": "scene_2be73f19-1407-49e2-8303-40dec53c0de7",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_4f22c61f-8c00-4502-9900-1b0139d9fa45.jpg",
+          "image": "/uploads/panorama_2be73f19-1407-49e2-8303-40dec53c0de7.jpg",
+          "panorama": "/uploads/panorama_2be73f19-1407-49e2-8303-40dec53c0de7.jpg",
+          "preview": "/uploads/thumb_2be73f19-1407-49e2-8303-40dec53c0de7.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "61d03f96-77d0-4289-9cf0-9de6a9d98cc5",
+      "id": "044ffa1f-08f9-4d97-b503-0a866ef583da",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_61d03f96-77d0-4289-9cf0-9de6a9d98cc5.jpg",
-      "created": "2025-09-16T10:26:08.001Z",
-      "stitchingMethod": "vertical",
+      "thumbnail": "/uploads/thumb_044ffa1f-08f9-4d97-b503-0a866ef583da.jpg",
+      "created": "2025-09-20T06:52:03.046Z",
+      "stitchingMethod": "seamless_multiband",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_61d03f96-77d0-4289-9cf0-9de6a9d98cc5",
+          "id": "scene_044ffa1f-08f9-4d97-b503-0a866ef583da",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_61d03f96-77d0-4289-9cf0-9de6a9d98cc5.jpg",
+          "image": "/uploads/panorama_044ffa1f-08f9-4d97-b503-0a866ef583da.jpg",
+          "panorama": "/uploads/panorama_044ffa1f-08f9-4d97-b503-0a866ef583da.jpg",
+          "preview": "/uploads/thumb_044ffa1f-08f9-4d97-b503-0a866ef583da.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "2e9168d0-d95f-430d-a453-e1c7dfc29fe1",
+      "id": "789538d1-3987-4780-b187-310089519aae",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_2e9168d0-d95f-430d-a453-e1c7dfc29fe1.jpg",
-      "created": "2025-09-16T10:25:38.971Z",
+      "thumbnail": "/uploads/thumb_789538d1-3987-4780-b187-310089519aae.jpg",
+      "created": "2025-09-20T06:51:43.684Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_789538d1-3987-4780-b187-310089519aae",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_789538d1-3987-4780-b187-310089519aae.jpg",
+          "panorama": "/uploads/panorama_789538d1-3987-4780-b187-310089519aae.jpg",
+          "preview": "/uploads/thumb_789538d1-3987-4780-b187-310089519aae.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "9c9b79ce-3151-4eaf-a8f3-b5fe50a99830",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_9c9b79ce-3151-4eaf-a8f3-b5fe50a99830.jpg",
+      "created": "2025-09-20T06:51:03.043Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_9c9b79ce-3151-4eaf-a8f3-b5fe50a99830",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_9c9b79ce-3151-4eaf-a8f3-b5fe50a99830.jpg",
+          "panorama": "/uploads/panorama_9c9b79ce-3151-4eaf-a8f3-b5fe50a99830.jpg",
+          "preview": "/uploads/thumb_9c9b79ce-3151-4eaf-a8f3-b5fe50a99830.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "7aa1f3af-7818-46d1-b6cd-0946fde2c526",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_7aa1f3af-7818-46d1-b6cd-0946fde2c526.jpg",
+      "created": "2025-09-20T06:46:48.545Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_7aa1f3af-7818-46d1-b6cd-0946fde2c526",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_7aa1f3af-7818-46d1-b6cd-0946fde2c526.jpg",
+          "panorama": "/uploads/panorama_7aa1f3af-7818-46d1-b6cd-0946fde2c526.jpg",
+          "preview": "/uploads/thumb_7aa1f3af-7818-46d1-b6cd-0946fde2c526.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "3c7e9227-5f79-4aee-8466-f6966afd1c65",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_3c7e9227-5f79-4aee-8466-f6966afd1c65.jpg",
+      "created": "2025-09-20T06:46:29.011Z",
       "stitchingMethod": "panoramic",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_2e9168d0-d95f-430d-a453-e1c7dfc29fe1",
+          "id": "scene_3c7e9227-5f79-4aee-8466-f6966afd1c65",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_2e9168d0-d95f-430d-a453-e1c7dfc29fe1.jpg",
+          "image": "/uploads/panorama_3c7e9227-5f79-4aee-8466-f6966afd1c65.jpg",
+          "panorama": "/uploads/panorama_3c7e9227-5f79-4aee-8466-f6966afd1c65.jpg",
+          "preview": "/uploads/thumb_3c7e9227-5f79-4aee-8466-f6966afd1c65.jpg",
           "hotspots": []
         }
       ]
     },
     {
-      "id": "8ec12bbb-0beb-4b45-973b-8c172b95144a",
+      "id": "caf133d0-2651-44ee-80d8-c4e2031a3961",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_8ec12bbb-0beb-4b45-973b-8c172b95144a.jpg",
-      "created": "2025-09-16T10:24:50.743Z",
+      "thumbnail": "/uploads/thumb_caf133d0-2651-44ee-80d8-c4e2031a3961.jpg",
+      "created": "2025-09-20T06:46:01.425Z",
+      "stitchingMethod": "seamless_multiband",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_caf133d0-2651-44ee-80d8-c4e2031a3961",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_caf133d0-2651-44ee-80d8-c4e2031a3961.jpg",
+          "panorama": "/uploads/panorama_caf133d0-2651-44ee-80d8-c4e2031a3961.jpg",
+          "preview": "/uploads/thumb_caf133d0-2651-44ee-80d8-c4e2031a3961.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c5efa292-f9bb-44e4-9528-1cce6b44e388",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+      "created": "2025-09-19T18:52:03.146Z",
       "stitchingMethod": "horizontal",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_8ec12bbb-0beb-4b45-973b-8c172b95144a",
+          "id": "scene_c5efa292-f9bb-44e4-9528-1cce6b44e388",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_8ec12bbb-0beb-4b45-973b-8c172b95144a.jpg",
-          "hotspots": []
+          "image": "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+          "panorama": "/uploads/panorama_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+          "preview": "/uploads/thumb_c5efa292-f9bb-44e4-9528-1cce6b44e388.jpg",
+          "hotspots": [
+            {
+              "category": "scene",
+              "pitch": -5,
+              "yaw": 45,
+              "sceneId": "scene_32e3229b-e434-43b8-81bc-b5b4737b23bc",
+              "title": "Go to Next Scene",
+              "text": "Next Scene",
+              "description": "Navigate to the next panoramic scene"
+            }
+          ]
         }
       ]
     },
     {
-      "id": "bb0499e9-5627-4cb7-9118-4ae482dd1f0b",
+      "id": "32e3229b-e434-43b8-81bc-b5b4737b23bc",
       "title": "Stitched Panorama",
       "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_bb0499e9-5627-4cb7-9118-4ae482dd1f0b.jpg",
-      "created": "2025-09-16T10:23:45.988Z",
-      "stitchingMethod": "horizontal",
-      "inputImages": 2,
-      "scenes": [
-        {
-          "id": "scene_bb0499e9-5627-4cb7-9118-4ae482dd1f0b",
-          "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_bb0499e9-5627-4cb7-9118-4ae482dd1f0b.jpg",
-          "hotspots": []
-        }
-      ]
-    },
-    {
-      "id": "26edeabb-d90f-45fd-8829-22e5fc1a25c2",
-      "title": "Stitched Panorama",
-      "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_26edeabb-d90f-45fd-8829-22e5fc1a25c2.jpg",
-      "created": "2025-09-16T10:22:57.625Z",
-      "stitchingMethod": "horizontal",
-      "inputImages": 2,
-      "scenes": [
-        {
-          "id": "scene_26edeabb-d90f-45fd-8829-22e5fc1a25c2",
-          "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_26edeabb-d90f-45fd-8829-22e5fc1a25c2.jpg",
-          "hotspots": []
-        }
-      ]
-    },
-    {
-      "id": "b6e20356-b220-4c36-91e7-ac8c522625c3",
-      "title": "Stitched Panorama",
-      "description": "360° panorama created from 2 stitched images",
-      "thumbnail": "/uploads/thumb_b6e20356-b220-4c36-91e7-ac8c522625c3.jpg",
-      "created": "2025-09-16T10:22:04.644Z",
+      "thumbnail": "/uploads/thumb_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+      "created": "2025-09-19T18:51:38.685Z",
       "stitchingMethod": "panoramic",
       "inputImages": 2,
       "scenes": [
         {
-          "id": "scene_b6e20356-b220-4c36-91e7-ac8c522625c3",
+          "id": "scene_32e3229b-e434-43b8-81bc-b5b4737b23bc",
           "title": "Stitched Panorama",
-          "panorama": "/uploads/panorama_b6e20356-b220-4c36-91e7-ac8c522625c3.jpg",
+          "image": "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+          "panorama": "/uploads/panorama_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+          "preview": "/uploads/thumb_32e3229b-e434-43b8-81bc-b5b4737b23bc.jpg",
+          "hotspots": [
+            {
+              "category": "scene",
+              "pitch": -5,
+              "yaw": -45,
+              "sceneId": "scene_c5efa292-f9bb-44e4-9528-1cce6b44e388",
+              "title": "Go to Previous Scene",
+              "text": "Previous Scene",
+              "description": "Navigate back to the previous panoramic scene"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03.jpg",
+      "created": "2025-09-19T18:51:07.007Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03.jpg",
+          "panorama": "/uploads/panorama_a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03.jpg",
+          "preview": "/uploads/thumb_a4c9cd7b-8680-4300-a3ef-1a61a1ac3c03.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6.jpg",
+      "created": "2025-09-19T18:50:48.667Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6.jpg",
+          "panorama": "/uploads/panorama_ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6.jpg",
+          "preview": "/uploads/thumb_ba27c0b2-2bae-49b3-bfdc-cf6ac0c2b9b6.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a081be30-10c1-4c00-8d01-1b8ec5e1844d",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_a081be30-10c1-4c00-8d01-1b8ec5e1844d.jpg",
+      "created": "2025-09-19T18:47:54.779Z",
+      "stitchingMethod": "seamless_multiband",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_a081be30-10c1-4c00-8d01-1b8ec5e1844d",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_a081be30-10c1-4c00-8d01-1b8ec5e1844d.jpg",
+          "panorama": "/uploads/panorama_a081be30-10c1-4c00-8d01-1b8ec5e1844d.jpg",
+          "preview": "/uploads/thumb_a081be30-10c1-4c00-8d01-1b8ec5e1844d.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "f2d4618a-b5e8-4e49-97bf-6ff1117613b1",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_f2d4618a-b5e8-4e49-97bf-6ff1117613b1.jpg",
+      "created": "2025-09-19T18:47:30.368Z",
+      "stitchingMethod": "seamless_feather",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_f2d4618a-b5e8-4e49-97bf-6ff1117613b1",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_f2d4618a-b5e8-4e49-97bf-6ff1117613b1.jpg",
+          "panorama": "/uploads/panorama_f2d4618a-b5e8-4e49-97bf-6ff1117613b1.jpg",
+          "preview": "/uploads/thumb_f2d4618a-b5e8-4e49-97bf-6ff1117613b1.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "19388436-a924-4490-a190-b3928cd3fffe",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_19388436-a924-4490-a190-b3928cd3fffe.jpg",
+      "created": "2025-09-19T18:44:00.809Z",
+      "stitchingMethod": "seamless_multiband",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_19388436-a924-4490-a190-b3928cd3fffe",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_19388436-a924-4490-a190-b3928cd3fffe.jpg",
+          "panorama": "/uploads/panorama_19388436-a924-4490-a190-b3928cd3fffe.jpg",
+          "preview": "/uploads/thumb_19388436-a924-4490-a190-b3928cd3fffe.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "d43b9052-8694-4bff-8072-3f54b0bae1ce",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_d43b9052-8694-4bff-8072-3f54b0bae1ce.jpg",
+      "created": "2025-09-19T18:39:34.867Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_d43b9052-8694-4bff-8072-3f54b0bae1ce",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_d43b9052-8694-4bff-8072-3f54b0bae1ce.jpg",
+          "panorama": "/uploads/panorama_d43b9052-8694-4bff-8072-3f54b0bae1ce.jpg",
+          "preview": "/uploads/thumb_d43b9052-8694-4bff-8072-3f54b0bae1ce.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b132deef-a5c4-4e1a-b13b-cf8a60791a61",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b132deef-a5c4-4e1a-b13b-cf8a60791a61.jpg",
+      "created": "2025-09-19T18:39:19.098Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b132deef-a5c4-4e1a-b13b-cf8a60791a61",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b132deef-a5c4-4e1a-b13b-cf8a60791a61.jpg",
+          "panorama": "/uploads/panorama_b132deef-a5c4-4e1a-b13b-cf8a60791a61.jpg",
+          "preview": "/uploads/thumb_b132deef-a5c4-4e1a-b13b-cf8a60791a61.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8696c17d-61a8-4e22-ab77-07e55bc5f59e",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_8696c17d-61a8-4e22-ab77-07e55bc5f59e.jpg",
+      "created": "2025-09-19T18:39:04.715Z",
+      "stitchingMethod": "seamless_feather",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_8696c17d-61a8-4e22-ab77-07e55bc5f59e",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_8696c17d-61a8-4e22-ab77-07e55bc5f59e.jpg",
+          "panorama": "/uploads/panorama_8696c17d-61a8-4e22-ab77-07e55bc5f59e.jpg",
+          "preview": "/uploads/thumb_8696c17d-61a8-4e22-ab77-07e55bc5f59e.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8e41306f-bb1c-425d-aa32-cae15981ff1b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_8e41306f-bb1c-425d-aa32-cae15981ff1b.jpg",
+      "created": "2025-09-19T18:38:46.607Z",
+      "stitchingMethod": "seamless_multiband",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_8e41306f-bb1c-425d-aa32-cae15981ff1b",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_8e41306f-bb1c-425d-aa32-cae15981ff1b.jpg",
+          "panorama": "/uploads/panorama_8e41306f-bb1c-425d-aa32-cae15981ff1b.jpg",
+          "preview": "/uploads/thumb_8e41306f-bb1c-425d-aa32-cae15981ff1b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "bfa9890b-556e-4f52-b7aa-aa971b7a312c",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_bfa9890b-556e-4f52-b7aa-aa971b7a312c.jpg",
+      "created": "2025-09-19T18:38:13.223Z",
+      "stitchingMethod": "seamless_feather",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_bfa9890b-556e-4f52-b7aa-aa971b7a312c",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_bfa9890b-556e-4f52-b7aa-aa971b7a312c.jpg",
+          "panorama": "/uploads/panorama_bfa9890b-556e-4f52-b7aa-aa971b7a312c.jpg",
+          "preview": "/uploads/thumb_bfa9890b-556e-4f52-b7aa-aa971b7a312c.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0.jpg",
+      "created": "2025-09-19T18:37:55.136Z",
+      "stitchingMethod": "seamless_multiband",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0.jpg",
+          "panorama": "/uploads/panorama_96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0.jpg",
+          "preview": "/uploads/thumb_96ce2a24-0f39-4c5a-943e-f2fc4dfdd9c0.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "548ed06c-fe17-4969-91be-d2e227a2f1d3",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_548ed06c-fe17-4969-91be-d2e227a2f1d3.jpg",
+      "created": "2025-09-19T18:26:39.112Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_548ed06c-fe17-4969-91be-d2e227a2f1d3",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_548ed06c-fe17-4969-91be-d2e227a2f1d3.jpg",
+          "panorama": "/uploads/panorama_548ed06c-fe17-4969-91be-d2e227a2f1d3.jpg",
+          "preview": "/uploads/thumb_548ed06c-fe17-4969-91be-d2e227a2f1d3.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "f7b9838d-a198-4892-88e1-947010a174d7",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_f7b9838d-a198-4892-88e1-947010a174d7.jpg",
+      "created": "2025-09-19T18:24:34.760Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_f7b9838d-a198-4892-88e1-947010a174d7",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_f7b9838d-a198-4892-88e1-947010a174d7.jpg",
+          "panorama": "/uploads/panorama_f7b9838d-a198-4892-88e1-947010a174d7.jpg",
+          "preview": "/uploads/thumb_f7b9838d-a198-4892-88e1-947010a174d7.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c29f14ba-dff7-4538-ad1e-139677793465",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_c29f14ba-dff7-4538-ad1e-139677793465.jpg",
+      "created": "2025-09-19T18:16:19.357Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_c29f14ba-dff7-4538-ad1e-139677793465",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_c29f14ba-dff7-4538-ad1e-139677793465.jpg",
+          "panorama": "/uploads/panorama_c29f14ba-dff7-4538-ad1e-139677793465.jpg",
+          "preview": "/uploads/thumb_c29f14ba-dff7-4538-ad1e-139677793465.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "911a84f6-05f5-4b55-a68c-be3b3b4b0442",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_911a84f6-05f5-4b55-a68c-be3b3b4b0442.jpg",
+      "created": "2025-09-19T17:39:22.889Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_911a84f6-05f5-4b55-a68c-be3b3b4b0442",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_911a84f6-05f5-4b55-a68c-be3b3b4b0442.jpg",
+          "panorama": "/uploads/panorama_911a84f6-05f5-4b55-a68c-be3b3b4b0442.jpg",
+          "preview": "/uploads/thumb_911a84f6-05f5-4b55-a68c-be3b3b4b0442.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "167d3e14-e802-4d16-a189-c8e1b37b4493",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_167d3e14-e802-4d16-a189-c8e1b37b4493.jpg",
+      "created": "2025-09-19T17:25:47.478Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_167d3e14-e802-4d16-a189-c8e1b37b4493",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_167d3e14-e802-4d16-a189-c8e1b37b4493.jpg",
+          "panorama": "/uploads/panorama_167d3e14-e802-4d16-a189-c8e1b37b4493.jpg",
+          "preview": "/uploads/thumb_167d3e14-e802-4d16-a189-c8e1b37b4493.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "7e5126d0-f2f4-4178-8a18-e5bddea30f60",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_7e5126d0-f2f4-4178-8a18-e5bddea30f60.jpg",
+      "created": "2025-09-19T16:59:22.612Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_7e5126d0-f2f4-4178-8a18-e5bddea30f60",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_7e5126d0-f2f4-4178-8a18-e5bddea30f60.jpg",
+          "panorama": "/uploads/panorama_7e5126d0-f2f4-4178-8a18-e5bddea30f60.jpg",
+          "preview": "/uploads/thumb_7e5126d0-f2f4-4178-8a18-e5bddea30f60.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b00783b5-7c4c-4841-bc52-79064f5cbabb",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b00783b5-7c4c-4841-bc52-79064f5cbabb.jpg",
+      "created": "2025-09-19T16:56:39.396Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b00783b5-7c4c-4841-bc52-79064f5cbabb",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b00783b5-7c4c-4841-bc52-79064f5cbabb.jpg",
+          "panorama": "/uploads/panorama_b00783b5-7c4c-4841-bc52-79064f5cbabb.jpg",
+          "preview": "/uploads/thumb_b00783b5-7c4c-4841-bc52-79064f5cbabb.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "86a1ec0e-bc9f-4845-afeb-8891e9114a61",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_86a1ec0e-bc9f-4845-afeb-8891e9114a61.jpg",
+      "created": "2025-09-19T16:54:47.906Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_86a1ec0e-bc9f-4845-afeb-8891e9114a61",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_86a1ec0e-bc9f-4845-afeb-8891e9114a61.jpg",
+          "panorama": "/uploads/panorama_86a1ec0e-bc9f-4845-afeb-8891e9114a61.jpg",
+          "preview": "/uploads/thumb_86a1ec0e-bc9f-4845-afeb-8891e9114a61.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "5a3fbc69-8ae4-40d0-a53a-e32831540c74",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_5a3fbc69-8ae4-40d0-a53a-e32831540c74.jpg",
+      "created": "2025-09-19T16:53:27.441Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_5a3fbc69-8ae4-40d0-a53a-e32831540c74",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_5a3fbc69-8ae4-40d0-a53a-e32831540c74.jpg",
+          "panorama": "/uploads/panorama_5a3fbc69-8ae4-40d0-a53a-e32831540c74.jpg",
+          "preview": "/uploads/thumb_5a3fbc69-8ae4-40d0-a53a-e32831540c74.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "de1c6f2a-1a31-449d-adfd-01dd8c877e86",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_de1c6f2a-1a31-449d-adfd-01dd8c877e86.jpg",
+      "created": "2025-09-19T16:53:06.462Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_de1c6f2a-1a31-449d-adfd-01dd8c877e86",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_de1c6f2a-1a31-449d-adfd-01dd8c877e86.jpg",
+          "panorama": "/uploads/panorama_de1c6f2a-1a31-449d-adfd-01dd8c877e86.jpg",
+          "preview": "/uploads/thumb_de1c6f2a-1a31-449d-adfd-01dd8c877e86.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c4fc1f86-e71f-4182-b4c7-65faea212014",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_c4fc1f86-e71f-4182-b4c7-65faea212014.jpg",
+      "created": "2025-09-19T16:52:36.898Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_c4fc1f86-e71f-4182-b4c7-65faea212014",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_c4fc1f86-e71f-4182-b4c7-65faea212014.jpg",
+          "panorama": "/uploads/panorama_c4fc1f86-e71f-4182-b4c7-65faea212014.jpg",
+          "preview": "/uploads/thumb_c4fc1f86-e71f-4182-b4c7-65faea212014.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "1758e469-d7de-4418-9702-81f2ac5fed85",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_1758e469-d7de-4418-9702-81f2ac5fed85.jpg",
+      "created": "2025-09-19T16:51:40.374Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_1758e469-d7de-4418-9702-81f2ac5fed85",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_1758e469-d7de-4418-9702-81f2ac5fed85.jpg",
+          "panorama": "/uploads/panorama_1758e469-d7de-4418-9702-81f2ac5fed85.jpg",
+          "preview": "/uploads/thumb_1758e469-d7de-4418-9702-81f2ac5fed85.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "fb18ec62-5e35-4d86-86d4-8665c86ec410",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_fb18ec62-5e35-4d86-86d4-8665c86ec410.jpg",
+      "created": "2025-09-19T16:50:54.861Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_fb18ec62-5e35-4d86-86d4-8665c86ec410",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_fb18ec62-5e35-4d86-86d4-8665c86ec410.jpg",
+          "panorama": "/uploads/panorama_fb18ec62-5e35-4d86-86d4-8665c86ec410.jpg",
+          "preview": "/uploads/thumb_fb18ec62-5e35-4d86-86d4-8665c86ec410.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "72cc908c-5e88-4267-b6ce-4cfe8a574f75",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_72cc908c-5e88-4267-b6ce-4cfe8a574f75.jpg",
+      "created": "2025-09-19T16:50:08.958Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_72cc908c-5e88-4267-b6ce-4cfe8a574f75",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_72cc908c-5e88-4267-b6ce-4cfe8a574f75.jpg",
+          "panorama": "/uploads/panorama_72cc908c-5e88-4267-b6ce-4cfe8a574f75.jpg",
+          "preview": "/uploads/thumb_72cc908c-5e88-4267-b6ce-4cfe8a574f75.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "4abd3754-ebe6-4443-8d3e-0c642226b228",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_4abd3754-ebe6-4443-8d3e-0c642226b228.jpg",
+      "created": "2025-09-19T16:49:58.025Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_4abd3754-ebe6-4443-8d3e-0c642226b228",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_4abd3754-ebe6-4443-8d3e-0c642226b228.jpg",
+          "panorama": "/uploads/panorama_4abd3754-ebe6-4443-8d3e-0c642226b228.jpg",
+          "preview": "/uploads/thumb_4abd3754-ebe6-4443-8d3e-0c642226b228.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "fc66c515-b2d7-4a27-8292-70f1fa4799de",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_fc66c515-b2d7-4a27-8292-70f1fa4799de.jpg",
+      "created": "2025-09-19T16:49:40.964Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_fc66c515-b2d7-4a27-8292-70f1fa4799de",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_fc66c515-b2d7-4a27-8292-70f1fa4799de.jpg",
+          "panorama": "/uploads/panorama_fc66c515-b2d7-4a27-8292-70f1fa4799de.jpg",
+          "preview": "/uploads/thumb_fc66c515-b2d7-4a27-8292-70f1fa4799de.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c5172fca-947a-4835-9ed0-a9890a9b3ff4",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_c5172fca-947a-4835-9ed0-a9890a9b3ff4.jpg",
+      "created": "2025-09-19T16:48:23.705Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_c5172fca-947a-4835-9ed0-a9890a9b3ff4",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_c5172fca-947a-4835-9ed0-a9890a9b3ff4.jpg",
+          "panorama": "/uploads/panorama_c5172fca-947a-4835-9ed0-a9890a9b3ff4.jpg",
+          "preview": "/uploads/thumb_c5172fca-947a-4835-9ed0-a9890a9b3ff4.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "51f66e3c-3f1f-43e4-800b-29609cdf4049",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_51f66e3c-3f1f-43e4-800b-29609cdf4049.jpg",
+      "created": "2025-09-19T16:47:54.333Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_51f66e3c-3f1f-43e4-800b-29609cdf4049",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_51f66e3c-3f1f-43e4-800b-29609cdf4049.jpg",
+          "panorama": "/uploads/panorama_51f66e3c-3f1f-43e4-800b-29609cdf4049.jpg",
+          "preview": "/uploads/thumb_51f66e3c-3f1f-43e4-800b-29609cdf4049.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "6a0815ce-8b87-4815-9320-8de2eafb5d08",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_6a0815ce-8b87-4815-9320-8de2eafb5d08.jpg",
+      "created": "2025-09-19T16:47:40.785Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_6a0815ce-8b87-4815-9320-8de2eafb5d08",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_6a0815ce-8b87-4815-9320-8de2eafb5d08.jpg",
+          "panorama": "/uploads/panorama_6a0815ce-8b87-4815-9320-8de2eafb5d08.jpg",
+          "preview": "/uploads/thumb_6a0815ce-8b87-4815-9320-8de2eafb5d08.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "bc594e18-e85e-4dd2-a5a3-656499d836d8",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_bc594e18-e85e-4dd2-a5a3-656499d836d8.jpg",
+      "created": "2025-09-19T16:47:26.649Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_bc594e18-e85e-4dd2-a5a3-656499d836d8",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_bc594e18-e85e-4dd2-a5a3-656499d836d8.jpg",
+          "panorama": "/uploads/panorama_bc594e18-e85e-4dd2-a5a3-656499d836d8.jpg",
+          "preview": "/uploads/thumb_bc594e18-e85e-4dd2-a5a3-656499d836d8.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "0b11877d-a0d3-4ed9-ab03-6e2eadff7a17",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_0b11877d-a0d3-4ed9-ab03-6e2eadff7a17.jpg",
+      "created": "2025-09-19T16:46:47.704Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_0b11877d-a0d3-4ed9-ab03-6e2eadff7a17",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_0b11877d-a0d3-4ed9-ab03-6e2eadff7a17.jpg",
+          "panorama": "/uploads/panorama_0b11877d-a0d3-4ed9-ab03-6e2eadff7a17.jpg",
+          "preview": "/uploads/thumb_0b11877d-a0d3-4ed9-ab03-6e2eadff7a17.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "f40c9717-fc73-47d5-a589-f633beac4eb4",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_f40c9717-fc73-47d5-a589-f633beac4eb4.jpg",
+      "created": "2025-09-19T16:46:32.224Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_f40c9717-fc73-47d5-a589-f633beac4eb4",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_f40c9717-fc73-47d5-a589-f633beac4eb4.jpg",
+          "panorama": "/uploads/panorama_f40c9717-fc73-47d5-a589-f633beac4eb4.jpg",
+          "preview": "/uploads/thumb_f40c9717-fc73-47d5-a589-f633beac4eb4.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "e02b68ce-81ca-4c6e-ab97-c7af581e4e3c",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_e02b68ce-81ca-4c6e-ab97-c7af581e4e3c.jpg",
+      "created": "2025-09-19T16:46:17.583Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_e02b68ce-81ca-4c6e-ab97-c7af581e4e3c",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_e02b68ce-81ca-4c6e-ab97-c7af581e4e3c.jpg",
+          "panorama": "/uploads/panorama_e02b68ce-81ca-4c6e-ab97-c7af581e4e3c.jpg",
+          "preview": "/uploads/thumb_e02b68ce-81ca-4c6e-ab97-c7af581e4e3c.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b9ad864a-fd3e-473e-96e5-fb06ac1d5529",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b9ad864a-fd3e-473e-96e5-fb06ac1d5529.jpg",
+      "created": "2025-09-19T16:37:01.127Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b9ad864a-fd3e-473e-96e5-fb06ac1d5529",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b9ad864a-fd3e-473e-96e5-fb06ac1d5529.jpg",
+          "panorama": "/uploads/panorama_b9ad864a-fd3e-473e-96e5-fb06ac1d5529.jpg",
+          "preview": "/uploads/thumb_b9ad864a-fd3e-473e-96e5-fb06ac1d5529.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "3b65d531-0ce8-4352-be01-3c6f49fdfe36",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_3b65d531-0ce8-4352-be01-3c6f49fdfe36.jpg",
+      "created": "2025-09-19T16:31:48.519Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_3b65d531-0ce8-4352-be01-3c6f49fdfe36",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_3b65d531-0ce8-4352-be01-3c6f49fdfe36.jpg",
+          "panorama": "/uploads/panorama_3b65d531-0ce8-4352-be01-3c6f49fdfe36.jpg",
+          "preview": "/uploads/thumb_3b65d531-0ce8-4352-be01-3c6f49fdfe36.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "266664cb-b9a5-4313-bcd9-ee0cbbd12996",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_266664cb-b9a5-4313-bcd9-ee0cbbd12996.jpg",
+      "created": "2025-09-19T16:25:32.430Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_266664cb-b9a5-4313-bcd9-ee0cbbd12996",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_266664cb-b9a5-4313-bcd9-ee0cbbd12996.jpg",
+          "panorama": "/uploads/panorama_266664cb-b9a5-4313-bcd9-ee0cbbd12996.jpg",
+          "preview": "/uploads/thumb_266664cb-b9a5-4313-bcd9-ee0cbbd12996.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "6e945f4c-d948-40e9-8c98-db1ca588991b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_6e945f4c-d948-40e9-8c98-db1ca588991b.jpg",
+      "created": "2025-09-19T16:25:03.235Z",
+      "stitchingMethod": "simple",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_6e945f4c-d948-40e9-8c98-db1ca588991b",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_6e945f4c-d948-40e9-8c98-db1ca588991b.jpg",
+          "panorama": "/uploads/panorama_6e945f4c-d948-40e9-8c98-db1ca588991b.jpg",
+          "preview": "/uploads/thumb_6e945f4c-d948-40e9-8c98-db1ca588991b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "5173f58f-af90-45d1-a6ba-bdf34b586685",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_5173f58f-af90-45d1-a6ba-bdf34b586685.jpg",
+      "created": "2025-09-19T16:20:46.654Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_5173f58f-af90-45d1-a6ba-bdf34b586685",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_5173f58f-af90-45d1-a6ba-bdf34b586685.jpg",
+          "panorama": "/uploads/panorama_5173f58f-af90-45d1-a6ba-bdf34b586685.jpg",
+          "preview": "/uploads/thumb_5173f58f-af90-45d1-a6ba-bdf34b586685.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "01ddf605-a89d-4ecd-bdf5-b895c8ca19d1",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_01ddf605-a89d-4ecd-bdf5-b895c8ca19d1.jpg",
+      "created": "2025-09-19T16:20:18.577Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_01ddf605-a89d-4ecd-bdf5-b895c8ca19d1",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_01ddf605-a89d-4ecd-bdf5-b895c8ca19d1.jpg",
+          "panorama": "/uploads/panorama_01ddf605-a89d-4ecd-bdf5-b895c8ca19d1.jpg",
+          "preview": "/uploads/thumb_01ddf605-a89d-4ecd-bdf5-b895c8ca19d1.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "9ba59084-0aa5-43fb-84ba-13308a779d54",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_9ba59084-0aa5-43fb-84ba-13308a779d54.jpg",
+      "created": "2025-09-19T16:14:24.861Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_9ba59084-0aa5-43fb-84ba-13308a779d54",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_9ba59084-0aa5-43fb-84ba-13308a779d54.jpg",
+          "panorama": "/uploads/panorama_9ba59084-0aa5-43fb-84ba-13308a779d54.jpg",
+          "preview": "/uploads/thumb_9ba59084-0aa5-43fb-84ba-13308a779d54.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b9218d0b-0bb1-4a41-a02e-f8ba15a5464b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b9218d0b-0bb1-4a41-a02e-f8ba15a5464b.jpg",
+      "created": "2025-09-19T16:14:02.183Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b9218d0b-0bb1-4a41-a02e-f8ba15a5464b",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b9218d0b-0bb1-4a41-a02e-f8ba15a5464b.jpg",
+          "panorama": "/uploads/panorama_b9218d0b-0bb1-4a41-a02e-f8ba15a5464b.jpg",
+          "preview": "/uploads/thumb_b9218d0b-0bb1-4a41-a02e-f8ba15a5464b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "ff0ba669-0b0e-4bdb-b224-c8291ce551b6",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_ff0ba669-0b0e-4bdb-b224-c8291ce551b6.jpg",
+      "created": "2025-09-19T16:13:28.669Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_ff0ba669-0b0e-4bdb-b224-c8291ce551b6",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_ff0ba669-0b0e-4bdb-b224-c8291ce551b6.jpg",
+          "panorama": "/uploads/panorama_ff0ba669-0b0e-4bdb-b224-c8291ce551b6.jpg",
+          "preview": "/uploads/thumb_ff0ba669-0b0e-4bdb-b224-c8291ce551b6.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "6e84c0b9-fc86-46ef-a8eb-030917b291e9",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_6e84c0b9-fc86-46ef-a8eb-030917b291e9.jpg",
+      "created": "2025-09-19T16:12:56.024Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_6e84c0b9-fc86-46ef-a8eb-030917b291e9",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_6e84c0b9-fc86-46ef-a8eb-030917b291e9.jpg",
+          "panorama": "/uploads/panorama_6e84c0b9-fc86-46ef-a8eb-030917b291e9.jpg",
+          "preview": "/uploads/thumb_6e84c0b9-fc86-46ef-a8eb-030917b291e9.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a2bf78fd-369b-4337-9baa-12b84505b13b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_a2bf78fd-369b-4337-9baa-12b84505b13b.jpg",
+      "created": "2025-09-19T16:03:24.399Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_a2bf78fd-369b-4337-9baa-12b84505b13b",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_a2bf78fd-369b-4337-9baa-12b84505b13b.jpg",
+          "panorama": "/uploads/panorama_a2bf78fd-369b-4337-9baa-12b84505b13b.jpg",
+          "preview": "/uploads/thumb_a2bf78fd-369b-4337-9baa-12b84505b13b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "1520d47b-79ac-4c66-bb7b-9a2d119630ff",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_1520d47b-79ac-4c66-bb7b-9a2d119630ff.jpg",
+      "created": "2025-09-19T16:03:00.519Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_1520d47b-79ac-4c66-bb7b-9a2d119630ff",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_1520d47b-79ac-4c66-bb7b-9a2d119630ff.jpg",
+          "panorama": "/uploads/panorama_1520d47b-79ac-4c66-bb7b-9a2d119630ff.jpg",
+          "preview": "/uploads/thumb_1520d47b-79ac-4c66-bb7b-9a2d119630ff.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a2cecf27-d6df-49c8-860f-9eca1d3e7816",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_a2cecf27-d6df-49c8-860f-9eca1d3e7816.jpg",
+      "created": "2025-09-18T07:26:28.565Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_a2cecf27-d6df-49c8-860f-9eca1d3e7816",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_a2cecf27-d6df-49c8-860f-9eca1d3e7816.jpg",
+          "panorama": "/uploads/panorama_a2cecf27-d6df-49c8-860f-9eca1d3e7816.jpg",
+          "preview": "/uploads/thumb_a2cecf27-d6df-49c8-860f-9eca1d3e7816.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "073c8482-436b-4f71-a6f5-b1fa643aeb55",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_073c8482-436b-4f71-a6f5-b1fa643aeb55.jpg",
+      "created": "2025-09-18T07:26:11.035Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_073c8482-436b-4f71-a6f5-b1fa643aeb55",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_073c8482-436b-4f71-a6f5-b1fa643aeb55.jpg",
+          "panorama": "/uploads/panorama_073c8482-436b-4f71-a6f5-b1fa643aeb55.jpg",
+          "preview": "/uploads/thumb_073c8482-436b-4f71-a6f5-b1fa643aeb55.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "bdd798bd-77c6-4aaf-9e99-94180a417278",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_bdd798bd-77c6-4aaf-9e99-94180a417278.jpg",
+      "created": "2025-09-17T19:35:16.976Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_bdd798bd-77c6-4aaf-9e99-94180a417278",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_bdd798bd-77c6-4aaf-9e99-94180a417278.jpg",
+          "panorama": "/uploads/panorama_bdd798bd-77c6-4aaf-9e99-94180a417278.jpg",
+          "preview": "/uploads/thumb_bdd798bd-77c6-4aaf-9e99-94180a417278.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "72a15bfc-6d57-4250-948c-9177a92c6419",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_72a15bfc-6d57-4250-948c-9177a92c6419.jpg",
+      "created": "2025-09-17T19:34:35.937Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_72a15bfc-6d57-4250-948c-9177a92c6419",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_72a15bfc-6d57-4250-948c-9177a92c6419.jpg",
+          "panorama": "/uploads/panorama_72a15bfc-6d57-4250-948c-9177a92c6419.jpg",
+          "preview": "/uploads/thumb_72a15bfc-6d57-4250-948c-9177a92c6419.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "e43339e3-6789-4546-b494-f106c4fa58e1",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_e43339e3-6789-4546-b494-f106c4fa58e1.jpg",
+      "created": "2025-09-17T19:28:58.614Z",
+      "stitchingMethod": "panoramic",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_e43339e3-6789-4546-b494-f106c4fa58e1",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_e43339e3-6789-4546-b494-f106c4fa58e1.jpg",
+          "panorama": "/uploads/panorama_e43339e3-6789-4546-b494-f106c4fa58e1.jpg",
+          "preview": "/uploads/thumb_e43339e3-6789-4546-b494-f106c4fa58e1.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8c4bb7de-ebbc-43d2-b4a5-39a898e42c74",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_8c4bb7de-ebbc-43d2-b4a5-39a898e42c74.jpg",
+      "created": "2025-09-17T19:28:27.945Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_8c4bb7de-ebbc-43d2-b4a5-39a898e42c74",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_8c4bb7de-ebbc-43d2-b4a5-39a898e42c74.jpg",
+          "panorama": "/uploads/panorama_8c4bb7de-ebbc-43d2-b4a5-39a898e42c74.jpg",
+          "preview": "/uploads/thumb_8c4bb7de-ebbc-43d2-b4a5-39a898e42c74.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "7c4da409-9c5b-4b5b-af2a-157522ed9352",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_7c4da409-9c5b-4b5b-af2a-157522ed9352.jpg",
+      "created": "2025-09-17T16:48:46.147Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_7c4da409-9c5b-4b5b-af2a-157522ed9352",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_7c4da409-9c5b-4b5b-af2a-157522ed9352.jpg",
+          "panorama": "/uploads/panorama_7c4da409-9c5b-4b5b-af2a-157522ed9352.jpg",
+          "preview": "/uploads/thumb_7c4da409-9c5b-4b5b-af2a-157522ed9352.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "75061c8f-51eb-4237-9aa1-01929a4f4748",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_75061c8f-51eb-4237-9aa1-01929a4f4748.jpg",
+      "created": "2025-09-17T16:42:04.554Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_75061c8f-51eb-4237-9aa1-01929a4f4748",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_75061c8f-51eb-4237-9aa1-01929a4f4748.jpg",
+          "panorama": "/uploads/panorama_75061c8f-51eb-4237-9aa1-01929a4f4748.jpg",
+          "preview": "/uploads/thumb_75061c8f-51eb-4237-9aa1-01929a4f4748.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "7ecfcd70-7fa8-4f66-a739-587e87b7a99d",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_7ecfcd70-7fa8-4f66-a739-587e87b7a99d.jpg",
+      "created": "2025-09-17T16:35:01.443Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_7ecfcd70-7fa8-4f66-a739-587e87b7a99d",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_7ecfcd70-7fa8-4f66-a739-587e87b7a99d.jpg",
+          "panorama": "/uploads/panorama_7ecfcd70-7fa8-4f66-a739-587e87b7a99d.jpg",
+          "preview": "/uploads/thumb_7ecfcd70-7fa8-4f66-a739-587e87b7a99d.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c3f8437d-f613-44a4-ab38-6bbb4c79fbae",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_c3f8437d-f613-44a4-ab38-6bbb4c79fbae.jpg",
+      "created": "2025-09-17T16:30:25.019Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_c3f8437d-f613-44a4-ab38-6bbb4c79fbae",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_c3f8437d-f613-44a4-ab38-6bbb4c79fbae.jpg",
+          "panorama": "/uploads/panorama_c3f8437d-f613-44a4-ab38-6bbb4c79fbae.jpg",
+          "preview": "/uploads/thumb_c3f8437d-f613-44a4-ab38-6bbb4c79fbae.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b5bada48-e72a-4e41-afa3-ec4473714348",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b5bada48-e72a-4e41-afa3-ec4473714348.jpg",
+      "created": "2025-09-17T16:19:46.194Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b5bada48-e72a-4e41-afa3-ec4473714348",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b5bada48-e72a-4e41-afa3-ec4473714348.jpg",
+          "panorama": "/uploads/panorama_b5bada48-e72a-4e41-afa3-ec4473714348.jpg",
+          "preview": "/uploads/thumb_b5bada48-e72a-4e41-afa3-ec4473714348.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "0ba76805-5066-4144-8ab6-89577cb8dcc4",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_0ba76805-5066-4144-8ab6-89577cb8dcc4.jpg",
+      "created": "2025-09-17T16:19:21.424Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_0ba76805-5066-4144-8ab6-89577cb8dcc4",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_0ba76805-5066-4144-8ab6-89577cb8dcc4.jpg",
+          "panorama": "/uploads/panorama_0ba76805-5066-4144-8ab6-89577cb8dcc4.jpg",
+          "preview": "/uploads/thumb_0ba76805-5066-4144-8ab6-89577cb8dcc4.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2.jpg",
+      "created": "2025-09-17T16:18:44.248Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2.jpg",
+          "panorama": "/uploads/panorama_5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2.jpg",
+          "preview": "/uploads/thumb_5fe00c5e-d4bf-4f6d-84e1-f7ea49862ab2.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "dcbfeddc-a71b-4a86-80c7-0086846c91d2",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_dcbfeddc-a71b-4a86-80c7-0086846c91d2.jpg",
+      "created": "2025-09-17T16:17:32.569Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_dcbfeddc-a71b-4a86-80c7-0086846c91d2",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_dcbfeddc-a71b-4a86-80c7-0086846c91d2.jpg",
+          "panorama": "/uploads/panorama_dcbfeddc-a71b-4a86-80c7-0086846c91d2.jpg",
+          "preview": "/uploads/thumb_dcbfeddc-a71b-4a86-80c7-0086846c91d2.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "456b8565-715e-4e80-a187-3de1384be9eb",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_456b8565-715e-4e80-a187-3de1384be9eb.jpg",
+      "created": "2025-09-17T16:15:54.578Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_456b8565-715e-4e80-a187-3de1384be9eb",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_456b8565-715e-4e80-a187-3de1384be9eb.jpg",
+          "panorama": "/uploads/panorama_456b8565-715e-4e80-a187-3de1384be9eb.jpg",
+          "preview": "/uploads/thumb_456b8565-715e-4e80-a187-3de1384be9eb.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "37c29f23-bcef-4f46-a026-43b2fbeeed22",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_37c29f23-bcef-4f46-a026-43b2fbeeed22.jpg",
+      "created": "2025-09-17T16:15:14.124Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_37c29f23-bcef-4f46-a026-43b2fbeeed22",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_37c29f23-bcef-4f46-a026-43b2fbeeed22.jpg",
+          "panorama": "/uploads/panorama_37c29f23-bcef-4f46-a026-43b2fbeeed22.jpg",
+          "preview": "/uploads/thumb_37c29f23-bcef-4f46-a026-43b2fbeeed22.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "ea06461e-d52b-4205-8851-b2c3a43d399c",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_ea06461e-d52b-4205-8851-b2c3a43d399c.jpg",
+      "created": "2025-09-17T16:14:43.891Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_ea06461e-d52b-4205-8851-b2c3a43d399c",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_ea06461e-d52b-4205-8851-b2c3a43d399c.jpg",
+          "panorama": "/uploads/panorama_ea06461e-d52b-4205-8851-b2c3a43d399c.jpg",
+          "preview": "/uploads/thumb_ea06461e-d52b-4205-8851-b2c3a43d399c.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "d81a23fb-96e4-4919-9ba4-a384d3e17219",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_d81a23fb-96e4-4919-9ba4-a384d3e17219.jpg",
+      "created": "2025-09-17T15:39:34.138Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_d81a23fb-96e4-4919-9ba4-a384d3e17219",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_d81a23fb-96e4-4919-9ba4-a384d3e17219.jpg",
+          "panorama": "/uploads/panorama_d81a23fb-96e4-4919-9ba4-a384d3e17219.jpg",
+          "preview": "/uploads/thumb_d81a23fb-96e4-4919-9ba4-a384d3e17219.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b07173ef-60d9-412d-9233-86147a75989b",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_b07173ef-60d9-412d-9233-86147a75989b.jpg",
+      "created": "2025-09-17T14:54:58.480Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_b07173ef-60d9-412d-9233-86147a75989b",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_b07173ef-60d9-412d-9233-86147a75989b.jpg",
+          "panorama": "/uploads/panorama_b07173ef-60d9-412d-9233-86147a75989b.jpg",
+          "preview": "/uploads/thumb_b07173ef-60d9-412d-9233-86147a75989b.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84.jpg",
+      "created": "2025-09-17T14:54:34.965Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84.jpg",
+          "panorama": "/uploads/panorama_02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84.jpg",
+          "preview": "/uploads/thumb_02fa3fb7-ec87-4d5f-b3e7-1c5846d18b84.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "4aa62469-d53c-4d30-b33f-812c8af798b0",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+      "created": "2025-09-17T08:36:00.741Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_4aa62469-d53c-4d30-b33f-812c8af798b0",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+          "panorama": "/uploads/panorama_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+          "preview": "/uploads/thumb_4aa62469-d53c-4d30-b33f-812c8af798b0.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "d903da23-3ed4-453f-a86f-85d2ead8a153",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
+      "created": "2025-09-17T07:05:07.621Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_d903da23-3ed4-453f-a86f-85d2ead8a153",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
+          "panorama": "/uploads/panorama_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
+          "preview": "/uploads/thumb_d903da23-3ed4-453f-a86f-85d2ead8a153.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "3aa3fb87-c931-4b45-8357-3d23c4a648dc",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg",
+      "created": "2025-09-17T06:50:54.572Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_3aa3fb87-c931-4b45-8357-3d23c4a648dc",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg",
+          "panorama": "/uploads/panorama_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg",
+          "preview": "/uploads/thumb_3aa3fb87-c931-4b45-8357-3d23c4a648dc.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36",
+      "title": "Stitched Panorama",
+      "description": "360° panorama created from 2 stitched images",
+      "thumbnail": "/uploads/thumb_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
+      "created": "2025-09-17T06:50:19.412Z",
+      "stitchingMethod": "horizontal",
+      "inputImages": 2,
+      "scenes": [
+        {
+          "id": "scene_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36",
+          "title": "Stitched Panorama",
+          "image": "/uploads/panorama_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
+          "panorama": "/uploads/panorama_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
+          "preview": "/uploads/thumb_5f2fb6ab-2f19-47e4-8b3b-463bbb4cdb36.jpg",
           "hotspots": []
         }
       ]
@@ -830,6 +2238,982 @@
           "title": "DJI_20241107212721_0050_D",
           "image": "/uploads/97467eba-0dbd-410e-a175-be0bd165f0f3.JPG",
           "preview": "/uploads/97467eba-0dbd-410e-a175-be0bd165f0f3.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "e4c5f886-47e1-49f8-ad35-d6ea448624da",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/0b93f36a-c142-441c-8138-09fccc921e1b.JPG",
+      "created": "2025-09-17T08:55:18.456Z",
+      "scenes": [
+        {
+          "id": "scene-d17d7346-351e-4cdd-bd7e-4d71592483c0",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/0b93f36a-c142-441c-8138-09fccc921e1b.JPG",
+          "preview": "/uploads/0b93f36a-c142-441c-8138-09fccc921e1b.JPG",
+          "hotspots": [
+            {
+              "id": "iqci5l6do",
+              "type": "info",
+              "text": "inter",
+              "sceneId": null,
+              "pitch": -9.933865023087506,
+              "yaw": -109.03283855936085
+            }
+          ]
+        },
+        {
+          "id": "scene-1568ba52-ab58-4071-ae81-a4c4506ac087",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2cab1f80-0ebc-4483-9d28-526f617c3973.JPG",
+          "preview": "/uploads/2cab1f80-0ebc-4483-9d28-526f617c3973.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-77a8ff2e-9aa1-4121-b41a-d020a6b1e71f",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/781b2705-b050-4125-bf56-3a221fb9b5ef.JPG",
+          "preview": "/uploads/781b2705-b050-4125-bf56-3a221fb9b5ef.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "88b881e5-09e9-4d08-993a-2e8b021000e7",
+      "title": "tour",
+      "description": "",
+      "thumbnail": "/uploads/34cf587e-9cd3-4df4-9c9e-beeccd89f4fc.JPG",
+      "created": "2025-09-17T09:05:46.188Z",
+      "scenes": [
+        {
+          "id": "scene-81c59d8d-286c-4d50-b29e-d3ee6289afbb",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/34cf587e-9cd3-4df4-9c9e-beeccd89f4fc.JPG",
+          "preview": "/uploads/34cf587e-9cd3-4df4-9c9e-beeccd89f4fc.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ab1d13ff-43c1-4cfc-807f-2469378f207a",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/3e054594-de39-4a73-ae73-538502faf167.JPG",
+          "preview": "/uploads/3e054594-de39-4a73-ae73-538502faf167.JPG",
+          "hotspots": [
+            {
+              "id": "c7tn3v6i9",
+              "type": "scene",
+              "text": "(1_DJI_20241107205800_0040_D)",
+              "sceneId": "(1_DJI_20241107205800_0040_D)",
+              "pitch": -4.9093696418124555,
+              "yaw": 109.2170986059723
+            }
+          ]
+        },
+        {
+          "id": "scene-b814f88e-b627-4542-bb9a-8574e31bca26",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/e783bcee-4c18-48dc-9b3f-a3dbf0ad7141.JPG",
+          "preview": "/uploads/e783bcee-4c18-48dc-9b3f-a3dbf0ad7141.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "fd76f5ec-0cf4-4904-9f80-7e6f77fb916a",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/3db09568-ea00-4c11-8dc8-773138427502.JPG",
+      "created": "2025-09-17T09:10:46.921Z",
+      "scenes": [
+        {
+          "id": "scene-1f774bc4-747f-480a-9251-69718246f090",
+          "title": "DJI_20241107211424_0046_D",
+          "image": "/uploads/3db09568-ea00-4c11-8dc8-773138427502.JPG",
+          "preview": "/uploads/3db09568-ea00-4c11-8dc8-773138427502.JPG",
+          "hotspots": [
+            {
+              "id": "z8linoysw",
+              "type": "scene",
+              "text": "1_DJI_20241107205800_0040_D",
+              "sceneId": "1_DJI_20241107205800_0040_D",
+              "pitch": -1.3287049836456077,
+              "yaw": 8.764990064123822
+            }
+          ]
+        },
+        {
+          "id": "scene-ef9ae8bd-8bdc-4405-a686-2d0668557d67",
+          "title": "DJI_20241107211700_0047_D",
+          "image": "/uploads/9240b2df-20e3-46af-a12f-9a3a873c4483.JPG",
+          "preview": "/uploads/9240b2df-20e3-46af-a12f-9a3a873c4483.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-c92028d2-b448-48a2-b05c-1be66efefd6a",
+          "title": "DJI_20241107212245_0049_D",
+          "image": "/uploads/d8756273-0372-4337-89a4-505b1f6d3beb.JPG",
+          "preview": "/uploads/d8756273-0372-4337-89a4-505b1f6d3beb.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "d6e66ba6-14d3-42c8-9c5b-a2fd49876932",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/18a0cfde-1aba-45cb-9980-aa685f248fcc.JPG",
+      "created": "2025-09-17T09:15:55.311Z",
+      "scenes": [
+        {
+          "id": "scene-065bf7f5-ccde-4b64-b1e0-a51a51025703",
+          "title": "DJI_20241107223547_0069_D",
+          "image": "/uploads/18a0cfde-1aba-45cb-9980-aa685f248fcc.JPG",
+          "preview": "/uploads/18a0cfde-1aba-45cb-9980-aa685f248fcc.JPG",
+          "hotspots": [
+            {
+              "id": "onrtgzhrr",
+              "type": "scene",
+              "text": "DJI_20241107223547_0069_D",
+              "sceneId": "DJI_20241107223547_0069_D",
+              "pitch": -5.008939365070589,
+              "yaw": -83.86933572676611
+            }
+          ]
+        },
+        {
+          "id": "scene-c6165798-6987-4860-89fc-4144ea484b56",
+          "title": "DJI_20241107223838_0070_D",
+          "image": "/uploads/d81f050e-2f89-455c-bca7-2e25e4b290ea.JPG",
+          "preview": "/uploads/d81f050e-2f89-455c-bca7-2e25e4b290ea.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-46768c5f-4b28-450f-9136-1112fb2458d4",
+          "title": "DJI_20241107231448_0072_D",
+          "image": "/uploads/3f847388-f3d5-4c83-bfda-7ff23e3c8930.JPG",
+          "preview": "/uploads/3f847388-f3d5-4c83-bfda-7ff23e3c8930.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "52fddb70-700a-4cea-9a2a-3319ca217f79",
+      "title": "home tour",
+      "description": "",
+      "thumbnail": "/uploads/b2163869-b90d-4a5e-9755-80120f88dd37.JPG",
+      "created": "2025-09-17T09:21:46.340Z",
+      "scenes": [
+        {
+          "id": "scene-201b5118-a29c-4247-b02a-d7249f57be34",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/b2163869-b90d-4a5e-9755-80120f88dd37.JPG",
+          "preview": "/uploads/b2163869-b90d-4a5e-9755-80120f88dd37.JPG",
+          "hotspots": [
+            {
+              "id": "dt6jxc2pf",
+              "type": "scene",
+              "text": "DJI_20241107205327_0039_D",
+              "sceneId": "DJI_20241107205327_0039_D",
+              "pitch": -9.541706300882659,
+              "yaw": 49.98216106455814
+            }
+          ]
+        },
+        {
+          "id": "scene-0583eb29-6389-4d57-83ba-a5dff0f29a50",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2655d3e1-1b64-4dc5-8d7c-9efd96fc84be.JPG",
+          "preview": "/uploads/2655d3e1-1b64-4dc5-8d7c-9efd96fc84be.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-32ed3ce3-f854-4fbf-bf25-02696825a90d",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/bbee2249-7d39-47e4-be24-ed2b98c1cfc4.JPG",
+          "preview": "/uploads/bbee2249-7d39-47e4-be24-ed2b98c1cfc4.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "1dcc86d3-2328-4e31-8bd7-f3b8078bee53",
+      "title": "home tour",
+      "description": "",
+      "thumbnail": "/uploads/aaf1b466-0268-48be-bd9e-c210a0db9fc5.JPG",
+      "created": "2025-09-17T09:41:43.743Z",
+      "scenes": [
+        {
+          "id": "scene-b99078ba-824f-45d0-8b68-c2412cddf931",
+          "title": "DJI_20241107222702_0066_D",
+          "image": "/uploads/aaf1b466-0268-48be-bd9e-c210a0db9fc5.JPG",
+          "preview": "/uploads/aaf1b466-0268-48be-bd9e-c210a0db9fc5.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-802aeb22-8616-4bc0-85d8-692f39273338",
+          "title": "DJI_20241107222912_0067_D",
+          "image": "/uploads/f9e1802c-714b-4c9a-93f3-0d40a1e28141.JPG",
+          "preview": "/uploads/f9e1802c-714b-4c9a-93f3-0d40a1e28141.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-1942907b-a775-4a12-8481-7363eac6584f",
+          "title": "DJI_20241107223251_0068_D",
+          "image": "/uploads/911a65a6-7342-4816-b75f-945926ea68f7.JPG",
+          "preview": "/uploads/911a65a6-7342-4816-b75f-945926ea68f7.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "333c6e91-052d-4d36-bc8e-bec68cce2e0c",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/103854cd-384f-4a86-b272-dd87bd48009e.JPG",
+      "created": "2025-09-17T09:46:44.153Z",
+      "scenes": [
+        {
+          "id": "scene-80bd603a-9096-4af8-ae2a-647ec9f1c2ce",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/103854cd-384f-4a86-b272-dd87bd48009e.JPG",
+          "preview": "/uploads/103854cd-384f-4a86-b272-dd87bd48009e.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-95cde32c-1951-44f1-ac02-fedd5c7e1aa6",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/7e61a161-16dd-496a-a7b3-cd57437aac5b.JPG",
+          "preview": "/uploads/7e61a161-16dd-496a-a7b3-cd57437aac5b.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-e15cd72f-6d21-4393-93e7-85836a3b1a41",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/504a090e-b35b-456f-af85-41ce49fd53ca.JPG",
+          "preview": "/uploads/504a090e-b35b-456f-af85-41ce49fd53ca.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "25315c53-e725-4496-8460-f626273bd744",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/89d63cb7-234a-40d0-9110-0510a65de173.JPG",
+      "created": "2025-09-17T09:53:14.101Z",
+      "scenes": [
+        {
+          "id": "scene-2b73d317-5059-4d1d-9a31-edb67fe47140",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/89d63cb7-234a-40d0-9110-0510a65de173.JPG",
+          "preview": "/uploads/89d63cb7-234a-40d0-9110-0510a65de173.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8a3425c0-f021-4f2a-a5a6-b307932b4156",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2ad6ba93-cc1d-4a8b-8a75-2cfd5e7667f8.JPG",
+          "preview": "/uploads/2ad6ba93-cc1d-4a8b-8a75-2cfd5e7667f8.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f1be776e-3d10-45e4-b393-8b3debb218cc",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/0c0aac4c-81c8-4d33-8885-a6c95c4e0860.JPG",
+          "preview": "/uploads/0c0aac4c-81c8-4d33-8885-a6c95c4e0860.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "3ffd9f79-d5fd-4ebd-a9e3-289154170c80",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/a0723b2b-884b-4cdd-970c-3eb6f9d5e603.JPG",
+      "created": "2025-09-17T09:59:11.762Z",
+      "scenes": [
+        {
+          "id": "scene-e215f61a-2eb5-4fe1-9385-7392cbc38c10",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/a0723b2b-884b-4cdd-970c-3eb6f9d5e603.JPG",
+          "preview": "/uploads/a0723b2b-884b-4cdd-970c-3eb6f9d5e603.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-e4f19df2-fb62-437c-bd28-e10a27a6449a",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/c6d04a4f-f531-4d14-9256-0cdf99ffce90.JPG",
+          "preview": "/uploads/c6d04a4f-f531-4d14-9256-0cdf99ffce90.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-6d74e17e-e16f-47c6-9601-236bccc49b73",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/4caebe23-7365-44ce-a4f3-68b08675d0ce.JPG",
+          "preview": "/uploads/4caebe23-7365-44ce-a4f3-68b08675d0ce.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "308a99e4-03f6-4318-90fa-18a48c408348",
+      "title": "tour 5",
+      "description": "",
+      "thumbnail": "/uploads/d587e142-061a-4149-880c-3477f684ed0b.JPG",
+      "created": "2025-09-17T10:00:37.760Z",
+      "scenes": [
+        {
+          "id": "scene-ff5e46d3-3983-45e7-8622-964e0824717f",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/d587e142-061a-4149-880c-3477f684ed0b.JPG",
+          "preview": "/uploads/d587e142-061a-4149-880c-3477f684ed0b.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-64c40746-5ce2-43cd-bd25-80edc61df8f2",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/dac5da84-3cbf-4e46-af28-5b0ea7c024e1.JPG",
+          "preview": "/uploads/dac5da84-3cbf-4e46-af28-5b0ea7c024e1.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-77161542-54f8-4c53-9325-4f162ff65c1d",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/2d8295d9-4758-4678-86e9-8aca2c22725f.JPG",
+          "preview": "/uploads/2d8295d9-4758-4678-86e9-8aca2c22725f.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "0f7241ea-5fd1-4580-a9e2-2b0ef4a71f4c",
+      "title": "home tour",
+      "description": "",
+      "thumbnail": "/uploads/1437f98f-2370-4018-8954-58b745de075c.JPG",
+      "created": "2025-09-17T10:23:32.606Z",
+      "scenes": [
+        {
+          "id": "scene-36fc7942-86c9-41a8-a7de-528647b75981",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/1437f98f-2370-4018-8954-58b745de075c.JPG",
+          "preview": "/uploads/1437f98f-2370-4018-8954-58b745de075c.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f683c8e3-c0a9-4af7-bb99-ea0f089952cd",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/0bad9d46-b1fd-42a5-986c-86b7d3d790bf.JPG",
+          "preview": "/uploads/0bad9d46-b1fd-42a5-986c-86b7d3d790bf.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-7070df0b-adf0-4ec9-9898-366f9baf2376",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/8c34b11c-b7b8-4a9f-81f5-6486c1e9ee1e.JPG",
+          "preview": "/uploads/8c34b11c-b7b8-4a9f-81f5-6486c1e9ee1e.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a6e2ec19-b038-4d50-9fe7-105c6f633e3f",
+      "title": "home tour",
+      "description": "",
+      "thumbnail": "/uploads/44585640-1a1a-4e44-bbf7-561fe8f44f9d.JPG",
+      "created": "2025-09-17T10:41:27.631Z",
+      "scenes": [
+        {
+          "id": "scene-4ec95043-1ffd-4198-9e27-3e19ea401c0d",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/44585640-1a1a-4e44-bbf7-561fe8f44f9d.JPG",
+          "preview": "/uploads/44585640-1a1a-4e44-bbf7-561fe8f44f9d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-e030e401-0537-4262-a7da-4d9912954d49",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/aac493d7-3bb3-4c05-b479-d7c705415a74.JPG",
+          "preview": "/uploads/aac493d7-3bb3-4c05-b479-d7c705415a74.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ef0712ab-7dd3-4d1a-909e-620b42ed920b",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/c5751e9f-6f15-44c6-a9e1-2e526d1f2eb3.JPG",
+          "preview": "/uploads/c5751e9f-6f15-44c6-a9e1-2e526d1f2eb3.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "e78377b0-afd1-4889-9fdd-def9ca0e5d76",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/c2bb6b3f-44dc-4931-8ae9-9b417f7ad8b5.JPG",
+      "created": "2025-09-17T11:26:40.652Z",
+      "scenes": [
+        {
+          "id": "scene-4b0cd851-2942-4e14-8757-d843bdffe3d0",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/c2bb6b3f-44dc-4931-8ae9-9b417f7ad8b5.JPG",
+          "preview": "/uploads/c2bb6b3f-44dc-4931-8ae9-9b417f7ad8b5.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-c8c4c43c-5be0-4e3f-9e29-9471570d898b",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2c05a196-a8c7-421b-852d-6481e2048cce.JPG",
+          "preview": "/uploads/2c05a196-a8c7-421b-852d-6481e2048cce.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-2a41ae32-ec8e-40ca-be46-a4704065fd66",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/64d524eb-d513-4981-9187-9438c6b7c60c.JPG",
+          "preview": "/uploads/64d524eb-d513-4981-9187-9438c6b7c60c.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "2d019c1d-7cb9-4fd3-9738-c447f9d690da",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/2dfd0968-a7e2-4493-9518-b86f25a4a935.JPG",
+      "created": "2025-09-17T11:30:31.052Z",
+      "scenes": [
+        {
+          "id": "scene-79a9db48-d0db-4088-b9e2-11df4e30e079",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/2dfd0968-a7e2-4493-9518-b86f25a4a935.JPG",
+          "preview": "/uploads/2dfd0968-a7e2-4493-9518-b86f25a4a935.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-5d0c3a27-56af-4d68-92cc-f23c00aa8937",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/3f1fd1cf-7ea2-4d4d-9b54-d47604c7de2f.JPG",
+          "preview": "/uploads/3f1fd1cf-7ea2-4d4d-9b54-d47604c7de2f.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-30583255-ea15-4cd5-b9bf-cccb4765773f",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/eedfdbec-987a-44e7-91e8-b42647bf3939.JPG",
+          "preview": "/uploads/eedfdbec-987a-44e7-91e8-b42647bf3939.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "8da124a0-73bb-4fef-9e4a-d3053baa44f0",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/c6bc8dd3-7219-488d-a5dc-0f60b222e50f.JPG",
+      "created": "2025-09-17T11:32:20.660Z",
+      "scenes": [
+        {
+          "id": "scene-44b50a98-327c-4faa-8287-3b3c6d58c0a7",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/c6bc8dd3-7219-488d-a5dc-0f60b222e50f.JPG",
+          "preview": "/uploads/c6bc8dd3-7219-488d-a5dc-0f60b222e50f.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-4c1d0e6a-592b-4586-b145-ea9587c18f4c",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/34c62d3f-8a0a-40e5-96a6-d1077fbf4189.JPG",
+          "preview": "/uploads/34c62d3f-8a0a-40e5-96a6-d1077fbf4189.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8719f9fd-69b3-40a0-bf3a-33203225bfb6",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/11fcfe7f-2e27-4922-9b6b-834b01d73e13.JPG",
+          "preview": "/uploads/11fcfe7f-2e27-4922-9b6b-834b01d73e13.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "20f58994-b348-4f3d-a8e3-fd2cd94e41cc",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/2b01b3e5-5235-435f-a2d1-3499c2c0b788.JPG",
+      "created": "2025-09-17T11:35:31.428Z",
+      "scenes": [
+        {
+          "id": "scene-d99cfc1b-66a9-456e-986e-d06f3e415ec1",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/2b01b3e5-5235-435f-a2d1-3499c2c0b788.JPG",
+          "preview": "/uploads/2b01b3e5-5235-435f-a2d1-3499c2c0b788.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8a3feae0-4a5b-4cd4-a321-b96d23290eae",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2fe7824f-027b-41b9-b310-1c0624945bf9.JPG",
+          "preview": "/uploads/2fe7824f-027b-41b9-b310-1c0624945bf9.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ac94dab9-3552-48e9-952e-a25007f40886",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/d2b06626-9710-4f51-8460-52cd0933da57.JPG",
+          "preview": "/uploads/d2b06626-9710-4f51-8460-52cd0933da57.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "cc634fd3-d41e-4664-9d14-7ae2acd8d44e",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/23a43c37-f402-40c3-8a4e-90d774e7e7b0.JPG",
+      "created": "2025-09-17T14:53:01.584Z",
+      "scenes": [
+        {
+          "id": "scene-8591762c-6dcb-48f0-b500-f8e658201a27",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/23a43c37-f402-40c3-8a4e-90d774e7e7b0.JPG",
+          "preview": "/uploads/23a43c37-f402-40c3-8a4e-90d774e7e7b0.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-475dc466-f68e-417e-8ed5-056852423449",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/7daf744e-28f8-4cbb-a9f9-fe93c94b01ca.JPG",
+          "preview": "/uploads/7daf744e-28f8-4cbb-a9f9-fe93c94b01ca.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-7fe85982-5d90-4d42-a007-0a9496ebe179",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/7f00273a-b483-40ae-9a62-0248254924fb.JPG",
+          "preview": "/uploads/7f00273a-b483-40ae-9a62-0248254924fb.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "c9238350-0f26-4c30-b2f3-3fac926b5480",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/c65e0ab2-ca9e-4cdb-96ed-85dd7d5672b3.jpg",
+      "created": "2025-09-17T15:08:06.835Z",
+      "scenes": [
+        {
+          "id": "scene-55afcd61-75ae-41af-99fd-ec32d476e9a7",
+          "title": "974-1",
+          "image": "/uploads/c65e0ab2-ca9e-4cdb-96ed-85dd7d5672b3.jpg",
+          "preview": "/uploads/c65e0ab2-ca9e-4cdb-96ed-85dd7d5672b3.jpg",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8ba9e59c-e241-452a-bdb3-60f36e9d3737",
+          "title": "975-1",
+          "image": "/uploads/b6aac49d-c309-43e6-9535-d00636a8a571.jpg",
+          "preview": "/uploads/b6aac49d-c309-43e6-9535-d00636a8a571.jpg",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "731006ee-cbd9-412f-993b-9ecf8b56d9e4",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/320038d3-b814-429a-aca7-408ecab0b833.JPG",
+      "created": "2025-09-17T17:23:14.175Z",
+      "scenes": [
+        {
+          "id": "scene-359a98cf-623a-44cb-b004-14bbb73d8582",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/320038d3-b814-429a-aca7-408ecab0b833.JPG",
+          "preview": "/uploads/320038d3-b814-429a-aca7-408ecab0b833.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-33179c08-bedc-4f2a-b613-e90e899021d3",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/7073215e-ce0f-4c4a-8f7d-1c828927826e.JPG",
+          "preview": "/uploads/7073215e-ce0f-4c4a-8f7d-1c828927826e.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-c9695351-10cc-4eb0-9823-25c7c6a1ea9f",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/fce44537-7400-428a-9310-b0c8d0fbbcbd.JPG",
+          "preview": "/uploads/fce44537-7400-428a-9310-b0c8d0fbbcbd.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "ad3e1c82-cf7c-47c3-a73b-dea632dfa8d3",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/03840f9c-0018-4949-8cf6-225b807cd5f7.JPG",
+      "created": "2025-09-17T17:56:25.024Z",
+      "scenes": [
+        {
+          "id": "scene-5a75a7b2-eb21-4431-a656-b716750760bd",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/03840f9c-0018-4949-8cf6-225b807cd5f7.JPG",
+          "preview": "/uploads/03840f9c-0018-4949-8cf6-225b807cd5f7.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8204e752-7d36-4186-bf1f-9fa62f9ab748",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/2830f643-530c-4787-bfd3-ed4d5c12e011.JPG",
+          "preview": "/uploads/2830f643-530c-4787-bfd3-ed4d5c12e011.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-d7358f55-1da1-41aa-87bc-2ba7d9a02cce",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/0393c2b9-2f6d-448c-b1da-97cbee384cf3.JPG",
+          "preview": "/uploads/0393c2b9-2f6d-448c-b1da-97cbee384cf3.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "9a6caaaa-ff4e-4636-ae1c-1e32504cbd02",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/10a1c783-f312-46a2-9957-8ea99644513b.JPG",
+      "created": "2025-09-17T18:09:27.293Z",
+      "scenes": [
+        {
+          "id": "scene-1b2398fa-068c-4309-a4bc-19b0ace15cc7",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/10a1c783-f312-46a2-9957-8ea99644513b.JPG",
+          "preview": "/uploads/10a1c783-f312-46a2-9957-8ea99644513b.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-7393d476-2252-471f-ac4a-768d179f7ea0",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/ef1ddcc2-421b-4e7e-a865-ff07f34d5a5b.JPG",
+          "preview": "/uploads/ef1ddcc2-421b-4e7e-a865-ff07f34d5a5b.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8ac07e5c-6515-4f11-a04a-a744528ccf29",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/de187904-1b24-42e3-a4e4-59ddb24ca719.JPG",
+          "preview": "/uploads/de187904-1b24-42e3-a4e4-59ddb24ca719.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "2bb2712e-8fb6-4793-b27a-7af03b9d925d",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/f599d910-6301-4892-ac94-1e508495d153.JPG",
+      "created": "2025-09-17T18:16:46.000Z",
+      "scenes": [
+        {
+          "id": "scene-e76223a0-042c-468a-ac4f-a4c2becfb0d2",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/f599d910-6301-4892-ac94-1e508495d153.JPG",
+          "preview": "/uploads/f599d910-6301-4892-ac94-1e508495d153.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-92581c1c-44ff-419e-9c5f-2364255fa1f4",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/92750e50-792a-4118-9bbb-dcbf3bda32d8.JPG",
+          "preview": "/uploads/92750e50-792a-4118-9bbb-dcbf3bda32d8.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-28e33531-5f46-42c8-9cf3-885813bca738",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/72a0b7f3-3ced-4cf7-81a2-f415a2b4333d.JPG",
+          "preview": "/uploads/72a0b7f3-3ced-4cf7-81a2-f415a2b4333d.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "18d33e24-d64f-4dd3-b9f9-e864ed2379e5",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/ebd7b85c-fd55-4295-b51d-e400e64ec108.JPG",
+      "created": "2025-09-17T18:33:53.272Z",
+      "scenes": [
+        {
+          "id": "scene-65393b83-3959-463e-a78b-466dfd40fa30",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/ebd7b85c-fd55-4295-b51d-e400e64ec108.JPG",
+          "preview": "/uploads/ebd7b85c-fd55-4295-b51d-e400e64ec108.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-16eccf7b-1c54-4ad4-9fe2-cefd52b67b04",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/eaaa02a8-3466-4dff-b132-fdbfcce18e26.JPG",
+          "preview": "/uploads/eaaa02a8-3466-4dff-b132-fdbfcce18e26.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-78a7a867-8760-4a0d-8448-12ce1dbae466",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/5ab91af9-5d11-4a05-8c7a-5da042f58c98.JPG",
+          "preview": "/uploads/5ab91af9-5d11-4a05-8c7a-5da042f58c98.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "714fa39d-5113-4a76-b21b-b75b28bf28af",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/249629ef-dfef-4afa-b0fc-d35c4d40546d.JPG",
+      "created": "2025-09-17T19:00:23.216Z",
+      "scenes": [
+        {
+          "id": "scene-b4887334-af7a-4ac6-8d10-a54e533d99ff",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/249629ef-dfef-4afa-b0fc-d35c4d40546d.JPG",
+          "preview": "/uploads/249629ef-dfef-4afa-b0fc-d35c4d40546d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-1e248c66-b159-46e5-8088-ca1e39caa8d7",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/18c46be4-574e-42db-af3e-647b3768bd31.JPG",
+          "preview": "/uploads/18c46be4-574e-42db-af3e-647b3768bd31.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-be9a136e-0b1e-4417-ab41-ff7dbbfb6654",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/2561b22d-5980-493e-ac50-3e17e94b4e04.JPG",
+          "preview": "/uploads/2561b22d-5980-493e-ac50-3e17e94b4e04.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "035cf4ef-cc93-4d82-8894-ad1babd28df1",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/6e01465d-b863-488c-a3b3-618af0e8c00e.JPG",
+      "created": "2025-09-17T19:20:41.915Z",
+      "scenes": [
+        {
+          "id": "scene-f07c2b43-6319-4bac-b49f-61423848df94",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/6e01465d-b863-488c-a3b3-618af0e8c00e.JPG",
+          "preview": "/uploads/6e01465d-b863-488c-a3b3-618af0e8c00e.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-198822f7-9975-4903-aabc-10231f5dcd52",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/b0252240-3325-4ec0-883d-fc5c0dd4e878.JPG",
+          "preview": "/uploads/b0252240-3325-4ec0-883d-fc5c0dd4e878.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-eed3f388-2ffd-4310-9a1b-d6fb920dcd15",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/670f604c-dfb8-4ba6-a4cb-fe9411601ccb.JPG",
+          "preview": "/uploads/670f604c-dfb8-4ba6-a4cb-fe9411601ccb.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "2d8845bd-6918-4b61-b36d-49d11644021b",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/48f1e050-511d-48a4-b682-34c36c3a5ffc.JPG",
+      "created": "2025-09-19T18:27:23.259Z",
+      "scenes": [
+        {
+          "id": "scene-f1b64ca1-abd3-42b6-a8e2-0245be52fb5a",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/48f1e050-511d-48a4-b682-34c36c3a5ffc.JPG",
+          "preview": "/uploads/48f1e050-511d-48a4-b682-34c36c3a5ffc.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-6b0d7390-843b-4a5b-8bbf-22e9a9ba590d",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/cfb3340e-b5d6-4bd6-847d-1219ae278617.JPG",
+          "preview": "/uploads/cfb3340e-b5d6-4bd6-847d-1219ae278617.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-ea088fe4-9b84-408d-90e2-9b63d3d294cd",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/194485c3-3e1e-4c3a-8ad1-9514fe037e01.JPG",
+          "preview": "/uploads/194485c3-3e1e-4c3a-8ad1-9514fe037e01.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "606df087-454c-4e1d-b0c4-eb7aa40b490c",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/c1d4fb05-7a73-4b33-8f15-e8910a12f245.JPG",
+      "created": "2025-09-19T18:53:54.691Z",
+      "scenes": [
+        {
+          "id": "scene-a1ddb4e8-676d-49f7-aa45-7bcad2b74a07",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/c1d4fb05-7a73-4b33-8f15-e8910a12f245.JPG",
+          "preview": "/uploads/c1d4fb05-7a73-4b33-8f15-e8910a12f245.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-4fd1bbb8-663f-457d-8485-b75044fad4d7",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/a145d21a-ce4e-4137-9288-a535f8f92a05.JPG",
+          "preview": "/uploads/a145d21a-ce4e-4137-9288-a535f8f92a05.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-3b0a7f8a-7de5-40c0-b104-859292e447b7",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/c2a30912-0198-4e5e-89fd-205ddeb3396c.JPG",
+          "preview": "/uploads/c2a30912-0198-4e5e-89fd-205ddeb3396c.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "e2f4e853-6c6b-430c-a5a6-e5163e0a222e",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/7a67a512-5013-4141-836e-b80886119188.JPG",
+      "created": "2025-09-19T19:01:17.750Z",
+      "scenes": [
+        {
+          "id": "scene-126c4431-f762-41b9-a777-afd4d2141df4",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/7a67a512-5013-4141-836e-b80886119188.JPG",
+          "preview": "/uploads/7a67a512-5013-4141-836e-b80886119188.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-6c124f81-e141-429d-b291-45d145c720c0",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/898c383f-a177-4cbe-a4fb-11e8650ced87.JPG",
+          "preview": "/uploads/898c383f-a177-4cbe-a4fb-11e8650ced87.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-602e89d2-cded-44ac-a1d1-3e38b9373e07",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/51dccf7f-1405-4199-b00e-535130bea9e1.JPG",
+          "preview": "/uploads/51dccf7f-1405-4199-b00e-535130bea9e1.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "b15fd91f-cf19-4136-8671-2ec9cefa91e8",
+      "title": "Test Connected Tour",
+      "description": "Testing hotspot navigation between two scenes",
+      "thumbnail": "",
+      "created": "2025-09-20T06:43:12.474Z",
+      "scenes": []
+    },
+    {
+      "id": "bfed5a0b-b4f7-48e9-844a-c8e7cb08136e",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/e2deb02f-602c-4e70-b4a7-a4e0b28fb464.JPG",
+      "created": "2025-09-20T06:55:08.844Z",
+      "scenes": [
+        {
+          "id": "scene-2eb32a50-184e-402b-8b9a-b3d980c95a03",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/e2deb02f-602c-4e70-b4a7-a4e0b28fb464.JPG",
+          "preview": "/uploads/e2deb02f-602c-4e70-b4a7-a4e0b28fb464.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-7364c99e-26dc-45a0-8a95-5a7195f08895",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/3451af5b-7196-4843-b2e7-626f1722f9be.JPG",
+          "preview": "/uploads/3451af5b-7196-4843-b2e7-626f1722f9be.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-602dbd5d-38b3-488d-93b8-079a7ccdb228",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/0cc59a81-4e2c-4110-be8a-9302fb9b689a.JPG",
+          "preview": "/uploads/0cc59a81-4e2c-4110-be8a-9302fb9b689a.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a0f6ec2d-b4f0-4d78-b7d9-6b76055c3fda",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/34c0b590-758d-4565-b674-b180dba3107b.JPG",
+      "created": "2025-09-20T07:32:11.688Z",
+      "scenes": [
+        {
+          "id": "scene-2bd75780-24ef-4d59-ab5f-1b3bb6673de5",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/34c0b590-758d-4565-b674-b180dba3107b.JPG",
+          "preview": "/uploads/34c0b590-758d-4565-b674-b180dba3107b.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-8639bf9a-5c52-491c-a1b1-246d18429b5f",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/b8163570-94f9-4a04-a864-9f862c0c004e.JPG",
+          "preview": "/uploads/b8163570-94f9-4a04-a864-9f862c0c004e.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-b79fbf10-5d2c-4cad-be7b-5abcad1421b0",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/3aaaf093-ef09-4b2a-a595-f93382fa59d2.JPG",
+          "preview": "/uploads/3aaaf093-ef09-4b2a-a595-f93382fa59d2.JPG",
+          "hotspots": []
+        }
+      ]
+    },
+    {
+      "id": "a9f0e2d0-7e02-40dd-8d85-03ae0796a989",
+      "title": "tpwits tour",
+      "description": "",
+      "thumbnail": "/uploads/566169f4-a444-4841-abc8-aff444c91abd.JPG",
+      "created": "2025-09-20T07:41:56.673Z",
+      "scenes": [
+        {
+          "id": "scene-0b22bf1c-eac7-4872-8d2c-e0f62e9cd78a",
+          "title": "DJI_20241107205327_0039_D",
+          "image": "/uploads/566169f4-a444-4841-abc8-aff444c91abd.JPG",
+          "preview": "/uploads/566169f4-a444-4841-abc8-aff444c91abd.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-f00ddd7c-fba7-4378-9de1-395f097b6c8a",
+          "title": "DJI_20241107205800_0041_D",
+          "image": "/uploads/04ba8089-d2b7-4d24-b46c-287ebf8f462d.JPG",
+          "preview": "/uploads/04ba8089-d2b7-4d24-b46c-287ebf8f462d.JPG",
+          "hotspots": []
+        },
+        {
+          "id": "scene-11971307-8e62-4ce8-a0f2-6564bcbbb8e8",
+          "title": "DJI_20241107210949_0045_D",
+          "image": "/uploads/7a005d30-782d-4280-bbfc-064040508ed3.JPG",
+          "preview": "/uploads/7a005d30-782d-4280-bbfc-064040508ed3.JPG",
           "hotspots": []
         }
       ]

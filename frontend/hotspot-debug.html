@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotspot Debug Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: white; }
+        .test-box { background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 8px; border: 1px solid #39FF14; }
+        .success { color: #39FF14; }
+        .error { color: #ff4444; }
+        .warning { color: #ffaa00; }
+        button { background: #39FF14; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #2ecc71; }
+        #results { background: #333; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 VR Tour Hotspot Diagnostic Tool</h1>
+
+    <div class="test-box">
+        <h3>📡 API Connection Test</h3>
+        <button onclick="testAPI()">Test API Connection</button>
+        <div id="apiResult"></div>
+    </div>
+
+    <div class="test-box">
+        <h3>🎯 Hotspot System Test</h3>
+        <button onclick="testHotspotSystem()">Test Hotspot Creation</button>
+        <div id="hotspotResult"></div>
+    </div>
+
+    <div class="test-box">
+        <h3>🧩 JavaScript Dependencies</h3>
+        <button onclick="testDependencies()">Check Dependencies</button>
+        <div id="depResult"></div>
+    </div>
+
+    <div class="test-box">
+        <h3>🔄 Quick Fix</h3>
+        <button onclick="quickFix()">Apply Quick Fix</button>
+        <div id="fixResult"></div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('apiResult');
+            try {
+                const response = await fetch('/api/tours/demo-tour-1');
+                const data = await response.json();
+
+                if (data.success && data.tour.scenes) {
+                    result.innerHTML = `<span class="success">✅ API Working!</span><br>
+                        Tours: ${data.tour.title}<br>
+                        Scenes: ${data.tour.scenes.length}<br>
+                        Hotspots in Scene 1: ${data.tour.scenes[0].hotspots?.length || 0}`;
+                } else {
+                    result.innerHTML = `<span class="error">❌ API Error</span><br>Response: ${JSON.stringify(data)}`;
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ API Connection Failed</span><br>Error: ${error.message}`;
+            }
+        }
+
+        function testHotspotSystem() {
+            const result = document.getElementById('hotspotResult');
+            let tests = [];
+
+            // Test if functions exist
+            tests.push(`HotspotManager: ${typeof window.hotspotManager !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`createEnhancedHotspots: ${typeof window.createEnhancedHotspots !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`loadScene: ${typeof window.loadScene !== 'undefined' ? '✅' : '❌'}`);
+            tests.push(`Pannellum: ${typeof window.pannellum !== 'undefined' ? '✅' : '❌'}`);
+
+            result.innerHTML = tests.join('<br>');
+        }
+
+        function testDependencies() {
+            const result = document.getElementById('depResult');
+            let deps = [];
+
+            deps.push(`Font Awesome: ${document.querySelector('link[href*="font-awesome"]') ? '✅' : '❌'}`);
+            deps.push(`Pannellum CSS: ${document.querySelector('link[href*="pannellum"]') ? '✅' : '❌'}`);
+            deps.push(`Pannellum JS: ${typeof pannellum !== 'undefined' ? '✅' : '❌'}`);
+            deps.push(`Enhanced Hotspots CSS: ${document.querySelector('link[href*="enhanced-hotspots"]') ? '✅' : '❌'}`);
+
+            result.innerHTML = deps.join('<br>');
+        }
+
+        function quickFix() {
+            const result = document.getElementById('fixResult');
+
+            // Add debugging to console
+            if (typeof console !== 'undefined') {
+                console.log('=== HOTSPOT DEBUG INFO ===');
+                console.log('Window objects:', {
+                    hotspotManager: typeof window.hotspotManager,
+                    createEnhancedHotspots: typeof window.createEnhancedHotspots,
+                    loadScene: typeof window.loadScene,
+                    pannellum: typeof window.pannellum,
+                    viewer: typeof window.viewer
+                });
+
+                if (window.currentTour) {
+                    console.log('Current tour:', window.currentTour);
+                    console.log('Current scene:', window.currentScene);
+                }
+
+                result.innerHTML = `<span class="success">✅ Debug info logged to console</span><br>
+                    Open browser DevTools (F12) → Console tab to see detailed info`;
+            } else {
+                result.innerHTML = `<span class="error">❌ Console not available</span>`;
+            }
+        }
+
+        // Auto-run basic tests on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testAPI();
+                testDependencies();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

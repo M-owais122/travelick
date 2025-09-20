@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern VR Tour Viewer</title>
+
+    <!-- VR/XR permissions -->
+    <meta http-equiv="Permissions-Policy" content="xr-spatial-tracking=(self), accelerometer=(self), gyroscope=(self), magnetometer=(self)">
+
+    <!-- CSS Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+
+    <!-- VR Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #39FF14;
+            --primary-glow: rgba(57, 255, 20, 0.3);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --border-color: #333;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Modern UI Components */
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .modern-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2dd814 100%);
+            border: none;
+            border-radius: 12px;
+            color: black;
+            font-weight: 600;
+            padding: 12px 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+            cursor: pointer;
+        }
+
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+        }
+
+        .modern-button:active {
+            transform: translateY(0);
+        }
+
+        /* Panoramic Viewer Styling */
+        #panoramaViewer {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+        }
+
+        /* Custom Hotspot Styling */
+        .modern-hotspot-marker {
+            width: 24px !important;
+            height: 24px !important;
+            background: radial-gradient(circle, var(--primary-color) 0%, #2dd814 100%) !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+            animation: pulse-hotspot 2s infinite !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .modern-hotspot-marker:hover {
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 30px var(--primary-glow), 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        @keyframes pulse-hotspot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Control Panels */
+        .control-panel {
+            position: fixed;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .control-panel.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation Panel */
+        .nav-panel {
+            top: 20px;
+            left: 20px;
+            max-width: 300px;
+        }
+
+        /* Scene Info Panel */
+        .info-panel {
+            bottom: 20px;
+            left: 20px;
+            max-width: 400px;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Share Panel */
+        .share-panel {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .control-panel {
+                max-width: calc(100vw - 40px);
+            }
+
+            .nav-panel {
+                top: 10px;
+                left: 10px;
+            }
+
+            .controls-panel {
+                top: 10px;
+                right: 10px;
+            }
+
+            .info-panel {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
+
+            .share-panel {
+                bottom: 80px;
+                right: 10px;
+            }
+        }
+
+        /* Scene Transition Effects */
+        .scene-transition {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .scene-transition.loaded {
+            opacity: 1;
+        }
+
+        /* Hotspot Tooltip */
+        .hotspot-tooltip {
+            position: absolute;
+            background: var(--card-bg);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            pointer-events: none;
+            border: 1px solid var(--border-color);
+        }
+
+        /* VR Mode Button */
+        .vr-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .vr-button:hover {
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Tour Progress */
+        .tour-progress {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .tour-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #2dd814 100%);
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="h-full bg-black text-white overflow-hidden">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-spinner mb-6"></div>
+        <h2 class="text-2xl font-bold mb-2">Loading Virtual Tour</h2>
+        <p class="text-gray-400">Preparing your immersive experience...</p>
+        <div class="mt-6 w-64 tour-progress">
+            <div id="loadingProgress" class="tour-progress-bar" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- Main Panoramic Viewer -->
+    <div id="panoramaViewer" class="scene-transition"></div>
+
+    <!-- Navigation Panel -->
+    <div id="navPanel" class="control-panel nav-panel glass-panel p-4 hidden">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white flex items-center">
+                <i class="fas fa-map text-green-400 mr-2"></i>
+                Navigation
+            </h3>
+            <button id="closeNavPanel" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="space-y-3">
+            <!-- Scene List -->
+            <div id="sceneList" class="space-y-2">
+                <!-- Scenes will be populated here -->
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="border-t border-gray-700 pt-3 space-y-2">
+                <button id="autoTourBtn" class="w-full modern-button text-sm py-2">
+                    <i class="fas fa-play mr-2"></i>Auto Tour
+                </button>
+                <button id="resetViewBtn" class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-lg py-2 text-sm transition-colors">
+                    <i class="fas fa-home mr-2"></i>Reset View
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene Info Panel -->
+    <div id="infoPanel" class="control-panel info-panel glass-panel p-4">
+        <div class="flex items-start justify-between mb-3">
+            <div class="flex-1">
+                <h2 id="sceneTitle" class="text-xl font-bold text-white mb-1">Scene Title</h2>
+                <p id="sceneDescription" class="text-gray-300 text-sm">Scene description will appear here</p>
+            </div>
+            <button id="toggleInfoPanel" class="text-gray-400 hover:text-white transition-colors ml-3">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+
+        <div id="infoContent" class="space-y-3">
+            <!-- Tour Progress -->
+            <div class="tour-progress">
+                <div id="tourProgressBar" class="tour-progress-bar" style="width: 0%"></div>
+            </div>
+
+            <!-- Scene Counter -->
+            <div class="flex items-center justify-between text-sm text-gray-400">
+                <span>Scene <span id="currentSceneNumber">1</span> of <span id="totalScenes">1</span></span>
+                <span id="sceneVisitedTime"></span>
+            </div>
+
+            <!-- Available Hotspots -->
+            <div id="hotspotsInfo" class="hidden">
+                <h4 class="text-sm font-medium text-gray-300 mb-2">Available Navigation</h4>
+                <div id="hotspotsList" class="space-y-1">
+                    <!-- Hotspots will be listed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div id="controlsPanel" class="control-panel controls-panel glass-panel p-4">
+        <div class="space-y-3">
+            <!-- Main Controls -->
+            <div class="flex space-x-2">
+                <button id="navToggle" class="modern-button px-3 py-2 text-sm" title="Toggle Navigation">
+                    <i class="fas fa-map"></i>
+                </button>
+                <button id="vrModeBtn" class="vr-button px-3 py-2 text-sm rounded-lg font-semibold" title="VR Mode">
+                    <i class="fas fa-vr-cardboard"></i>
+                </button>
+                <button id="fullscreenBtn" class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 text-sm rounded-lg transition-colors" title="Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+
+            <!-- View Controls -->
+            <div class="border-t border-gray-700 pt-3">
+                <div class="flex items-center space-x-2 mb-2">
+                    <i class="fas fa-eye text-gray-400"></i>
+                    <span class="text-sm text-gray-300">View</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-xs text-gray-400 w-12">FOV</label>
+                        <input type="range" id="fovSlider" min="50" max="120" value="100" class="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                        <span id="fovValue" class="text-xs text-green-400 w-8">100°</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Controls -->
+            <div class="border-t border-gray-700 pt-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-volume-up text-gray-400"></i>
+                        <span class="text-sm text-gray-300">Audio</span>
+                    </div>
+                    <button id="muteBtn" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Panel -->
+    <div id="sharePanel" class="control-panel share-panel glass-panel p-4">
+        <div class="space-y-3">
+            <button id="shareBtn" class="modern-button w-full py-2 text-sm">
+                <i class="fas fa-share mr-2"></i>Share Tour
+            </button>
+
+            <div id="shareOptions" class="hidden space-y-2">
+                <button id="copyLinkBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                    <i class="fas fa-link mr-2"></i>Copy Link
+                </button>
+                <button id="embedBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                    <i class="fas fa-code mr-2"></i>Embed Code
+                </button>
+                <button id="qrCodeBtn" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                    <i class="fas fa-qrcode mr-2"></i>QR Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotspot Tooltip -->
+    <div id="hotspotTooltip" class="hotspot-tooltip hidden">
+        Navigation Point
+    </div>
+
+    <!-- Modals -->
+    <!-- Share Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="glass-panel p-6 max-w-md w-full mx-4">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold">Share This Tour</h3>
+                <button id="closeShareModal" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Tour Link</label>
+                    <div class="flex">
+                        <input type="text" id="shareLinkInput" readonly class="flex-1 bg-gray-800 border border-gray-600 rounded-l-lg px-3 py-2 text-white text-sm">
+                        <button id="copyShareLink" class="modern-button px-4 rounded-l-none rounded-r-lg">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Embed Code</label>
+                    <textarea id="embedCode" readonly rows="3" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white text-sm resize-none"></textarea>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button id="shareTwitter" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg text-sm transition-colors">
+                        <i class="fab fa-twitter mr-2"></i>Twitter
+                    </button>
+                    <button id="shareFacebook" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm transition-colors">
+                        <i class="fab fa-facebook mr-2"></i>Facebook
+                    </button>
+                    <button id="shareLinkedIn" class="flex-1 bg-blue-700 hover:bg-blue-800 text-white py-2 rounded-lg text-sm transition-colors">
+                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="glass-panel p-6 max-w-sm w-full mx-4 text-center">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold">QR Code</h3>
+                <button id="closeQrModal" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="qrCodeContainer" class="bg-white p-4 rounded-lg mb-4">
+                <!-- QR Code will be generated here -->
+            </div>
+
+            <p class="text-sm text-gray-400">Scan to open tour on mobile device</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="/js/modern-hotspot-manager.js"></script>
+
+    <script>
+        class ModernVRViewer {
+            constructor() {
+                this.viewer = null;
+                this.currentTour = null;
+                this.currentScene = null;
+                this.sceneHistory = [];
+                this.autoTourInterval = null;
+                this.isAutoTour = false;
+                this.hotspotManager = new ModernHotspotManager();
+                this.startTime = Date.now();
+                this.sceneStartTime = Date.now();
+
+                this.init();
+            }
+
+            async init() {
+                this.setupEventListeners();
+                await this.loadTour();
+                this.hideLoading();
+            }
+
+            setupEventListeners() {
+                // Navigation controls
+                document.getElementById('navToggle').addEventListener('click', this.toggleNavPanel.bind(this));
+                document.getElementById('closeNavPanel').addEventListener('click', this.hideNavPanel.bind(this));
+
+                // View controls
+                document.getElementById('fovSlider').addEventListener('input', this.updateFOV.bind(this));
+                document.getElementById('fullscreenBtn').addEventListener('click', this.toggleFullscreen.bind(this));
+                document.getElementById('vrModeBtn').addEventListener('click', this.enterVRMode.bind(this));
+
+                // Share controls
+                document.getElementById('shareBtn').addEventListener('click', this.toggleShareOptions.bind(this));
+                document.getElementById('copyLinkBtn').addEventListener('click', this.copyShareLink.bind(this));
+                document.getElementById('embedBtn').addEventListener('click', this.showEmbedCode.bind(this));
+                document.getElementById('qrCodeBtn').addEventListener('click', this.showQRCode.bind(this));
+
+                // Modal controls
+                document.getElementById('closeShareModal').addEventListener('click', this.hideShareModal.bind(this));
+                document.getElementById('closeQrModal').addEventListener('click', this.hideQRModal.bind(this));
+
+                // Auto tour
+                document.getElementById('autoTourBtn').addEventListener('click', this.toggleAutoTour.bind(this));
+                document.getElementById('resetViewBtn').addEventListener('click', this.resetView.bind(this));
+
+                // Info panel toggle
+                document.getElementById('toggleInfoPanel').addEventListener('click', this.toggleInfoPanel.bind(this));
+
+                // Keyboard controls
+                document.addEventListener('keydown', this.handleKeyboard.bind(this));
+
+                // Touch/mouse events for mobile
+                this.setupMobileControls();
+
+                // Hotspot manager events
+                this.hotspotManager.onSceneChange = this.navigateToScene.bind(this);
+            }
+
+            async loadTour() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tourId = urlParams.get('tour');
+
+                if (!tourId) {
+                    this.showError('No tour specified');
+                    return;
+                }
+
+                try {
+                    this.updateLoadingProgress(20);
+
+                    const response = await fetch(`/api/tours/${tourId}`);
+                    if (!response.ok) {
+                        throw new Error('Tour not found');
+                    }
+
+                    this.updateLoadingProgress(50);
+
+                    const data = await response.json();
+                    this.currentTour = data.tour;
+
+                    this.updateLoadingProgress(70);
+
+                    // Set up hotspot manager
+                    this.hotspotManager.setTourData(this.currentTour);
+
+                    this.updateLoadingProgress(90);
+
+                    // Load first scene
+                    if (this.currentTour.scenes && this.currentTour.scenes.length > 0) {
+                        await this.loadScene(this.currentTour.scenes[0]);
+                        this.setupNavigation();
+                        this.updateTourInfo();
+                    }
+
+                    this.updateLoadingProgress(100);
+
+                } catch (error) {
+                    console.error('Error loading tour:', error);
+                    this.showError('Failed to load tour');
+                }
+            }
+
+            async loadScene(scene) {
+                this.currentScene = scene;
+                this.sceneStartTime = Date.now();
+
+                // Update scene transition
+                const viewerElement = document.getElementById('panoramaViewer');
+                viewerElement.classList.remove('loaded');
+
+                try {
+                    // Destroy existing viewer
+                    if (this.viewer) {
+                        this.viewer.destroy();
+                    }
+
+                    // Create new viewer
+                    this.viewer = pannellum.viewer('panoramaViewer', {
+                        type: 'equirectangular',
+                        panorama: scene.panorama || scene.image,
+                        autoLoad: true,
+                        pitch: 0,
+                        yaw: 0,
+                        hfov: 100,
+                        minHfov: 50,
+                        maxHfov: 120,
+                        showControls: false,
+                        hotSpotDebug: false,
+                        keyboardZoom: true,
+                        mouseZoom: true,
+                        autoRotate: false,
+                        compass: false,
+                        orientationOnByDefault: false
+                    });
+
+                    // Set up viewer events
+                    this.viewer.on('load', () => {
+                        viewerElement.classList.add('loaded');
+                        this.addHotspotsToScene();
+                        this.updateSceneInfo();
+                    });
+
+                    this.viewer.on('error', (error) => {
+                        console.error('Viewer error:', error);
+                        this.showError('Failed to load panoramic image');
+                    });
+
+                    // Set up hotspot manager for this scene
+                    this.hotspotManager.setViewer(this.viewer, scene.id);
+
+                } catch (error) {
+                    console.error('Error creating viewer:', error);
+                    this.showError('Failed to create panoramic viewer');
+                }
+            }
+
+            addHotspotsToScene() {
+                if (!this.currentScene.hotspots) return;
+
+                this.currentScene.hotspots.forEach(hotspot => {
+                    this.viewer.addHotSpot({
+                        id: hotspot.id || `hotspot_${Date.now()}`,
+                        pitch: hotspot.pitch || 0,
+                        yaw: hotspot.yaw || 0,
+                        type: 'custom',
+                        cssClass: 'modern-hotspot-marker',
+                        text: hotspot.text || hotspot.title,
+                        clickHandlerFunc: () => this.handleHotspotClick(hotspot)
+                    });
+                });
+
+                // Load hotspots into manager
+                this.hotspotManager.loadHotspotsForScene(this.currentScene.id, this.currentScene.hotspots);
+            }
+
+            handleHotspotClick(hotspot) {
+                if (hotspot.sceneId) {
+                    this.navigateToScene(hotspot.sceneId);
+                } else if (hotspot.category === 'scene' && hotspot.sceneId) {
+                    this.navigateToScene(hotspot.sceneId);
+                }
+            }
+
+            navigateToScene(sceneId) {
+                const targetScene = this.currentTour.scenes.find(s => s.id === sceneId);
+                if (targetScene) {
+                    this.sceneHistory.push(this.currentScene.id);
+                    this.loadScene(targetScene);
+                    this.updateTourProgress();
+                }
+            }
+
+            setupNavigation() {
+                const sceneList = document.getElementById('sceneList');
+                sceneList.innerHTML = '';
+
+                this.currentTour.scenes.forEach((scene, index) => {
+                    const sceneItem = document.createElement('div');
+                    sceneItem.className = `scene-item p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                        scene.id === this.currentScene.id
+                            ? 'bg-green-500 bg-opacity-20 border border-green-400'
+                            : 'bg-gray-800 hover:bg-gray-700'
+                    }`;
+
+                    sceneItem.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full ${
+                                scene.id === this.currentScene.id
+                                    ? 'bg-green-400 text-black'
+                                    : 'bg-gray-600 text-white'
+                            } flex items-center justify-center text-sm font-bold">
+                                ${index + 1}
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium text-white">${scene.title || `Scene ${index + 1}`}</div>
+                                ${scene.description ? `<div class="text-xs text-gray-400">${scene.description}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                    sceneItem.addEventListener('click', () => {
+                        if (scene.id !== this.currentScene.id) {
+                            this.navigateToScene(scene.id);
+                        }
+                    });
+
+                    sceneList.appendChild(sceneItem);
+                });
+            }
+
+            updateSceneInfo() {
+                document.getElementById('sceneTitle').textContent = this.currentScene.title || 'Untitled Scene';
+                document.getElementById('sceneDescription').textContent = this.currentScene.description || 'No description available';
+
+                // Update scene counter
+                const currentIndex = this.currentTour.scenes.findIndex(s => s.id === this.currentScene.id);
+                document.getElementById('currentSceneNumber').textContent = currentIndex + 1;
+                document.getElementById('totalScenes').textContent = this.currentTour.scenes.length;
+
+                // Update hotspots info
+                this.updateHotspotsInfo();
+
+                // Update time spent
+                this.updateTimeSpent();
+            }
+
+            updateHotspotsInfo() {
+                const hotspotsInfo = document.getElementById('hotspotsInfo');
+                const hotspotsList = document.getElementById('hotspotsList');
+
+                if (this.currentScene.hotspots && this.currentScene.hotspots.length > 0) {
+                    hotspotsInfo.classList.remove('hidden');
+                    hotspotsList.innerHTML = '';
+
+                    this.currentScene.hotspots.forEach(hotspot => {
+                        const hotspotItem = document.createElement('div');
+                        hotspotItem.className = 'flex items-center space-x-2 text-xs';
+                        hotspotItem.innerHTML = `
+                            <i class="fas fa-arrow-right text-green-400"></i>
+                            <span class="text-gray-300">${hotspot.text || hotspot.title}</span>
+                        `;
+                        hotspotsList.appendChild(hotspotItem);
+                    });
+                } else {
+                    hotspotsInfo.classList.add('hidden');
+                }
+            }
+
+            updateTourInfo() {
+                document.title = `${this.currentTour.title || 'Virtual Tour'} - Modern VR Viewer`;
+            }
+
+            updateTourProgress() {
+                const visitedScenes = new Set([...this.sceneHistory, this.currentScene.id]);
+                const progress = (visitedScenes.size / this.currentTour.scenes.length) * 100;
+                document.getElementById('tourProgressBar').style.width = `${progress}%`;
+            }
+
+            updateTimeSpent() {
+                const timeSpent = Math.floor((Date.now() - this.sceneStartTime) / 1000);
+                const minutes = Math.floor(timeSpent / 60);
+                const seconds = timeSpent % 60;
+                document.getElementById('sceneVisitedTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            updateLoadingProgress(percent) {
+                document.getElementById('loadingProgress').style.width = `${percent}%`;
+            }
+
+            hideLoading() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+
+            showError(message) {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-6xl text-red-400 mb-4"></i>
+                        <h2 class="text-2xl font-bold mb-2 text-red-400">Error</h2>
+                        <p class="text-gray-400 mb-4">${message}</p>
+                        <button onclick="window.location.reload()" class="modern-button">
+                            <i class="fas fa-refresh mr-2"></i>Try Again
+                        </button>
+                    </div>
+                `;
+            }
+
+            // Control Methods
+            toggleNavPanel() {
+                const navPanel = document.getElementById('navPanel');
+                navPanel.classList.toggle('hidden');
+            }
+
+            hideNavPanel() {
+                document.getElementById('navPanel').classList.add('hidden');
+            }
+
+            updateFOV() {
+                const fov = document.getElementById('fovSlider').value;
+                document.getElementById('fovValue').textContent = `${fov}°`;
+                if (this.viewer) {
+                    this.viewer.setHfov(parseInt(fov));
+                }
+            }
+
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                    document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-compress"></i>';
+                } else {
+                    document.exitFullscreen();
+                    document.getElementById('fullscreenBtn').innerHTML = '<i class="fas fa-expand"></i>';
+                }
+            }
+
+            enterVRMode() {
+                if (this.viewer && this.viewer.renderVR) {
+                    this.viewer.renderVR();
+                } else {
+                    alert('VR mode not supported in this browser');
+                }
+            }
+
+            toggleAutoTour() {
+                if (this.isAutoTour) {
+                    this.stopAutoTour();
+                } else {
+                    this.startAutoTour();
+                }
+            }
+
+            startAutoTour() {
+                this.isAutoTour = true;
+                document.getElementById('autoTourBtn').innerHTML = '<i class="fas fa-pause mr-2"></i>Stop Auto Tour';
+
+                this.autoTourInterval = setInterval(() => {
+                    const currentIndex = this.currentTour.scenes.findIndex(s => s.id === this.currentScene.id);
+                    const nextIndex = (currentIndex + 1) % this.currentTour.scenes.length;
+                    this.navigateToScene(this.currentTour.scenes[nextIndex].id);
+                }, 10000); // Change scene every 10 seconds
+            }
+
+            stopAutoTour() {
+                this.isAutoTour = false;
+                document.getElementById('autoTourBtn').innerHTML = '<i class="fas fa-play mr-2"></i>Auto Tour';
+
+                if (this.autoTourInterval) {
+                    clearInterval(this.autoTourInterval);
+                    this.autoTourInterval = null;
+                }
+            }
+
+            resetView() {
+                if (this.viewer) {
+                    this.viewer.setPitch(0);
+                    this.viewer.setYaw(0);
+                    this.viewer.setHfov(100);
+                    document.getElementById('fovSlider').value = 100;
+                    document.getElementById('fovValue').textContent = '100°';
+                }
+            }
+
+            toggleInfoPanel() {
+                const infoContent = document.getElementById('infoContent');
+                const toggleBtn = document.getElementById('toggleInfoPanel');
+
+                infoContent.classList.toggle('hidden');
+
+                if (infoContent.classList.contains('hidden')) {
+                    toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+                } else {
+                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                }
+            }
+
+            // Share Methods
+            toggleShareOptions() {
+                const shareOptions = document.getElementById('shareOptions');
+                shareOptions.classList.toggle('hidden');
+            }
+
+            copyShareLink() {
+                const shareLink = window.location.href;
+                navigator.clipboard.writeText(shareLink).then(() => {
+                    this.showNotification('Link copied to clipboard!', 'success');
+                });
+            }
+
+            showEmbedCode() {
+                const embedCode = `<iframe src="${window.location.href}" width="800" height="600" frameborder="0" allowfullscreen></iframe>`;
+                document.getElementById('shareLinkInput').value = window.location.href;
+                document.getElementById('embedCode').value = embedCode;
+                document.getElementById('shareModal').classList.remove('hidden');
+                document.getElementById('shareModal').classList.add('flex');
+            }
+
+            showQRCode() {
+                // Generate QR code (you would use a QR code library here)
+                document.getElementById('qrCodeContainer').innerHTML = `
+                    <div class="w-48 h-48 bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-600">QR Code</span>
+                    </div>
+                `;
+                document.getElementById('qrModal').classList.remove('hidden');
+                document.getElementById('qrModal').classList.add('flex');
+            }
+
+            hideShareModal() {
+                document.getElementById('shareModal').classList.add('hidden');
+                document.getElementById('shareModal').classList.remove('flex');
+            }
+
+            hideQRModal() {
+                document.getElementById('qrModal').classList.add('hidden');
+                document.getElementById('qrModal').classList.remove('flex');
+            }
+
+            // Utility Methods
+            setupMobileControls() {
+                // Add mobile-specific touch controls
+                let touchStartX = 0;
+                let touchStartY = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                });
+
+                document.addEventListener('touchend', (e) => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const touchEndY = e.changedTouches[0].clientY;
+
+                    const deltaX = touchEndX - touchStartX;
+                    const deltaY = touchEndY - touchStartY;
+
+                    // Swipe gestures for navigation
+                    if (Math.abs(deltaX) > 100 && Math.abs(deltaY) < 50) {
+                        if (deltaX > 0) {
+                            // Swipe right - previous scene
+                            this.navigateToPreviousScene();
+                        } else {
+                            // Swipe left - next scene
+                            this.navigateToNextScene();
+                        }
+                    }
+                });
+            }
+
+            navigateToNextScene() {
+                const currentIndex = this.currentTour.scenes.findIndex(s => s.id === this.currentScene.id);
+                const nextIndex = (currentIndex + 1) % this.currentTour.scenes.length;
+                this.navigateToScene(this.currentTour.scenes[nextIndex].id);
+            }
+
+            navigateToPreviousScene() {
+                const currentIndex = this.currentTour.scenes.findIndex(s => s.id === this.currentScene.id);
+                const prevIndex = currentIndex === 0 ? this.currentTour.scenes.length - 1 : currentIndex - 1;
+                this.navigateToScene(this.currentTour.scenes[prevIndex].id);
+            }
+
+            handleKeyboard(event) {
+                switch(event.key) {
+                    case 'n':
+                    case 'ArrowRight':
+                        this.navigateToNextScene();
+                        break;
+                    case 'p':
+                    case 'ArrowLeft':
+                        this.navigateToPreviousScene();
+                        break;
+                    case 'f':
+                        this.toggleFullscreen();
+                        break;
+                    case 'r':
+                        this.resetView();
+                        break;
+                    case 'Escape':
+                        this.hideNavPanel();
+                        this.hideShareModal();
+                        this.hideQRModal();
+                        break;
+                    case ' ':
+                        event.preventDefault();
+                        this.toggleAutoTour();
+                        break;
+                }
+            }
+
+            showNotification(message, type = 'info') {
+                // Reuse hotspot manager's notification system
+                this.hotspotManager.showNotification(message, type);
+            }
+        }
+
+        // Initialize viewer when page loads
+        window.addEventListener('load', () => {
+            window.vrViewer = new ModernVRViewer();
+        });
+
+        // Update time every second
+        setInterval(() => {
+            if (window.vrViewer) {
+                window.vrViewer.updateTimeSpent();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
