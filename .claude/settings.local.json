@@ -23,7 +23,8 @@
       "Bash(fuser:*)",
       "Bash(grep:*)",
       "WebFetch(domain:www.klapty.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(ip link:*)"
     ],
     "deny": [],
     "ask": []
